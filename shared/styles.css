@@ -51,4 +51,10 @@ body{background:#1a1a2e;color:#e0e0e0;font-family:'Roboto Condensed',Arial,sans-
 .surface-bg{background:linear-gradient(180deg,#1e3a2f,#0f0f1a);padding:6px 0;border-radius:8px 8px 0 0;border-bottom:2px solid #4ade80;margin-bottom:1px}
 .divider{display:flex;align-items:center;gap:6px;margin:4px 0;padding:0 30px}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:#2d2d44}
-.divider span{font-family:'Share Tech Mono',monospace;font-size:8px;color:#4ade80;text-transform:uppercase;letter-spacing:1.5px;white-space:nowrap}
+.divider span{font-family:'Share Tech Mono',monospace;font-size:8px;color:#4ade80;text-transform:uppercase;letter-spacing:1.5px}
+
+@media(max-width:480px){
+  .nav{padding:6px 10px;gap:12px;font-size:11px}
+  .divider{padding:0 8px;margin:3px 0}
+  .divider span{font-size:7px;letter-spacing:.5px}
+}
