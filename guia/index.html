@@ -7,10 +7,8 @@
 <meta name="description" content="Guia otimizado para começar um vault do zero em Fallout Shelter. Build order, layout e estratégias.">
 <link rel="stylesheet" href="/shared/styles.css">
 <style>
-  .topbar{background:#0f0f1a;border-bottom:2px solid #4ade80;padding:12px 20px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100}
-  .topbar h1{font-family:'Share Tech Mono',monospace;color:#4ade80;font-size:18px;letter-spacing:2px}
-  .topbar .back{display:none;cursor:pointer;background:none;border:1px solid #4ade80;color:#4ade80;padding:4px 12px;border-radius:4px;font-size:13px;font-family:'Roboto Condensed',sans-serif}
-  .topbar .back:hover{background:#4ade80;color:#0f0f1a}
+  .nav .back{display:none;cursor:pointer;background:none;border:1px solid #4ade80;color:#4ade80;padding:4px 12px;border-radius:4px;font-size:13px;font-family:'Roboto Condensed',sans-serif}
+  .nav .back:hover{background:#4ade80;color:#0f0f1a}
   .dw-wrap{margin-left:auto;display:flex;align-items:center;gap:8px}
   .dw-wrap label{font-size:12px;color:#9ca3af}
   .dw-input{width:56px;background:#1a1a2e;border:1px solid #4ade80;color:#4ade80;font-family:'Share Tech Mono',monospace;font-size:16px;text-align:center;padding:4px 2px;border-radius:4px;outline:none}
@@ -102,7 +100,7 @@
     .size-1{width:48px}.size-2{width:98px}.size-3{width:148px}
     .elevator{width:20px}
     .room-name{font-size:7px}.room-detail{font-size:6px}
-    .topbar{flex-wrap:wrap;gap:8px}
+    .nav{flex-wrap:wrap;gap:8px}
     .ms-head h3{font-size:12px}
   }
 </style>
@@ -112,17 +110,13 @@
 <nav class="nav">
   <a href="/">Layout</a>
   <a href="/guia" class="active">Guia</a>
-</nav>
-
-<div class="topbar">
   <button class="back" id="backBtn" onclick="showMain()">Voltar</button>
-  <h1 id="pageTitle">VAULT GUIDE</h1>
   <div class="dw-wrap">
     <label>Dwellers:</label>
     <input type="number" class="dw-input" id="dwInput" value="0" min="0" max="200" onchange="updateDwellers(+this.value)" oninput="updateDwellers(+this.value)">
     <span class="dw-label" id="dwLabel">NOVO VAULT</span>
   </div>
-</div>
+</nav>
 
 <!-- ==================== MAIN PAGE ==================== -->
 <div class="page active" id="mainPage">
@@ -462,7 +456,6 @@ function showDetail(roomId) {
   document.getElementById('mainPage').classList.remove('active');
   document.getElementById('detailPage').classList.add('active');
   document.getElementById('backBtn').style.display = 'inline-block';
-  document.getElementById('pageTitle').textContent = r.name.toUpperCase();
   document.title = r.name + ' — Fallout Shelter Guide';
 
   var status = getStatus(r);
@@ -509,7 +502,6 @@ function showMain() {
   document.getElementById('detailPage').classList.remove('active');
   document.getElementById('mainPage').classList.add('active');
   document.getElementById('backBtn').style.display = 'none';
-  document.getElementById('pageTitle').textContent = 'VAULT GUIDE';
   document.title = 'Fallout Shelter - Guia do Zero';
   history.pushState({}, '', '/guia');
   window.scrollTo(0, 0);
@@ -564,8 +556,7 @@ window.onpopstate = function(e) {
     document.getElementById('detailPage').classList.remove('active');
     document.getElementById('mainPage').classList.add('active');
     document.getElementById('backBtn').style.display = 'none';
-    document.getElementById('pageTitle').textContent = 'VAULT GUIDE';
-    document.title = 'Fallout Shelter - Guia do Zero';
+      document.title = 'Fallout Shelter - Guia do Zero';
   }
 };
 
