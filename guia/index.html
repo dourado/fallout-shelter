@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fallout Shelter - Guia do Zero</title>
+<meta name="description" content="Guia otimizado para começar um vault do zero em Fallout Shelter. Build order, layout e estratégias.">
+<link rel="stylesheet" href="/shared/styles.css">
+<style>
+  .topbar{background:#0f0f1a;border-bottom:2px solid #4ade80;padding:12px 20px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100}
+  .topbar h1{font-family:'Share Tech Mono',monospace;color:#4ade80;font-size:18px;letter-spacing:2px}
+  .topbar .back{display:none;cursor:pointer;background:none;border:1px solid #4ade80;color:#4ade80;padding:4px 12px;border-radius:4px;font-size:13px;font-family:'Roboto Condensed',sans-serif}
+  .topbar .back:hover{background:#4ade80;color:#0f0f1a}
+  .dw-wrap{margin-left:auto;display:flex;align-items:center;gap:8px}
+  .dw-wrap label{font-size:12px;color:#9ca3af}
+  .dw-input{width:56px;background:#1a1a2e;border:1px solid #4ade80;color:#4ade80;font-family:'Share Tech Mono',monospace;font-size:16px;text-align:center;padding:4px 2px;border-radius:4px;outline:none}
+  .dw-input:focus{box-shadow:0 0 8px rgba(74,222,128,.3)}
+  .dw-label{font-family:'Share Tech Mono',monospace;font-size:11px;color:#4ade80}
+
+  .page{display:none;padding:20px;max-width:900px;margin:0 auto}
+  .page.active{display:block}
+
+  .section-title{font-family:'Share Tech Mono',monospace;color:#4ade80;font-size:16px;letter-spacing:1px;margin:24px 0 12px;border-bottom:1px solid #2d2d44;padding-bottom:6px}
+  .section-title:first-child{margin-top:0}
+
+  .destroy-list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
+  .destroy-list li{font-size:13px;padding:8px 12px;background:#0f0f1a;border-radius:6px;border-left:3px solid #ef4444;line-height:1.5}
+  .destroy-list li.do{border-left-color:#22c55e}
+  .destroy-list li.warn{border-left-color:#eab308}
+  .destroy-list li strong{color:#e0e0e0}
+  .destroy-list li .tag{font-size:10px;padding:1px 6px;border-radius:3px;margin-right:6px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px}
+  .destroy-list li .tag.red{background:#dc2626;color:white}
+  .destroy-list li .tag.green{background:#22c55e;color:#0f0f1a}
+  .destroy-list li .tag.yellow{background:#eab308;color:#0f0f1a}
+
+  .milestone{border:1px solid #2d2d44;border-radius:8px;margin-bottom:10px;overflow:hidden;transition:opacity .3s}
+  .ms-head{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#0f0f1a;cursor:pointer;border-left:3px solid #4b5563;transition:all .2s}
+  .ms-head:hover{background:#111827}
+  .ms-head h3{font-family:'Share Tech Mono',monospace;font-size:13px;color:#e0e0e0;flex:1;margin:0}
+  .ms-badge{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#374151;color:#9ca3af}
+  .ms-arrow{color:#4b5563;font-size:11px;transition:transform .2s;user-select:none}
+  .ms-body{display:none;padding:12px 16px 16px}
+  .milestone.expanded .ms-body{display:block}
+  .milestone.expanded .ms-arrow{transform:rotate(180deg)}
+  .milestone.done .ms-head{border-left-color:#22c55e}
+  .milestone.done .ms-badge{background:#22c55e;color:#0f0f1a}
+  .milestone.done{opacity:.45}
+  .milestone.done:hover{opacity:.75}
+  .milestone.current .ms-head{border-left-color:#fbbf24}
+  .milestone.current .ms-badge{background:#fbbf24;color:#0f0f1a}
+  .milestone.locked .ms-head{border-left-color:#4b5563}
+
+  .vault-state{background:#0f0f1a;border-radius:6px;padding:10px 14px;margin:8px 0;border:1px solid #2d2d44;font-family:'Share Tech Mono',monospace;font-size:12px;color:#9ca3af;line-height:1.8}
+
+  .golden{background:linear-gradient(135deg,#1a1a0e,#0f0f1a);border:1px solid #fbbf24;border-radius:8px;padding:16px;margin-bottom:20px}
+  .golden h3{font-family:'Share Tech Mono',monospace;color:#fbbf24;font-size:13px;margin-bottom:10px;letter-spacing:1px}
+  .golden ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+  .golden li{font-size:12px;padding:6px 10px;background:rgba(251,191,36,.05);border-radius:4px;border-left:2px solid #fbbf24;color:#d4d4d4;line-height:1.5}
+  .golden li strong{color:#fbbf24}
+
+  .warn-banner{background:linear-gradient(135deg,#1a0e0e,#0f0f1a);border:2px solid #ef4444;border-radius:8px;padding:12px 16px;margin-bottom:10px;font-size:13px;color:#fca5a5;line-height:1.5}
+  .warn-banner strong{color:#ef4444}
+
+  .room-list{display:flex;flex-direction:column;gap:4px}
+  .room-card{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#0f0f1a;border-radius:6px;border:1px solid #2d2d44;cursor:pointer;transition:all .15s;text-decoration:none;color:inherit}
+  .room-card:hover{border-color:#4ade80;background:#111827}
+  .room-card.available{border-left:3px solid #22c55e}
+  .room-card.next{border-left:3px solid #eab308}
+  .room-card.locked{border-left:3px solid #4b5563;opacity:.6}
+  .room-card .rc-num{font-family:'Share Tech Mono',monospace;font-size:20px;color:#4ade80;min-width:32px;text-align:center}
+  .room-card.locked .rc-num{color:#4b5563}
+  .room-card.next .rc-num{color:#eab308}
+  .room-card .rc-info{flex:1}
+  .room-card .rc-name{font-size:14px;font-weight:700}
+  .room-card .rc-sub{font-size:11px;color:#9ca3af;margin-top:2px}
+  .room-card .rc-unlock{font-family:'Share Tech Mono',monospace;font-size:12px;color:#9ca3af;white-space:nowrap}
+  .room-card.available .rc-unlock{color:#22c55e}
+  .room-card.next .rc-unlock{color:#eab308}
+  .room-card .rc-arrow{color:#4b5563;font-size:16px}
+
+  .detail-header{text-align:center;padding:20px;margin-bottom:16px;border-radius:10px}
+  .detail-header h2{font-family:'Share Tech Mono',monospace;font-size:24px;margin-bottom:6px}
+  .detail-header .unlock-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-family:'Share Tech Mono',monospace;font-size:14px;margin-top:8px}
+  .detail-header .unlock-badge.available{background:#22c55e;color:#0f0f1a}
+  .detail-header .unlock-badge.locked{background:#4b5563;color:#e0e0e0}
+
+  .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+  .detail-card{background:#0f0f1a;border:1px solid #2d2d44;border-radius:8px;padding:14px}
+  .detail-card h3{font-family:'Share Tech Mono',monospace;color:#4ade80;font-size:12px;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+  .detail-card p{font-size:13px;line-height:1.6;color:#9ca3af}
+  .detail-card p strong{color:#e0e0e0}
+  .detail-card.full{grid-column:1/-1}
+
+  .instruction-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .instruction-list li{font-size:13px;padding:8px 12px;background:#111827;border-radius:4px;border-left:3px solid #4ade80;line-height:1.5;color:#9ca3af}
+  .instruction-list li strong{color:#e0e0e0}
+  .instruction-list li.warn{border-left-color:#ef4444}
+  .instruction-list li.note{border-left-color:#eab308}
+
+  @media(max-width:700px){
+    .detail-grid{grid-template-columns:1fr}
+    .size-1{width:48px}.size-2{width:98px}.size-3{width:148px}
+    .elevator{width:20px}
+    .room-name{font-size:7px}.room-detail{font-size:6px}
+    .topbar{flex-wrap:wrap;gap:8px}
+    .ms-head h3{font-size:12px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/">Layout</a>
+  <a href="/guia" class="active">Guia</a>
+</nav>
+
+<div class="topbar">
+  <button class="back" id="backBtn" onclick="showMain()">Voltar</button>
+  <h1 id="pageTitle">VAULT GUIDE</h1>
+  <div class="dw-wrap">
+    <label>Dwellers:</label>
+    <input type="number" class="dw-input" id="dwInput" value="0" min="0" max="200" onchange="updateDwellers(+this.value)" oninput="updateDwellers(+this.value)">
+    <span class="dw-label" id="dwLabel">NOVO VAULT</span>
+  </div>
+</div>
+
+<!-- ==================== MAIN PAGE ==================== -->
+<div class="page active" id="mainPage">
+
+  <div class="golden">
+    <h3>REGRAS DE OURO — seguir SEMPRE</h3>
+    <ul>
+      <li><strong>Vault Door Lv1</strong> — NUNCA fazer upgrade. Themes funcionam no Lv1</li>
+      <li><strong>Guard Room (Storage) Lv1</strong> — NUNCA upgrade. Sala rasa = combate mais rapido</li>
+      <li><strong>HP e PERMANENTE</strong> — calculado no level-up. Nao tem como corrigir depois. E17 (E10 + outfit +7E) do Lv1 ao 50 = 595 HP (maximo)</li>
+      <li><strong>Protocolo E</strong> (a partir de 35dw): todo novo dweller treina E ate 10 + equipa outfit +E ANTES de ganhar qualquer XP</li>
+      <li><strong>Elevadores nas bordas</strong> de todos os andares subterraneos — bloqueia spawn de Molerats</li>
+      <li><strong>NAO construir Radio Studio</strong> (20dw) — atrai Raiders e Deathclaws sem necessidade</li>
+      <li><strong>SPECIAL nao afeta combate</strong> no vault — so dano da arma + HP do dweller importam</li>
+      <li><strong>Salas vazias geram incidentes</strong> — nao construa salas desnecessarias</li>
+    </ul>
+  </div>
+
+  <div class="section-title">BUILD ORDER — PASSO A PASSO</div>
+  <div style="background:#111827;border-radius:6px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#9ca3af;border-left:3px solid #4ade80">
+    Ajuste o numero de <strong style="color:#4ade80">Dwellers</strong> no topo da pagina para ver seu milestone atual. Milestones concluidos ficam esmaecidos. Clique para expandir/recolher.
+  </div>
+
+  <!-- MS 0-5 -->
+  <div class="milestone expanded" data-dw="0">
+    <div class="ms-head" onclick="toggleMs(this.parentElement)">
+      <span class="ms-badge">0-5 DW</span>
+      <h3>TUTORIAL + SETUP INICIAL</h3>
+      <span class="ms-arrow">&#9660;</span>
+    </div>
+    <div class="ms-body">
+      <ul class="destroy-list">
+        <li class="do"><span class="tag green">1</span> Complete o <strong>tutorial</strong> normalmente — ele guia a construir as primeiras salas (PG, Diner, LQ)</li>
+        <li class="do"><span class="tag green">2</span> Apos o tutorial, construa <strong>Elevador na ponta DIREITA</strong> do Andar 1 (superficie)</li>
+        <li class="do"><span class="tag green">3</span> Descer o elevador para o <strong>Andar 2</strong></li>
+        <li class="do"><span class="tag green">4</span> Construir <strong>Diner</strong> (1 bloco) a esquerda do elevador no Andar 2</li>
+        <li class="do"><span class="tag green">5</span> Construir <strong>Water Treatment</strong> (1 bloco) a esquerda do Diner</li>
+        <li class="do"><span class="tag green">6</span> Construir <strong>Living Quarters</strong> (1 bloco) — para breeding</li>
+        <li class="do"><span class="tag green">7</span> <strong>Breeding</strong>: 1 homem + 1 mulher no LQ. Repetir ate 12 dwellers</li>
+        <li class="do"><span class="tag green">8</span> <strong>Explorar</strong> com dwellers extras (caps + armas + roupas)</li>
+      </ul>
+      <ul class="destroy-list">
+        <li class="warn"><span class="tag yellow">STAFF</span> <strong>S</strong> → Power Gen &nbsp;|&nbsp; <strong>A</strong> → Diner &nbsp;|&nbsp; <strong>P</strong> → Water Treatment</li>
+        <li class="warn"><span class="tag yellow">DICA</span> Guarde caps para o milestone de 12 (guard room). Rush com &lt;40% falha para caps extras</li>
+        <li class="warn"><span class="tag yellow">DICA</span> NAO gaste lunchboxes em upgrade de salas. Guardar para itens e dwellers raros</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MS 6-11 -->
+  <div class="milestone" data-dw="6">
+    <div class="ms-head" onclick="toggleMs(this.parentElement)">
+      <span class="ms-badge">6-11 DW</span>
+      <h3>EXPANSAO BASICA</h3>
+      <span class="ms-arrow">&#9660;</span>
+    </div>
+    <div class="ms-body">
+      <ul class="destroy-list">
+        <li class="do"><span class="tag green">1</span> Expandir <strong>Power Generator</strong> para 2 blocos (merge) no Andar 1 ou 2</li>
+        <li class="do"><span class="tag green">2</span> Construir <strong>elevador na borda ESQUERDA</strong> do Andar 2 (bloqueia Molerats)</li>
+        <li class="do"><span class="tag green">3</span> Expandir Diner e Water conforme necessario (merge para 2 blocos)</li>
+        <li class="do"><span class="tag green">4</span> Continuar <strong>breeding</strong> — meta: chegar a 12 dwellers rapido!</li>
+        <li class="do"><span class="tag green">5</span> Enviar dwellers com boas armas para <strong>explorar</strong> (caps + itens)</li>
+        <li class="do"><span class="tag green">6</span> Rush salas com &lt;40% falha para caps extras</li>
+      </ul>
+      <div class="vault-state">
+        Meta do Andar 2: <span style="color:#4ade80">[ELEV_L]</span>→<span style="color:#f472b6">[LQ]</span>→<span style="color:#22d3ee">[Water]</span>→<span style="color:#22d3ee">[Diner]</span>→<span style="color:#fbbf24">[PG]</span>→<span style="color:#4ade80">[ELEV_R]</span>
+      </div>
+      <ul class="destroy-list">
+        <li class="warn"><span class="tag yellow">AVISO</span> NAO construa salas desnecessarias — cada sala vazia gera incidentes sozinha</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MS 12 -->
+  <div class="milestone" data-dw="12">
+    <div class="ms-head" onclick="toggleMs(this.parentElement)">
+      <span class="ms-badge">12 DW</span>
+      <h3>GUARD ROOM — STORAGE ROOM DESBLOQUEADA</h3>
+      <span class="ms-arrow">&#9660;</span>
+    </div>
+    <div class="ms-body">
+      <div class="warn-banner">
+        <strong>MILESTONE MAIS IMPORTANTE DO EARLY GAME!</strong> A Storage Room vira sua sala de guarda permanente no Andar 1.
+      </div>
+      <ul class="destroy-list">
+        <li class="do"><span class="tag green">1</span> Garantir que <strong>PG + Diner + Water</strong> estao funcionando no Andar 2 (nao depender do Andar 1)</li>
+        <li class="do"><span class="tag green">2</span> <strong>DESTRUIR</strong> as salas entre o VD e o Elevador no Andar 1 (PGs/Diners do tutorial)</li>
+        <li class="do"><span class="tag green">3</span> Construir <strong>Storage Room</strong> (1 bloco, ~150 caps) logo apos o VD</li>
+        <li class="do"><span class="tag green">4</span> Construir <strong>+2 Storage Rooms</strong> adjacentes (merge em 3 blocos = guard room completa, ~300 caps)</li>
+        <li class="do"><span class="tag green">5</span> Colocar <strong>6 dwellers com MELHORES ARMAS</strong> no guard room</li>
+      </ul>
+      <div class="vault-state">
+        Andar 1: <span style="color:#8b5cf6">[VD]</span>→<span style="color:#f87171">[Storage 3 blocos Lv1]</span>→<span style="color:#4ade80">[ELEV]</span>
+      </div>
+      <ul class="destroy-list">
+        <li class="warn"><span class="tag yellow">LV1</span> <strong>NUNCA</strong> fazer upgrade na Storage Room — manter Lv1 SEMPRE (sala rasa = combate rapido)</li>
+        <li class="warn"><span class="tag yellow">DICA</span> SPECIAL nao afeta combate no vault — so <strong>dano da arma + HP</strong> importam</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MS 14-16 -->
+  <div class="milestone" data-dw="14">
+    <div class="ms-head" onclick="toggleMs(this.parentElement)">
+      <span class="ms-badge">14-16 DW</span>
+      <h3>MEDBAY + SCIENCE LAB</h3>
+      <span class="ms-arrow">&#9660;</span>
+    </div>
+    <div class="ms-body">
+      <ul class="destroy-list">
+        <li class="do"><span class="tag green">14dw</span> Construir <strong>Medbay</strong> (1 bloco, ~150 caps) — produz Stimpaks<br><span style="font-size:11px;color:#9ca3af">Colocar onde tiver espaco. Posicao final: Andar 9 (3-wide). Staffar com I alto.</span></li>
+        <li class="do"><span class="tag green">16dw</span> Construir <strong>Science Lab</strong> (1 bloco, ~150 caps) — produz RadAway<br><span style="font-size:11px;color:#9ca3af">Colocar onde tiver espaco. Posicao final: Andares 10-11 (cap farm). Staffar com I alto.</span></li>
+        <li class="do"><span class="tag green">USAR</span> Dar <strong>Stimpaks + RadAway</strong> para exploradores — aumenta tempo no Wasteland</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MS 18 -->
+  <div class="milestone" data-dw="18">
+    <div class="ms-head" onclick="toggleMs(this.parentElement)">
+      <span class="ms-badge">18 DW</span>
+      <h3>OVERSEER'S OFFICE — QUESTS</h3>
+      <span class="ms-arrow">&#9660;</span>
+    </div>
+    <div class="ms-body">
+      <ul class="destroy-list">
+        <li class="do"><span class="tag green">1</span> Construir <strong>Overseer's Office</strong> (2 blocos fixos, ~150 caps)<br><span style="font-size:11px;color:#9ca3af">Posicao final: Andar 5 (ao lado do Weight Room que desbloqueia aos 24dw)</span></li>
+        <li class="do"><span class="tag green">2</span> Fazer <strong>upgrade ate Lv3</strong> (permite enviar 3 quests simultaneas)</li>
+        <li class="do"><span class="tag green">3</span> Comecar a fazer <strong>quests IMEDIATAMENTE</strong> — principal fonte de armas e roupas Legendary</li>
+      </ul>
+      <ul class="destroy-list">
+        <li class="warn"><span class="tag yellow">DICA</span> Nao precisa de staff para funcionar. Priorize quests que dao <strong>Legendary weapons</strong></li>
+        <li class="warn"><span class="tag yellow">UNICO</span> So pode ter <strong>1 OO</strong> por vault</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- WARNING: Radio Studio -->
+  <div class="warn-banner" style="margin-top:4px">
+    <strong>20 DWELLERS — NAO CONSTRUIR RADIO STUDIO!</strong> Atrai Raiders e Deathclaws sem necessidade. Breeding e melhor para recrutar (bebes herdam stats dos pais). Se construiu por acidente, destrua.
+  </div>
+
+  <!-- MS 22-34 -->
+  <div class="milestone" data-dw="22">
+    <div class="ms-head" onclick="toggleMs(this.parentElement)">
+      <span class="ms-badge">22-34 DW</span>
+      <h3>WORKSHOPS + TRAINING I</h3>
+      <span class="ms-arrow">&#9660;</span>
+    </div>
+    <div class="ms-body">
+      <ul class="destroy-list">
+        <li class="do"><span class="tag green">22dw</span> <strong>Weapon Workshop</strong> (3 blocos fixos) — Andar 4, lado esquerdo. Craft de armas</li>
+        <li class="do"><span class="tag green">24dw</span> <strong>Weight Room</strong> (1-3 blocos, treino S) — Andar 5, ao lado do OO. Merge 3 blocos</li>
+        <li class="do"><span class="tag green">26dw</span> <strong>Athletics Room</strong> (1-3 blocos, treino A) — Andar 8</li>
+        <li class="do"><span class="tag green">28dw</span> <strong>Armory</strong> (1-3 blocos, treino P) — Andar 6</li>
+        <li class="do"><span class="tag green">30dw</span> <strong>Classroom</strong> (1-3 blocos, treino I) — Andar 8, ao lado do Athletics. Merge 3 blocos</li>
+        <li class="do"><span class="tag green">32dw</span> <strong>Outfit Workshop</strong> (3 blocos fixos) — Andar 4, ao lado do Weapon WS. Craft de roupas</li>
+      </ul>
+      <ul class="destroy-list">
+        <li class="warn"><span class="tag yellow">PRIOR</span> Prioridade de treino: <strong>S</strong> (energia) e <strong>I</strong> (Stimpaks/RadAway) primeiro</li>
+        <li class="warn"><span class="tag yellow">CRAFT</span> Priorizar craft de armas S-tier (Dragon's Maw, MIRV, Vengeance) e roupas +7E</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MS 35 — SPECIAL HIGHLIGHT -->
+  <div class="milestone" data-dw="35">
+    <div class="ms-head" onclick="toggleMs(this.parentElement)">
+      <span class="ms-badge">35 DW</span>
+      <h3>FITNESS ROOM — PROTOCOLO E (MAIS IMPORTANTE DO JOGO)</h3>
+      <span class="ms-arrow">&#9660;</span>
+    </div>
+    <div class="ms-body">
+      <div class="warn-banner" style="border-color:#fbbf24;background:linear-gradient(135deg,#1a1a0e,#0f0f1a)">
+        <strong style="color:#fbbf24">ESTE E O MILESTONE MAIS IMPORTANTE DO JOGO INTEIRO.</strong> A partir de agora, todos os novos dwellers devem seguir o Protocolo E antes de fazer QUALQUER outra coisa.
+      </div>
+      <ul class="destroy-list">
+        <li class="do"><span class="tag green">1</span> Construir <strong>Fitness Room</strong> (1-3 blocos, treino E) no Andar 7<br><span style="font-size:11px;color:#9ca3af">Layout: ELEV → [gap] → Fitness 3 blocos → [gap] → ELEV. ISOLADO!</span></li>
+        <li class="do"><span class="tag green">2</span> <strong>GAPS nos dois lados</strong> — dwellers Lv1 treinando E sao FRAGEIS. Isolamento impede propagacao de incidentes</li>
+      </ul>
+      <div style="background:#111827;border:1px solid #fbbf24;border-radius:8px;padding:14px 16px;margin:12px 0">
+        <div style="font-family:'Share Tech Mono',monospace;color:#fbbf24;font-size:13px;margin-bottom:10px">PROTOCOLO E — para TODOS os novos dwellers:</div>
+        <ul class="destroy-list" style="margin-bottom:0">
+          <li class="do"><span class="tag green">1</span> Nasce ou chega → vai <strong>DIRETO</strong> para Fitness Room</li>
+          <li class="do"><span class="tag green">2</span> Treinar <strong>E ate 10</strong></li>
+          <li class="do"><span class="tag green">3</span> Equipar <strong>outfit com +E</strong> (idealmente +7E para E17 total)</li>
+          <li class="do"><span class="tag green">4</span> <strong>SO DEPOIS</strong> ganhar XP (trabalhar, explorar, treinar outros stats)</li>
+        </ul>
+      </div>
+      <ul class="destroy-list">
+        <li class="warn"><span class="tag yellow">HP</span> HP = 10 + (E + outfitE - 1) × 0.5 <strong>por level up</strong>. E17 do Lv1→50 = <strong>595 HP</strong> (maximo do jogo)</li>
+        <li class="warn"><span class="tag yellow">AVISO</span> Dwellers que ja subiram de level SEM E alto tem HP permanentemente baixo. Nao tem como corrigir</li>
+        <li class="warn"><span class="tag yellow">DICA</span> Dwellers pre-35 (antes do Fitness Room) serao sua workforce inicial. Serao eventualmente substituidos</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MS 40-50 -->
+  <div class="milestone" data-dw="40">
+    <div class="ms-head" onclick="toggleMs(this.parentElement)">
+      <span class="ms-badge">40-50 DW</span>
+      <h3>TRAINING II + CAP FARM SETUP</h3>
+      <span class="ms-arrow">&#9660;</span>
+    </div>
+    <div class="ms-body">
+      <ul class="destroy-list">
+        <li class="do"><span class="tag green">40dw</span> <strong>Lounge</strong> (treino C) — Andar 6, ao lado do Armory</li>
+        <li class="do"><span class="tag green">42dw</span> <strong>Theme Workshop</strong> (3 blocos fixos) — opcional, cosmeticos</li>
+        <li class="do"><span class="tag green">45dw</span> <strong>Game Room</strong> (treino L) — Andar 9, ao lado da Medbay 3-wide de producao</li>
+        <li class="do"><span class="tag green">50dw</span> <strong>Barbershop</strong> (2 blocos fixos) — opcional, cosmeticos</li>
+      </ul>
+      <div style="background:#111827;border:1px solid #facc15;border-radius:8px;padding:14px 16px;margin:12px 0">
+        <div style="font-family:'Share Tech Mono',monospace;color:#facc15;font-size:13px;margin-bottom:10px">CAP FARM SETUP (Andares 10-11):</div>
+        <ul class="destroy-list" style="margin-bottom:0">
+          <li class="do"><span class="tag green">1</span> Construir <strong>Medbay</strong> single (1 bloco) <strong>Lv1</strong> alternando com Science Lab</li>
+          <li class="do"><span class="tag green">2</span> Padrao: <strong>Med-Sci-Med-Sci-Med-Sci</strong> (6 salas por andar)</li>
+          <li class="do"><span class="tag green">3</span> <strong>2 dwellers</strong> por sala (high Luck + high Level)</li>
+          <li class="do"><span class="tag green">4</span> <strong>Rush infinito</strong> — Luck alto = taxa de sucesso alta = caps rapidos</li>
+        </ul>
+      </div>
+      <ul class="destroy-list">
+        <li class="warn"><span class="tag yellow">LV1</span> <strong>NAO</strong> fazer upgrade nas salas de cap farm — Lv1 para ciclo rapido</li>
+        <li class="warn"><span class="tag yellow">MERGE</span> <strong>NAO</strong> fazer merge — manter como singles. Alternancia Med-Sci previne auto-merge</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MS 60-100 -->
+  <div class="milestone" data-dw="60">
+    <div class="ms-head" onclick="toggleMs(this.parentElement)">
+      <span class="ms-badge">60-100 DW</span>
+      <h3>ENDGAME — UPGRADES DE PRODUCAO</h3>
+      <span class="ms-arrow">&#9660;</span>
+    </div>
+    <div class="ms-body">
+      <ul class="destroy-list">
+        <li class="do"><span class="tag green">60dw</span> <strong>Nuclear Reactor</strong> substitui Power Generator no Andar 2<br><span style="font-size:11px;color:#9ca3af">Destruir PGs → construir 2× NR 3 blocos. Staffar com S10. 2 maxed = energia para 200dw</span></li>
+        <li class="do"><span class="tag green">70dw</span> <strong>Garden</strong> substitui Diner no Andar 3<br><span style="font-size:11px;color:#9ca3af">Temporario — sera substituido pelo Nuka-Cola Bottler aos 100dw</span></li>
+        <li class="do"><span class="tag green">80dw</span> <strong>Water Purification</strong> substitui Water Treatment no Andar 3<br><span style="font-size:11px;color:#9ca3af">Temporario — sera substituido pelo Nuka-Cola Bottler aos 100dw</span></li>
+        <li class="do"><span class="tag green">100dw</span> <strong>Nuka-Cola Bottler</strong> substitui TUDO no Andar 3<br><span style="font-size:11px;color:#9ca3af">2× NCB 3 blocos maxed = comida E agua para 200 dwellers. Upgrade FINAL</span></li>
+      </ul>
+      <div class="vault-state">
+        Andar 2 final: <span style="color:#4ade80">[ELEV]</span>→<span style="color:#fbbf24">[Nuclear Reactor 3b]</span>→<span style="color:#fbbf24">[Nuclear Reactor 3b]</span>→<span style="color:#4ade80">[ELEV]</span><br>
+        Andar 3 final: <span style="color:#4ade80">[ELEV]</span>→<span style="color:#22d3ee">[Nuka-Cola Bottler 3b]</span>→<span style="color:#22d3ee">[Nuka-Cola Bottler 3b]</span>→<span style="color:#4ade80">[ELEV]</span>
+      </div>
+      <ul class="destroy-list">
+        <li class="warn"><span class="tag yellow">ARMAS</span> Dwellers do Andar 2 sao a <strong>kill zone</strong> — equipar com armas top (Dragon's Maw, MIRV etc.)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">REFERENCIA: TAMANHO DAS SALAS</div>
+  <div style="background:#0f0f1a;border-radius:8px;padding:14px 16px;margin-bottom:20px;border:1px solid #2d2d44">
+    <div style="font-family:'Share Tech Mono',monospace;font-size:11px;color:#4ade80;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">Tamanho em Blocos</div>
+    <div style="font-size:12px;color:#9ca3af;line-height:1.8">
+      <div><strong style="color:#e0e0e0">Vault Door:</strong> 2 blocos (fixo) &nbsp;|&nbsp; <strong style="color:#e0e0e0">Elevador:</strong> 1 square</div>
+      <div><strong style="color:#e0e0e0">PG / Diner / Water / Storage / LQ / Training:</strong> 1 bloco cada — merge ate 3 blocos</div>
+      <div><strong style="color:#e0e0e0">Overseer's Office / Barbershop:</strong> 2 blocos (fixo, nao expande)</div>
+      <div><strong style="color:#e0e0e0">Weapon / Outfit / Theme Workshop:</strong> 3 blocos (fixo, nao reduz)</div>
+      <div style="margin-top:8px;font-size:11px;color:#6b7280">1 bloco = 3 squares &nbsp;|&nbsp; 2 blocos = 6 sq &nbsp;|&nbsp; 3 blocos = 9 sq</div>
+    </div>
+    <div style="margin-top:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:#4ade80;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Capacidade por Andar</div>
+    <div style="font-size:12px;color:#9ca3af;line-height:1.8">
+      <div><strong style="color:#fbbf24">Andar 1 (superficie):</strong> VD (2 blocos) + ate 3 blocos de sala + elevador = 17 squares</div>
+      <div><strong style="color:#fbbf24">Andares subterraneos:</strong> ELEV + <strong>6 blocos de salas</strong> + ELEV = 20 squares</div>
+    </div>
+  </div>
+
+  <div class="section-title">LAYOUT FINAL (clique em qualquer sala para ver detalhes)</div>
+  <div class="vault" id="mainVault"></div>
+
+  <div class="section-title">PROGRESSAO DE SALAS (ordem de desbloqueio)</div>
+  <div class="room-list" id="roomList"></div>
+</div>
+
+<!-- ==================== DETAIL PAGE ==================== -->
+<div class="page" id="detailPage">
+  <div class="detail-header" id="detailHeader">
+    <h2 id="detailName"></h2>
+    <div id="detailSub" style="font-size:13px;color:#9ca3af;margin-top:4px"></div>
+    <div class="unlock-badge" id="detailBadge"></div>
+  </div>
+  <div class="detail-grid" id="detailGrid"></div>
+  <div class="section-title">POSICAO NO LAYOUT</div>
+  <div class="vault" id="detailVault" style="margin-bottom:20px"></div>
+  <div class="section-title">INSTRUCOES</div>
+  <ul class="instruction-list" id="detailInstructions"></ul>
+</div>
+
+<script src="/shared/rooms.js"></script>
+<script>
+function navigateToRoom(roomId) {
+  history.pushState({room: roomId}, '', '/rooms/' + roomSlug(roomId));
+  showDetail(roomId);
+}
+
+function buildRoomList() {
+  var list = document.getElementById('roomList');
+  list.innerHTML = '';
+  var sorted = ROOMS.filter(function(r) { return r.id !== 'elevator'; });
+  sorted.sort(function(a,b) { return a.unlock - b.unlock; });
+
+  sorted.forEach(function(r) {
+    var status = getStatus(r);
+    var card = document.createElement('a');
+    card.className = 'room-card ' + (status === 'skip' ? 'locked' : status);
+    card.href = '/rooms/' + roomSlug(r.id);
+    card.onclick = function(e) {
+      e.preventDefault();
+      navigateToRoom(r.id);
+    };
+
+    var num = r.unlock === 0 ? '0' : r.unlock.toString();
+    var statusText = status === 'available' ? 'DESBLOQUEADO' :
+                     status === 'next' ? 'PROXIMO!' :
+                     status === 'skip' ? 'NAO CONSTRUIR' :
+                     r.unlock + ' dwellers';
+    var floorText = r.floor ? 'Andar ' + r.floor : (r.id === 'radio_studio' ? 'NAO CONSTRUIR' : 'Opcional');
+
+    card.innerHTML =
+      '<div class="rc-num">' + num + '</div>' +
+      '<div class="rc-info">' +
+        '<div class="rc-name">' + r.name + '</div>' +
+        '<div class="rc-sub">' + floorText + (r.size ? ' | ' + r.size + (r.size==='1'?' bloco':' blocos') : '') + (r.stat ? ' | ' + r.stat : '') + '</div>' +
+      '</div>' +
+      '<div class="rc-unlock">' + statusText + '</div>' +
+      '<div class="rc-arrow">&rarr;</div>';
+    list.appendChild(card);
+  });
+}
+
+function showDetail(roomId) {
+  var r = ROOMS.find(function(x) { return x.id === roomId; });
+  if (!r) return;
+
+  document.getElementById('mainPage').classList.remove('active');
+  document.getElementById('detailPage').classList.add('active');
+  document.getElementById('backBtn').style.display = 'inline-block';
+  document.getElementById('pageTitle').textContent = r.name.toUpperCase();
+  document.title = r.name + ' — Fallout Shelter Guide';
+
+  var status = getStatus(r);
+  var header = document.getElementById('detailHeader');
+  header.className = 'detail-header ' + r.css;
+  document.getElementById('detailName').textContent = r.name;
+  document.getElementById('detailSub').textContent = r.desc;
+
+  var badge = document.getElementById('detailBadge');
+  badge.className = 'unlock-badge ' + (status === 'available' ? 'available' : 'locked');
+  badge.textContent = r.unlock === 0 ? 'Disponivel desde o inicio' :
+                    status === 'available' ? 'DESBLOQUEADO (' + r.unlock + ' dwellers)' :
+                    'Desbloqueia com ' + r.unlock + ' dwellers';
+
+  var grid = document.getElementById('detailGrid');
+  grid.innerHTML =
+    '<div class="detail-card">' +
+      '<h3>Desbloqueio</h3>' +
+      '<p><strong>' + (r.unlock === 0 ? 'Inicio do jogo' : r.unlock + ' Dwellers') + '</strong><br>' +
+      (status === 'available' ? 'Voce ja tem acesso!' : 'Faltam ' + (r.unlock - DWELLERS) + ' dwellers') + '</p>' +
+    '</div>' +
+    '<div class="detail-card">' +
+      '<h3>Posicao no Layout</h3>' +
+      '<p><strong>' + (r.floor ? 'Andar ' + r.floor : (r.id === 'radio_studio' ? 'NAO CONSTRUIR' : 'Opcional / Andares de baixo')) + '</strong><br>' +
+      (r.stat ? 'SPECIAL: ' + r.stat : 'Sem stat associado') +
+      (r.size ? '<br>Tamanho: <strong>' + r.size + (r.size==='1'?' bloco':' blocos') + '</strong>' + (r.size === '3' ? ' (3-wide = 9 squares)' : r.size === '2' ? ' (2-wide = 6 squares)' : r.size === '1' ? ' (single = 3 squares)' : '') : '') + '</p>' +
+    '</div>';
+
+  var inst = document.getElementById('detailInstructions');
+  inst.innerHTML = '';
+  r.instructions.forEach(function(i) {
+    var li = document.createElement('li');
+    if (i.indexOf('NAO') !== -1 || i.indexOf('DESTRUIR') !== -1 || i.indexOf('NUNCA') !== -1 || i.indexOf('TEMPORARIO') !== -1) li.className = 'warn';
+    else if (i.indexOf('CRITICO') !== -1 || i.indexOf('ISOLADO') !== -1) li.className = 'note';
+    li.innerHTML = i;
+    inst.appendChild(li);
+  });
+
+  buildVault('detailVault', roomId, navigateToRoom);
+  window.scrollTo(0, 0);
+}
+
+function showMain() {
+  document.getElementById('detailPage').classList.remove('active');
+  document.getElementById('mainPage').classList.add('active');
+  document.getElementById('backBtn').style.display = 'none';
+  document.getElementById('pageTitle').textContent = 'VAULT GUIDE';
+  document.title = 'Fallout Shelter - Guia do Zero';
+  history.pushState({}, '', '/guia');
+  window.scrollTo(0, 0);
+}
+
+function toggleMs(el) {
+  el.classList.toggle('expanded');
+}
+
+function updateDwellers(n) {
+  DWELLERS = Math.max(0, Math.min(200, parseInt(n) || 0));
+  document.getElementById('dwInput').value = DWELLERS;
+  var label = document.getElementById('dwLabel');
+  if (DWELLERS === 0) label.textContent = 'NOVO VAULT';
+  else if (DWELLERS < 12) label.textContent = 'EARLY GAME';
+  else if (DWELLERS < 35) label.textContent = 'MID GAME';
+  else if (DWELLERS < 60) label.textContent = 'LATE GAME';
+  else label.textContent = 'ENDGAME';
+  buildVault('mainVault', null, navigateToRoom);
+  buildRoomList();
+  updateMilestones();
+}
+
+function updateMilestones() {
+  var milestones = document.querySelectorAll('.milestone');
+  var thresholds = [];
+  milestones.forEach(function(m) { thresholds.push(parseInt(m.dataset.dw)); });
+
+  milestones.forEach(function(m, i) {
+    var myDw = thresholds[i];
+    var nextDw = thresholds[i + 1] !== undefined ? thresholds[i + 1] : Infinity;
+
+    m.classList.remove('done', 'current', 'locked', 'expanded');
+
+    if (DWELLERS >= nextDw) {
+      m.classList.add('done');
+      m.querySelector('.ms-badge').textContent = '✓ COMPLETO';
+    } else if (DWELLERS >= myDw) {
+      m.classList.add('current', 'expanded');
+      m.querySelector('.ms-badge').textContent = '→ AGORA';
+    } else {
+      m.classList.add('locked');
+      m.querySelector('.ms-badge').textContent = myDw + ' DW';
+    }
+  });
+}
+
+window.onpopstate = function(e) {
+  if (e.state && e.state.room) {
+    showDetail(e.state.room);
+  } else {
+    document.getElementById('detailPage').classList.remove('active');
+    document.getElementById('mainPage').classList.add('active');
+    document.getElementById('backBtn').style.display = 'none';
+    document.getElementById('pageTitle').textContent = 'VAULT GUIDE';
+    document.title = 'Fallout Shelter - Guia do Zero';
+  }
+};
+
+function initRouter() {
+  var path = window.location.pathname;
+  var match = path.match(/^\/rooms\/(.+)$/);
+  if (match) {
+    var id = roomIdFromSlug(match[1]);
+    var room = ROOMS.find(function(x) { return x.id === id; });
+    if (room) {
+      history.replaceState({room: id}, '', path);
+      showDetail(id);
+      return;
+    }
+  }
+  buildVault('mainVault', null, navigateToRoom);
+  buildRoomList();
+  updateMilestones();
+}
+
+initRouter();
+</script>
+
+</body>
+</html>
