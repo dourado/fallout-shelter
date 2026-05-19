@@ -4,6 +4,7 @@
 /* FLOOR */
 .floor{display:flex;align-items:stretch;gap:clamp(2px, 0.2vw, 3px);position:relative;min-height:clamp(40px, 5vw + 8px, 62px)}
 .floor-label{font-family:'Share Tech Mono',monospace;font-size:clamp(8px, 0.6vw + 4px, 11px);color:#4b5563;min-width:clamp(12px, 1.5vw + 5px, 24px);text-align:right;flex-shrink:0;align-self:center}
+.surface-bg .floor-label{margin-right:auto}
 
 /* ROOM BASE */
 .room{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:clamp(4px, 0.6vw + 1px, 8px) clamp(1px, 0.3vw, 4px);border-radius:clamp(4px, 0.4vw + 1px, 6px);min-height:clamp(40px, 5vw + 8px, 62px);text-align:center;border:2px solid;cursor:pointer;transition:all .15s;position:relative;flex-shrink:0;text-decoration:none;color:inherit}

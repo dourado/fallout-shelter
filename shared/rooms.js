@@ -232,9 +232,9 @@ function buildVault(containerId, highlightId, onClick, options) {
       lbl.textContent = f.label;
       fl.appendChild(lbl);
       var ph = document.createElement('div');
-      ph.className = 'room gap';
-      ph.style.cssText = 'flex:1;min-height:40px;display:flex;align-items:center;justify-content:flex-end';
-      ph.innerHTML = '<span class="room-name" style="color:#4b5563;font-size:11px">Repetir padrao Storage + Gap + Living conforme necessario...</span>';
+      ph.className = 'gap';
+      ph.style.cssText = 'flex:1;display:flex;align-items:center;justify-content:flex-end;border:1px dashed #2d2d44;border-radius:4px;padding:4px 8px';
+      ph.innerHTML = '<span class="room-name" style="color:#4b5563">Repetir padrao Storage + Gap + Living conforme necessario...</span>';
       fl.appendChild(ph);
       c.appendChild(fl);
       return;
