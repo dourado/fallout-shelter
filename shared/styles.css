@@ -13,7 +13,7 @@ body{background:#1a1a2e;color:#e0e0e0;font-family:'Roboto Condensed',Arial,sans-
 
 /* FLOOR */
 .floor{display:flex;align-items:stretch;gap:2px;position:relative;min-height:42px}
-.floor-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:#4b5563;min-width:16px;text-align:right;flex-shrink:0;align-self:center;margin-right:auto}
+.floor-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:#4b5563;min-width:16px;text-align:right;flex-shrink:0;align-self:center;padding-right:2px}
 
 /* ROOM BASE */
 .room{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4px 2px;border-radius:4px;min-height:42px;text-align:center;border:2px solid;cursor:pointer;transition:all .15s;position:relative;flex-shrink:0}
