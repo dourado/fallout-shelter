@@ -9,7 +9,7 @@ body{background:#1a1a2e;color:#e0e0e0;font-family:'Roboto Condensed',Arial,sans-
 .nav a.active{color:#4ade80;border-bottom-color:#4ade80}
 
 /* VAULT CONTAINER */
-.vault{display:flex;flex-direction:column;gap:2px;padding:12px;background:#0f0f1a;border-radius:8px;border:1px solid #2d2d44;overflow-x:auto;width:fit-content;margin:0 auto}
+.vault{display:flex;flex-direction:column;gap:2px;padding:12px;background:#0f0f1a;border-radius:8px;border:1px solid #2d2d44;overflow-x:auto;width:fit-content;max-width:100%;margin:0 auto}
 
 /* FLOOR */
 .floor{display:flex;align-items:stretch;gap:2px;position:relative;min-height:42px}
