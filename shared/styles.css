@@ -9,26 +9,28 @@ body{background:#1a1a2e;color:#e0e0e0;font-family:'Roboto Condensed',Arial,sans-
 .nav a.active{color:#4ade80;border-bottom-color:#4ade80}
 
 /* VAULT CONTAINER */
-.vault{display:flex;flex-direction:column;gap:2px;padding:12px;background:#0f0f1a;border-radius:8px;border:1px solid #2d2d44;overflow-x:auto;width:fit-content;max-width:100%;margin:0 auto}
+.vault{display:flex;flex-direction:column;gap:2px;padding:clamp(6px, 1vw + 4px, 12px);background:#0f0f1a;border-radius:8px;border:1px solid #2d2d44;overflow-x:auto;width:fit-content;max-width:100%;margin:0 auto}
 
 /* FLOOR */
-.floor{display:flex;align-items:stretch;gap:2px;position:relative;min-height:42px}
-.floor-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:#4b5563;min-width:16px;text-align:right;flex-shrink:0;align-self:center;margin-right:auto}
+.floor{display:flex;align-items:stretch;gap:2px;position:relative;min-height:clamp(36px, 4vw + 4px, 42px)}
+.floor-label{font-family:'Share Tech Mono',monospace;font-size:clamp(7px, 0.5vw + 4px, 9px);color:#4b5563;min-width:clamp(12px, 1vw + 7px, 16px);text-align:right;flex-shrink:0;align-self:center;margin-right:auto}
 
 /* ROOM BASE */
-.room{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4px 2px;border-radius:4px;min-height:42px;text-align:center;border:2px solid;cursor:pointer;transition:all .15s;position:relative;flex-shrink:0}
+.room{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4px 2px;border-radius:4px;min-height:clamp(36px, 4vw + 4px, 42px);text-align:center;border:2px solid;cursor:pointer;transition:all .15s;position:relative;flex-shrink:0}
 .room:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.4);z-index:10}
 .room.highlighted{animation:pulse 1.5s infinite;z-index:20}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,.4)}50%{box-shadow:0 0 0 8px rgba(74,222,128,0)}}
 
-.room-name{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;line-height:1.1}
-.room-detail{font-size:7px;opacity:.7;margin-top:2px;line-height:1.1}
-.room-badge{position:absolute;top:-5px;right:-5px;color:white;font-size:7px;font-weight:700;padding:1px 4px;border-radius:6px}
+.room-name{font-size:clamp(6px, 0.65vw + 3px, 9px);font-weight:700;text-transform:uppercase;letter-spacing:.3px;line-height:1.1}
+.room-detail{font-size:clamp(5px, 0.45vw + 2.5px, 7px);opacity:.7;margin-top:2px;line-height:1.1}
+.room-badge{position:absolute;top:-5px;right:-5px;color:white;font-size:clamp(5px, 0.45vw + 2.5px, 7px);font-weight:700;padding:1px 4px;border-radius:6px}
 
-/* SIZES (compact — override in layout) */
-.size-1{width:62px}.size-2{width:126px}.size-3{width:190px}
-.elevator{width:26px;min-height:42px;background:linear-gradient(180deg,#374151,#1f2937);border-color:#4b5563;border-radius:3px}
-.elevator .room-name{font-size:7px;color:#9ca3af;writing-mode:vertical-rl}
+/* SIZES — fluid scaling for guide (compact); layout page overrides */
+.size-1{width:clamp(40px, 5.2vw + 15px, 62px)}
+.size-2{width:clamp(82px, 10.4vw + 32px, 126px)}
+.size-3{width:clamp(124px, 15.6vw + 49px, 190px)}
+.elevator{width:clamp(14px, 2.2vw + 3px, 26px);min-height:clamp(36px, 4vw + 4px, 42px);background:linear-gradient(180deg,#374151,#1f2937);border-color:#4b5563;border-radius:3px}
+.elevator .room-name{font-size:clamp(5px, 0.4vw + 2px, 7px);color:#9ca3af;writing-mode:vertical-rl}
 
 /* ROOM TYPES */
 .vault-door{background:linear-gradient(135deg,#7c3aed,#5b21b6);border-color:#8b5cf6;color:#f3e8ff}
