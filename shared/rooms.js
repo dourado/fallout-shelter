@@ -249,7 +249,6 @@ function buildVault(containerId, highlightId, onClick) {
 function buildFloor(f, highlightId, onClick) {
   var fl = document.createElement('div');
   fl.className = 'floor';
-  fl.style.justifyContent = 'flex-end';
   var lbl = document.createElement('div');
   lbl.className = 'floor-label';
   lbl.textContent = f.label;
