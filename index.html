@@ -6,6 +6,7 @@
 <title>Layout do Vault — Fallout Shelter Guide</title>
 <meta name="description" content="Layout visual otimizado do vault em Fallout Shelter. Posição de cada sala para endgame.">
 <link rel="stylesheet" href="/shared/styles.css">
+<link rel="stylesheet" href="/shared/vault.css">
 <style>
   body{display:flex;flex-direction:column;padding:0}
   .nav{width:100%}
@@ -13,30 +14,6 @@
 
   h1{font-family:'Share Tech Mono',monospace;color:#4ade80;font-size:clamp(16px, 2vw + 6px, 28px);text-transform:uppercase;letter-spacing:clamp(1px, 0.3vw, 3px);margin-bottom:5px;text-shadow:0 0 20px rgba(74,222,128,.3)}
   .subtitle{color:#6b7280;font-size:clamp(11px, 0.5vw + 8px, 14px);margin-bottom:clamp(16px, 2.5vw + 4px, 30px);letter-spacing:1px}
-
-  .vault{gap:clamp(2px, 0.2vw, 3px);padding:clamp(6px, 1.8vw + 2px, 20px);border-radius:clamp(6px, 1vw + 2px, 12px);border-width:2px;box-shadow:0 0 40px rgba(0,0,0,.5)}
-  .floor{gap:clamp(2px, 0.2vw, 3px)}
-  .floor-label{font-size:clamp(8px, 0.6vw + 4px, 11px);min-width:clamp(12px, 1.5vw + 5px, 24px)}
-  .room{padding:clamp(4px, 0.6vw + 1px, 8px) clamp(1px, 0.3vw, 4px);border-radius:clamp(4px, 0.4vw + 1px, 6px);min-height:clamp(40px, 5vw + 8px, 62px)}
-  .room:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.4)}
-  .room-name{font-size:clamp(7px, 0.7vw + 3px, 11px);letter-spacing:.5px;line-height:1.2}
-  .room-detail{font-size:clamp(5px, 0.55vw + 2.5px, 9px);opacity:.75;margin-top:clamp(1px, 0.2vw, 3px);line-height:1.2}
-  .room-badge{top:clamp(-6px, -0.5vw, -4px);right:clamp(-6px, -0.5vw, -4px);font-size:clamp(5px, 0.5vw + 2px, 8px);padding:clamp(0px, 0.1vw, 1px) clamp(2px, 0.4vw, 5px);border-radius:clamp(4px, 0.6vw + 2px, 8px);letter-spacing:.5px}
-  .room-badge.green{background:#22c55e}
-  .room-badge.blue{background:#3b82f6}
-  .room-badge.yellow{background:#eab308;color:#1a1a2e}
-
-  .size-1{width:clamp(46px, 7.1vw + 12px, 90px)}
-  .size-2{width:clamp(95px, 14.2vw + 27px, 183px)}
-  .size-3{width:clamp(144px, 21.3vw + 42px, 276px)}
-  .elevator{width:clamp(15px, 3vw + 1px, 36px);min-height:clamp(40px, 5vw + 8px, 62px);border-radius:4px;display:flex;align-items:center;justify-content:center}
-  .elevator .room-name{font-size:clamp(5px, 0.4vw + 2px, 8px)}
-  .gap .room-name{font-size:clamp(7px, 0.5vw + 3px, 9px)}
-  .gap{background:repeating-linear-gradient(45deg,#1a1a2e,#1a1a2e 4px,#22223a 4px,#22223a 8px);border:2px dashed #2d2d44;opacity:.5}
-
-  .surface-bg{padding:clamp(4px, 0.6vw + 2px, 8px) 0;border-radius:clamp(6px, 0.8vw + 2px, 10px) clamp(6px, 0.8vw + 2px, 10px) 0 0;margin-bottom:2px}
-  .divider{gap:8px;margin:clamp(4px, 0.6vw + 2px, 8px) 0;padding:0 clamp(10px, 3vw + 5px, 40px)}
-  .divider span{font-size:clamp(8px, 0.4vw + 5px, 10px);letter-spacing:clamp(1px, 0.3vw, 2px)}
 
   .legend{margin-top:clamp(20px, 2.5vw + 8px, 30px);display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(6px, 0.8vw + 4px, 12px);max-width:800px;width:100%}
   .legend-item{display:flex;align-items:flex-start;gap:clamp(8px, 0.6vw + 4px, 10px);background:#0f0f1a;padding:clamp(8px, 0.6vw + 4px, 10px) clamp(10px, 0.8vw + 4px, 14px);border-radius:8px;border:1px solid #2d2d44}
@@ -72,295 +49,7 @@
 <h1>Vault Layout Optimized</h1>
 <p class="subtitle">Fallout Shelter &mdash; Endgame Optimization</p>
 
-<div class="vault">
-
-  <!-- SURFACE -->
-  <div class="surface-bg">
-    <div class="floor">
-      <div class="floor-label">01</div>
-      <div class="room vault-door size-2" onclick="location.href='/rooms/elevator'">
-        <span class="room-badge green">LV 1</span>
-        <span class="room-name">Vault Door</span>
-        <span class="room-detail">Posicao fixa (6 sq) &bull; Nunca upgrade<br>Temas funcionam no Lv1</span>
-      </div>
-      <a href="/rooms/storage-room" class="room guard-room size-3" style="text-decoration:none;color:inherit">
-        <span class="room-badge">LV 1</span>
-        <span class="room-name">Sala de Guarda</span>
-        <span class="room-detail">6 Dwellers &bull; Armas S-Tier<br>1a sala apos Vault Door &bull; mantida Lv1</span>
-      </a>
-      <div class="room elevator"><span class="room-name">ELEV</span></div>
-    </div>
-  </div>
-
-  <div class="divider"><span>Kill Zone &mdash; Andares de Abate</span></div>
-
-  <!-- FLOOR 2 -->
-  <div class="floor">
-    <div class="floor-label">02</div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-    <a href="/rooms/nuclear-reactor" class="room power size-3" style="text-decoration:none;color:inherit">
-      <span class="room-badge blue">MAX</span>
-      <span class="room-name">Nuclear Reactor</span>
-      <span class="room-detail">6 Dwellers armados &bull; S maxado</span>
-    </a>
-    <a href="/rooms/nuclear-reactor" class="room power size-3" style="text-decoration:none;color:inherit">
-      <span class="room-badge blue">MAX</span>
-      <span class="room-name">Nuclear Reactor</span>
-      <span class="room-detail">6 Dwellers armados &bull; S maxado</span>
-    </a>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-  </div>
-
-  <!-- FLOOR 3 -->
-  <div class="floor">
-    <div class="floor-label">03</div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-    <a href="/rooms/nuka-cola-bottler" class="room food-water size-3" style="text-decoration:none;color:inherit">
-      <span class="room-badge blue">MAX</span>
-      <span class="room-name">Nuka-Cola Bottler</span>
-      <span class="room-detail">6 Dwellers armados &bull; E+I max</span>
-    </a>
-    <a href="/rooms/nuka-cola-bottler" class="room food-water size-3" style="text-decoration:none;color:inherit">
-      <span class="room-badge blue">MAX</span>
-      <span class="room-name">Nuka-Cola Bottler</span>
-      <span class="room-detail">6 Dwellers armados &bull; E+I max</span>
-    </a>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-  </div>
-
-  <div class="divider"><span>Crafting</span></div>
-
-  <!-- FLOOR 4 -->
-  <div class="floor">
-    <div class="floor-label">04</div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-    <a href="/rooms/weapon-workshop" class="room craft size-3" style="text-decoration:none;color:inherit">
-      <span class="room-badge blue">MAX</span>
-      <span class="room-name">Weapon Workshop</span>
-      <span class="room-detail">6 Dwellers &bull; Craft armas S-tier</span>
-    </a>
-    <a href="/rooms/outfit-workshop" class="room craft size-3" style="text-decoration:none;color:inherit">
-      <span class="room-badge blue">MAX</span>
-      <span class="room-name">Outfit Workshop</span>
-      <span class="room-detail">6 Dwellers &bull; Craft roupas</span>
-    </a>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-  </div>
-
-  <!-- FLOOR 5 -->
-  <div class="floor">
-    <div class="floor-label">05</div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-    <a href="/rooms/overseer-office" class="room overseer size-2" style="text-decoration:none;color:inherit">
-      <span class="room-badge blue">MAX</span>
-      <span class="room-name">Overseer's Office</span>
-      <span class="room-detail">Quests (6 sq fixo) &bull; Sem staff<br>Unico por vault &bull; Lv3 = 3 quests</span>
-    </a>
-    <a href="/rooms/weight-room" class="room training size-3" style="text-decoration:none;color:inherit">
-      <span class="room-name">Weight Room</span>
-      <span class="room-detail">Treino Strength</span>
-    </a>
-    <div class="room gap size-1">
-      <span class="room-name">vazio</span>
-    </div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-  </div>
-
-  <div class="divider"><span>Treinamento SPECIAL</span></div>
-
-  <!-- FLOOR 6 -->
-  <div class="floor">
-    <div class="floor-label">06</div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-    <a href="/rooms/armory" class="room training size-3" style="text-decoration:none;color:inherit">
-      <span class="room-name">Armory</span>
-      <span class="room-detail">Treino Perception</span>
-    </a>
-    <a href="/rooms/lounge" class="room training size-3" style="text-decoration:none;color:inherit">
-      <span class="room-name">Lounge</span>
-      <span class="room-detail">Treino Charisma</span>
-    </a>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-  </div>
-
-  <!-- FLOOR 7 -->
-  <div class="floor">
-    <div class="floor-label">07</div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-    <div class="room gap size-1">
-      <span class="room-name">vazio</span>
-    </div>
-    <a href="/rooms/fitness-room" class="room training-e size-3" style="text-decoration:none;color:inherit">
-      <span class="room-badge yellow">ISOLADO</span>
-      <span class="room-name">Fitness Room</span>
-      <span class="room-detail">Treino Endurance<br>Dwellers Lv1 &mdash; FRAGEIS!</span>
-    </a>
-    <div class="room gap size-2">
-      <span class="room-name">vazio</span>
-    </div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-  </div>
-
-  <!-- FLOOR 8 -->
-  <div class="floor">
-    <div class="floor-label">08</div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-    <a href="/rooms/classroom" class="room training size-3" style="text-decoration:none;color:inherit">
-      <span class="room-name">Classroom</span>
-      <span class="room-detail">Treino Intelligence</span>
-    </a>
-    <a href="/rooms/athletics-room" class="room training size-3" style="text-decoration:none;color:inherit">
-      <span class="room-name">Athletics Room</span>
-      <span class="room-detail">Treino Agility</span>
-    </a>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-  </div>
-
-  <!-- FLOOR 9 -->
-  <div class="floor">
-    <div class="floor-label">09</div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-    <a href="/rooms/game-room" class="room training size-3" style="text-decoration:none;color:inherit">
-      <span class="room-name">Game Room</span>
-      <span class="room-detail">Treino Luck</span>
-    </a>
-    <a href="/rooms/medbay" class="room medbay-prod size-3" style="text-decoration:none;color:inherit">
-      <span class="room-badge blue">MAX</span>
-      <span class="room-name">Medbay</span>
-      <span class="room-detail">Producao Stimpaks p/ Quests</span>
-    </a>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-  </div>
-
-  <div class="divider"><span>Cap Farming &mdash; Rush Spam</span></div>
-
-  <!-- FLOOR 10 -->
-  <div class="floor">
-    <div class="floor-label">10</div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-    <a href="/rooms/medbay" class="room cap-farm size-1" style="text-decoration:none;color:inherit">
-      <span class="room-badge">LV 1</span>
-      <span class="room-name">Med</span>
-    </a>
-    <a href="/rooms/science-lab" class="room cap-farm size-1" style="text-decoration:none;color:inherit">
-      <span class="room-badge">LV 1</span>
-      <span class="room-name">Sci</span>
-    </a>
-    <a href="/rooms/medbay" class="room cap-farm size-1" style="text-decoration:none;color:inherit">
-      <span class="room-badge">LV 1</span>
-      <span class="room-name">Med</span>
-    </a>
-    <a href="/rooms/science-lab" class="room cap-farm size-1" style="text-decoration:none;color:inherit">
-      <span class="room-badge">LV 1</span>
-      <span class="room-name">Sci</span>
-    </a>
-    <a href="/rooms/medbay" class="room cap-farm size-1" style="text-decoration:none;color:inherit">
-      <span class="room-badge">LV 1</span>
-      <span class="room-name">Med</span>
-    </a>
-    <a href="/rooms/science-lab" class="room cap-farm size-1" style="text-decoration:none;color:inherit">
-      <span class="room-badge">LV 1</span>
-      <span class="room-name">Sci</span>
-    </a>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-  </div>
-
-  <!-- FLOOR 11 -->
-  <div class="floor">
-    <div class="floor-label">11</div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-    <a href="/rooms/medbay" class="room cap-farm size-1" style="text-decoration:none;color:inherit">
-      <span class="room-badge">LV 1</span>
-      <span class="room-name">Med</span>
-    </a>
-    <a href="/rooms/science-lab" class="room cap-farm size-1" style="text-decoration:none;color:inherit">
-      <span class="room-badge">LV 1</span>
-      <span class="room-name">Sci</span>
-    </a>
-    <a href="/rooms/medbay" class="room cap-farm size-1" style="text-decoration:none;color:inherit">
-      <span class="room-badge">LV 1</span>
-      <span class="room-name">Med</span>
-    </a>
-    <a href="/rooms/science-lab" class="room cap-farm size-1" style="text-decoration:none;color:inherit">
-      <span class="room-badge">LV 1</span>
-      <span class="room-name">Sci</span>
-    </a>
-    <a href="/rooms/medbay" class="room cap-farm size-1" style="text-decoration:none;color:inherit">
-      <span class="room-badge">LV 1</span>
-      <span class="room-name">Med</span>
-    </a>
-    <a href="/rooms/science-lab" class="room cap-farm size-1" style="text-decoration:none;color:inherit">
-      <span class="room-badge">LV 1</span>
-      <span class="room-name">Sci</span>
-    </a>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-  </div>
-
-  <div class="divider"><span>Storage &mdash; Auto-Extincao de Incidentes</span></div>
-
-  <!-- FLOOR 12 -->
-  <div class="floor">
-    <div class="floor-label">12</div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-    <a href="/rooms/storage-room" class="room storage size-3" style="text-decoration:none;color:inherit">
-      <span class="room-name">Storage</span>
-      <span class="room-detail">Sem staff</span>
-    </a>
-    <div class="room gap size-1">
-      <span class="room-name">gap</span>
-    </div>
-    <a href="/rooms/living-quarters" class="room living size-2" style="text-decoration:none;color:inherit">
-      <span class="room-name">Living Quarters</span>
-      <span class="room-detail">Sem staff</span>
-    </a>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-  </div>
-
-  <!-- FLOOR 13 -->
-  <div class="floor">
-    <div class="floor-label">13</div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-    <a href="/rooms/living-quarters" class="room living size-2" style="text-decoration:none;color:inherit">
-      <span class="room-name">Living Quarters</span>
-      <span class="room-detail">Sem staff</span>
-    </a>
-    <div class="room gap size-1">
-      <span class="room-name">gap</span>
-    </div>
-    <a href="/rooms/storage-room" class="room storage size-3" style="text-decoration:none;color:inherit">
-      <span class="room-name">Storage</span>
-      <span class="room-detail">Sem staff</span>
-    </a>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-  </div>
-
-  <!-- FLOOR 14 -->
-  <div class="floor">
-    <div class="floor-label">14</div>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-    <a href="/rooms/storage-room" class="room storage size-3" style="text-decoration:none;color:inherit">
-      <span class="room-name">Storage</span>
-      <span class="room-detail">Sem staff</span>
-    </a>
-    <div class="room gap size-1">
-      <span class="room-name">gap</span>
-    </div>
-    <a href="/rooms/living-quarters" class="room living size-2" style="text-decoration:none;color:inherit">
-      <span class="room-name">Living Quarters</span>
-      <span class="room-detail">Sem staff</span>
-    </a>
-    <div class="room elevator"><span class="room-name">ELEV</span></div>
-  </div>
-
-  <!-- FLOOR 15+ -->
-  <div class="floor">
-    <div class="floor-label" style="color:#4ade80;">15+</div>
-    <div class="room gap" style="flex:1; min-height:40px; display:flex; align-items:center; justify-content:flex-end;">
-      <span class="room-name" style="color:#4b5563; font-size:11px;">Repetir padrao Storage + Gap + Living conforme necessario...</span>
-    </div>
-  </div>
-
-</div>
+<div class="vault" id="layoutVault"></div>
 
 <!-- LEGEND -->
 <div class="legend">
@@ -447,5 +136,11 @@
 </div>
 
 </div>
+
+<script src="/shared/rooms.js"></script>
+<script>
+  DWELLERS = 200;
+  buildVault('layoutVault', null, null, {linkBase: '/rooms/'});
+</script>
 </body>
 </html>

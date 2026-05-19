@@ -104,94 +104,102 @@ var ROOMS = [
 
 var VAULT_FLOORS = [
   {label:'01',surface:true,rooms:[
-    {id:'vault_door',css:'vault-door',size:'size-2',name:'Vault Door',detail:'Lv1 fixo',badge:'LV1',badgeCss:'background:#22c55e'},
-    {id:'storage_room',css:'guard-room',size:'size-3',name:'Storage Room',detail:'Guarda Lv1 | 6 Dwellers',badge:'LV1',badgeCss:'background:#ef4444'},
+    {id:'elevator',css:'vault-door',size:'size-2',name:'Vault Door',detail:'Posicao fixa (6 sq) • Nunca upgrade',badge:'LV 1',badgeCss:'background:#22c55e'},
+    {id:'storage_room',css:'guard-room',size:'size-3',name:'Sala de Guarda',detail:'6 Dwellers • Armas S-Tier',badge:'LV 1',badgeCss:'background:#ef4444'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
-  {label:'02',rooms:[
+  {label:'02',dividerBefore:'Kill Zone — Andares de Abate',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'nuclear_reactor',css:'power',size:'size-3',name:'Nuclear Reactor',detail:'(Power Gen ate 60dw)',badge:'MAX'},
-    {id:'nuclear_reactor',css:'power',size:'size-3',name:'Nuclear Reactor',detail:'(Power Gen ate 60dw)',badge:'MAX'},
+    {id:'nuclear_reactor',css:'power',size:'size-3',name:'Nuclear Reactor',detail:'6 Dwellers armados • S maxado',badge:'MAX',badgeCss:'background:#3b82f6'},
+    {id:'nuclear_reactor',css:'power',size:'size-3',name:'Nuclear Reactor',detail:'6 Dwellers armados • S maxado',badge:'MAX',badgeCss:'background:#3b82f6'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'03',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'nuka_cola_bottler',css:'food-water',size:'size-3',name:'Nuka-Cola Bottler',detail:'(Diner→Garden→Bottler)',badge:'MAX'},
-    {id:'nuka_cola_bottler',css:'food-water',size:'size-3',name:'Nuka-Cola Bottler',detail:'(WTreat→WPurif→Bottler)',badge:'MAX'},
+    {id:'nuka_cola_bottler',css:'food-water',size:'size-3',name:'Nuka-Cola Bottler',detail:'6 Dwellers armados • E+I max',badge:'MAX',badgeCss:'background:#3b82f6'},
+    {id:'nuka_cola_bottler',css:'food-water',size:'size-3',name:'Nuka-Cola Bottler',detail:'6 Dwellers armados • E+I max',badge:'MAX',badgeCss:'background:#3b82f6'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
-  {label:'04',rooms:[
+  {label:'04',dividerBefore:'Crafting',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'weapon_workshop',css:'craft',size:'size-3',name:'Weapon Workshop',detail:'Craft armas',badge:'MAX'},
-    {id:'outfit_workshop',css:'craft',size:'size-3',name:'Outfit Workshop',detail:'Craft roupas',badge:'MAX'},
+    {id:'weapon_workshop',css:'craft',size:'size-3',name:'Weapon Workshop',detail:'6 Dwellers • Craft armas S-tier',badge:'MAX',badgeCss:'background:#3b82f6'},
+    {id:'outfit_workshop',css:'craft',size:'size-3',name:'Outfit Workshop',detail:'6 Dwellers • Craft roupas',badge:'MAX',badgeCss:'background:#3b82f6'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'05',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'overseer_office',css:'overseer',size:'size-2',name:"Overseer's Office",detail:'Quests',badge:'MAX'},
-    {id:'weight_room',css:'training',size:'size-3',name:'Weight Room',detail:'Treino S'},
-    {id:null,css:'gap',size:'size-1',name:''},
+    {id:'overseer_office',css:'overseer',size:'size-2',name:"Overseer's Office",detail:'Quests (6 sq fixo) • Sem staff',badge:'MAX',badgeCss:'background:#3b82f6'},
+    {id:'weight_room',css:'training',size:'size-3',name:'Weight Room',detail:'Treino Strength'},
+    {id:null,css:'gap',size:'size-1',name:'vazio'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
-  {label:'06',rooms:[
+  {label:'06',dividerBefore:'Treinamento SPECIAL',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'armory',css:'training',size:'size-3',name:'Armory',detail:'Treino P'},
-    {id:'lounge',css:'training',size:'size-3',name:'Lounge',detail:'Treino C'},
+    {id:'armory',css:'training',size:'size-3',name:'Armory',detail:'Treino Perception'},
+    {id:'lounge',css:'training',size:'size-3',name:'Lounge',detail:'Treino Charisma'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'07',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:null,css:'gap',size:'size-1',name:''},
-    {id:'fitness_room',css:'training-e',size:'size-3',name:'Fitness Room',detail:'Treino E | ISOLADO'},
-    {id:null,css:'gap',size:'size-2',name:''},
+    {id:null,css:'gap',size:'size-1',name:'vazio'},
+    {id:'fitness_room',css:'training-e',size:'size-3',name:'Fitness Room',detail:'Treino Endurance',badge:'ISOLADO',badgeCss:'background:#eab308;color:#1a1a2e'},
+    {id:null,css:'gap',size:'size-2',name:'vazio'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'08',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'classroom',css:'training',size:'size-3',name:'Classroom',detail:'Treino I'},
-    {id:'athletics_room',css:'training',size:'size-3',name:'Athletics Room',detail:'Treino A'},
+    {id:'classroom',css:'training',size:'size-3',name:'Classroom',detail:'Treino Intelligence'},
+    {id:'athletics_room',css:'training',size:'size-3',name:'Athletics Room',detail:'Treino Agility'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'09',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'game_room',css:'training',size:'size-3',name:'Game Room',detail:'Treino L'},
-    {id:'medbay',css:'medbay-prod',size:'size-3',name:'Medbay',detail:'Producao Stimpaks',badge:'MAX'},
+    {id:'game_room',css:'training',size:'size-3',name:'Game Room',detail:'Treino Luck'},
+    {id:'medbay',css:'medbay-prod',size:'size-3',name:'Medbay',detail:'Producao Stimpaks p/ Quests',badge:'MAX',badgeCss:'background:#3b82f6'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
-  {label:'10',capfarm:true,rooms:[
+  {label:'10',capfarm:true,dividerBefore:'Cap Farming — Rush Spam',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'medbay',css:'cap-farm',size:'size-1',name:'Med',badge:'LV1',badgeCss:'background:#ef4444'},
-    {id:'science_lab',css:'cap-farm',size:'size-1',name:'Sci',badge:'LV1',badgeCss:'background:#ef4444'},
-    {id:'medbay',css:'cap-farm',size:'size-1',name:'Med',badge:'LV1',badgeCss:'background:#ef4444'},
-    {id:'science_lab',css:'cap-farm',size:'size-1',name:'Sci',badge:'LV1',badgeCss:'background:#ef4444'},
-    {id:'medbay',css:'cap-farm',size:'size-1',name:'Med',badge:'LV1',badgeCss:'background:#ef4444'},
-    {id:'science_lab',css:'cap-farm',size:'size-1',name:'Sci',badge:'LV1',badgeCss:'background:#ef4444'},
+    {id:'medbay',css:'cap-farm',size:'size-1',name:'Med',badge:'LV 1'},
+    {id:'science_lab',css:'cap-farm',size:'size-1',name:'Sci',badge:'LV 1'},
+    {id:'medbay',css:'cap-farm',size:'size-1',name:'Med',badge:'LV 1'},
+    {id:'science_lab',css:'cap-farm',size:'size-1',name:'Sci',badge:'LV 1'},
+    {id:'medbay',css:'cap-farm',size:'size-1',name:'Med',badge:'LV 1'},
+    {id:'science_lab',css:'cap-farm',size:'size-1',name:'Sci',badge:'LV 1'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'11',capfarm:true,rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'medbay',css:'cap-farm',size:'size-1',name:'Med',badge:'LV1',badgeCss:'background:#ef4444'},
-    {id:'science_lab',css:'cap-farm',size:'size-1',name:'Sci',badge:'LV1',badgeCss:'background:#ef4444'},
-    {id:'medbay',css:'cap-farm',size:'size-1',name:'Med',badge:'LV1',badgeCss:'background:#ef4444'},
-    {id:'science_lab',css:'cap-farm',size:'size-1',name:'Sci',badge:'LV1',badgeCss:'background:#ef4444'},
-    {id:'medbay',css:'cap-farm',size:'size-1',name:'Med',badge:'LV1',badgeCss:'background:#ef4444'},
-    {id:'science_lab',css:'cap-farm',size:'size-1',name:'Sci',badge:'LV1',badgeCss:'background:#ef4444'},
+    {id:'medbay',css:'cap-farm',size:'size-1',name:'Med',badge:'LV 1'},
+    {id:'science_lab',css:'cap-farm',size:'size-1',name:'Sci',badge:'LV 1'},
+    {id:'medbay',css:'cap-farm',size:'size-1',name:'Med',badge:'LV 1'},
+    {id:'science_lab',css:'cap-farm',size:'size-1',name:'Sci',badge:'LV 1'},
+    {id:'medbay',css:'cap-farm',size:'size-1',name:'Med',badge:'LV 1'},
+    {id:'science_lab',css:'cap-farm',size:'size-1',name:'Sci',badge:'LV 1'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
-  {label:'12',rooms:[
+  {label:'12',dividerBefore:'Storage — Auto-Extincao de Incidentes',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
     {id:'storage_room',css:'storage',size:'size-3',name:'Storage',detail:'Sem staff'},
     {id:null,css:'gap',size:'size-1',name:'gap'},
-    {id:'living_quarters',css:'living',size:'size-2',name:'Living Q.',detail:'Sem staff'},
+    {id:'living_quarters',css:'living',size:'size-2',name:'Living Quarters',detail:'Sem staff'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
-  {label:'13+',rooms:[
+  {label:'13',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'living_quarters',css:'living',size:'size-2',name:'Living Q.',detail:'Sem staff'},
+    {id:'living_quarters',css:'living',size:'size-2',name:'Living Quarters',detail:'Sem staff'},
     {id:null,css:'gap',size:'size-1',name:'gap'},
     {id:'storage_room',css:'storage',size:'size-3',name:'Storage',detail:'Sem staff'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
-  ]}
+  ]},
+  {label:'14',rooms:[
+    {id:null,css:'elevator',size:'elevator',name:'ELEV'},
+    {id:'storage_room',css:'storage',size:'size-3',name:'Storage',detail:'Sem staff'},
+    {id:null,css:'gap',size:'size-1',name:'gap'},
+    {id:'living_quarters',css:'living',size:'size-2',name:'Living Quarters',detail:'Sem staff'},
+    {id:null,css:'elevator',size:'elevator',name:'ELEV'}
+  ]},
+  {label:'15+',placeholder:true}
 ];
 
 function getStatus(r) {
@@ -202,51 +210,49 @@ function getStatus(r) {
   return 'locked';
 }
 
-function buildVault(containerId, highlightId, onClick) {
+function buildVault(containerId, highlightId, onClick, options) {
+  options = options || {};
   var c = document.getElementById(containerId);
   c.innerHTML = '';
 
   VAULT_FLOORS.forEach(function(f) {
+    if (f.dividerBefore) {
+      var div = document.createElement('div');
+      div.className = 'divider';
+      div.innerHTML = '<span>' + f.dividerBefore + '</span>';
+      c.appendChild(div);
+    }
+
+    if (f.placeholder) {
+      var fl = document.createElement('div');
+      fl.className = 'floor';
+      var lbl = document.createElement('div');
+      lbl.className = 'floor-label';
+      lbl.style.color = '#4ade80';
+      lbl.textContent = f.label;
+      fl.appendChild(lbl);
+      var ph = document.createElement('div');
+      ph.className = 'room gap';
+      ph.style.cssText = 'flex:1;min-height:40px;display:flex;align-items:center;justify-content:flex-end';
+      ph.innerHTML = '<span class="room-name" style="color:#4b5563;font-size:11px">Repetir padrao Storage + Gap + Living conforme necessario...</span>';
+      fl.appendChild(ph);
+      c.appendChild(fl);
+      return;
+    }
+
     if (f.surface) {
       var wrap = document.createElement('div');
       wrap.className = 'surface-bg';
-      wrap.appendChild(buildFloor(f, highlightId, onClick));
+      wrap.appendChild(buildFloor(f, highlightId, onClick, options));
       c.appendChild(wrap);
-      var div = document.createElement('div');
-      div.className = 'divider';
-      div.innerHTML = '<span>Kill Zone</span>';
-      c.appendChild(div);
-    } else if (f.label === '04') {
-      var div = document.createElement('div');
-      div.className = 'divider';
-      div.innerHTML = '<span>Crafting</span>';
-      c.appendChild(div);
-      c.appendChild(buildFloor(f, highlightId, onClick));
-    } else if (f.label === '05') {
-      var div = document.createElement('div');
-      div.className = 'divider';
-      div.innerHTML = '<span>Overseer + Training</span>';
-      c.appendChild(div);
-      c.appendChild(buildFloor(f, highlightId, onClick));
-    } else if (f.label === '10') {
-      var div = document.createElement('div');
-      div.className = 'divider';
-      div.innerHTML = '<span>Cap Farming</span>';
-      c.appendChild(div);
-      c.appendChild(buildFloor(f, highlightId, onClick));
-    } else if (f.label === '12') {
-      var div = document.createElement('div');
-      div.className = 'divider';
-      div.innerHTML = '<span>Storage (auto-extincao)</span>';
-      c.appendChild(div);
-      c.appendChild(buildFloor(f, highlightId, onClick));
     } else {
-      c.appendChild(buildFloor(f, highlightId, onClick));
+      c.appendChild(buildFloor(f, highlightId, onClick, options));
     }
   });
 }
 
-function buildFloor(f, highlightId, onClick) {
+function buildFloor(f, highlightId, onClick, options) {
+  options = options || {};
   var fl = document.createElement('div');
   fl.className = 'floor';
   var lbl = document.createElement('div');
@@ -255,32 +261,37 @@ function buildFloor(f, highlightId, onClick) {
   fl.appendChild(lbl);
 
   f.rooms.forEach(function(r) {
-    var div = document.createElement('div');
     var isElev = r.size === 'elevator';
     var isGap = r.css === 'gap';
-    div.className = 'room ' + r.css + (isElev ? '' : ' ' + r.size);
-
     var roomData = r.id ? ROOMS.find(function(x) { return x.id === r.id; }) : null;
     var isLocked = roomData && roomData.unlock > DWELLERS;
     var isHighlighted = highlightId && r.id === highlightId;
 
-    if (isLocked && !isElev && !isGap) div.classList.add('locked');
-    if (isHighlighted) div.classList.add('highlighted');
+    var el;
+    if (roomData && !isElev && !isGap && options.linkBase) {
+      el = document.createElement('a');
+      el.href = options.linkBase + roomSlug(roomData.id);
+    } else {
+      el = document.createElement('div');
+      if (roomData && !isElev && !isGap && onClick) {
+        el.style.cursor = 'pointer';
+        el.onclick = function() { onClick(roomData.id); };
+      }
+    }
+
+    el.className = 'room ' + r.css + (isElev ? '' : ' ' + r.size);
+    if (isLocked && !isElev && !isGap) el.classList.add('locked');
+    if (isHighlighted) el.classList.add('highlighted');
 
     var html = '<span class="room-name">' + r.name + '</span>';
     if (r.detail) html += '<span class="room-detail">' + r.detail + '</span>';
     if (r.badge) {
-      var bCss = r.badgeCss || 'background:#3b82f6';
+      var bCss = r.badgeCss || 'background:#374151';
       html = '<span class="room-badge" style="' + bCss + '">' + r.badge + '</span>' + html;
     }
-    div.innerHTML = html;
+    el.innerHTML = html;
 
-    if (roomData && !isElev && !isGap && onClick) {
-      div.style.cursor = 'pointer';
-      div.onclick = function() { onClick(roomData.id); };
-    }
-
-    fl.appendChild(div);
+    fl.appendChild(el);
   });
   return fl;
 }

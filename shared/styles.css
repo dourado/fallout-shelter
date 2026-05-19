@@ -8,55 +8,6 @@ body{background:#1a1a2e;color:#e0e0e0;font-family:'Roboto Condensed',Arial,sans-
 .nav a:hover{color:#4ade80}
 .nav a.active{color:#4ade80;border-bottom-color:#4ade80}
 
-/* VAULT CONTAINER */
-.vault{display:flex;flex-direction:column;gap:2px;padding:clamp(6px, 1vw + 4px, 12px);background:#0f0f1a;border-radius:8px;border:1px solid #2d2d44;overflow-x:auto;width:fit-content;max-width:100%;margin:0 auto}
-
-/* FLOOR */
-.floor{display:flex;align-items:stretch;gap:2px;position:relative;min-height:clamp(36px, 4vw + 4px, 42px)}
-.floor-label{font-family:'Share Tech Mono',monospace;font-size:clamp(7px, 0.5vw + 4px, 9px);color:#4b5563;min-width:clamp(12px, 1vw + 7px, 16px);text-align:right;flex-shrink:0;align-self:center;margin-right:auto}
-
-/* ROOM BASE */
-.room{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4px 2px;border-radius:4px;min-height:clamp(36px, 4vw + 4px, 42px);text-align:center;border:2px solid;cursor:pointer;transition:all .15s;position:relative;flex-shrink:0}
-.room:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.4);z-index:10}
-.room.highlighted{animation:pulse 1.5s infinite;z-index:20}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,.4)}50%{box-shadow:0 0 0 8px rgba(74,222,128,0)}}
-
-.room-name{font-size:clamp(6px, 0.65vw + 3px, 9px);font-weight:700;text-transform:uppercase;letter-spacing:.3px;line-height:1.1}
-.room-detail{font-size:clamp(5px, 0.45vw + 2.5px, 7px);opacity:.7;margin-top:2px;line-height:1.1}
-.room-badge{position:absolute;top:-5px;right:-5px;color:white;font-size:clamp(5px, 0.45vw + 2.5px, 7px);font-weight:700;padding:1px 4px;border-radius:6px}
-
-/* SIZES — fluid scaling for guide (compact); layout page overrides */
-.size-1{width:clamp(40px, 5.2vw + 15px, 62px)}
-.size-2{width:clamp(82px, 10.4vw + 32px, 126px)}
-.size-3{width:clamp(124px, 15.6vw + 49px, 190px)}
-.elevator{width:clamp(14px, 2.2vw + 3px, 26px);min-height:clamp(36px, 4vw + 4px, 42px);background:linear-gradient(180deg,#374151,#1f2937);border-color:#4b5563;border-radius:3px}
-.elevator .room-name{font-size:clamp(5px, 0.4vw + 2px, 7px);color:#9ca3af;writing-mode:vertical-rl}
-
-/* ROOM TYPES */
-.vault-door{background:linear-gradient(135deg,#7c3aed,#5b21b6);border-color:#8b5cf6;color:#f3e8ff}
-.guard-room{background:linear-gradient(135deg,#dc2626,#991b1b);border-color:#f87171;color:#fef2f2}
-.power{background:linear-gradient(135deg,#d97706,#92400e);border-color:#fbbf24;color:#fffbeb}
-.food-water{background:linear-gradient(135deg,#0891b2,#155e75);border-color:#22d3ee;color:#ecfeff}
-.craft{background:linear-gradient(135deg,#7c3aed,#4c1d95);border-color:#a78bfa;color:#f3e8ff}
-.overseer{background:linear-gradient(135deg,#1d4ed8,#1e3a8a);border-color:#60a5fa;color:#dbeafe}
-.training{background:linear-gradient(135deg,#059669,#064e3b);border-color:#34d399;color:#ecfdf5}
-.training-e{background:linear-gradient(135deg,#e11d48,#881337);border-color:#fb7185;color:#fff1f2}
-.cap-farm{background:linear-gradient(135deg,#ca8a04,#713f12);border-color:#facc15;color:#fefce8}
-.storage{background:linear-gradient(135deg,#475569,#1e293b);border-color:#64748b;color:#e2e8f0}
-.living{background:linear-gradient(135deg,#be185d,#831843);border-color:#f472b6;color:#fce7f3}
-.medbay-prod{background:linear-gradient(135deg,#0e7490,#164e63);border-color:#06b6d4;color:#ecfeff}
-.gap{background:repeating-linear-gradient(45deg,#1a1a2e,#1a1a2e 3px,#22223a 3px,#22223a 6px);border:1px dashed #2d2d44;opacity:.4;cursor:default}
-.gap .room-name{color:#4b5563;font-size:7px}
-.locked{opacity:.25;filter:grayscale(1)}
-
-/* SURFACE & DIVIDERS */
-.surface-bg{background:linear-gradient(180deg,#1e3a2f,#0f0f1a);padding:6px 0;border-radius:8px 8px 0 0;border-bottom:2px solid #4ade80;margin-bottom:1px}
-.divider{display:flex;align-items:center;gap:6px;margin:4px 0;padding:0 30px}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:#2d2d44}
-.divider span{font-family:'Share Tech Mono',monospace;font-size:8px;color:#4ade80;text-transform:uppercase;letter-spacing:1.5px}
-
 @media(max-width:480px){
   .nav{padding:6px 10px;gap:12px;font-size:11px}
-  .divider{padding:0 8px;margin:3px 0}
-  .divider span{font-size:7px;letter-spacing:.5px}
 }
