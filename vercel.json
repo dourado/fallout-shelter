@@ -1,0 +1,6 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/rooms/:id", "destination": "/index.html" }
+  ]
+}
