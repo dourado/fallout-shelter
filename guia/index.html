@@ -532,6 +532,10 @@ function showDetail(roomId) {
 }
 
 function showMain() {
+  if (cameFromLayout) {
+    window.location.href = '/';
+    return;
+  }
   document.getElementById('detailPage').classList.remove('active');
   document.getElementById('mainPage').classList.add('active');
   document.getElementById('backBtn').style.display = 'none';
@@ -585,13 +589,17 @@ function updateMilestones() {
 window.onpopstate = function(e) {
   if (e.state && e.state.room) {
     showDetail(e.state.room);
+  } else if (cameFromLayout) {
+    window.location.href = '/';
   } else {
     document.getElementById('detailPage').classList.remove('active');
     document.getElementById('mainPage').classList.add('active');
     document.getElementById('backBtn').style.display = 'none';
-      document.title = 'Fallout Shelter - Guia do Zero';
+    document.title = 'Fallout Shelter - Guia do Zero';
   }
 };
+
+var cameFromLayout = false;
 
 function initRouter() {
   var path = window.location.pathname;
@@ -600,6 +608,7 @@ function initRouter() {
     var id = roomIdFromSlug(match[1]);
     var room = ROOMS.find(function(x) { return x.id === id; });
     if (room) {
+      cameFromLayout = !document.referrer || new URL(document.referrer).pathname !== '/guia';
       history.replaceState({room: id}, '', path);
       showDetail(id);
       return;
