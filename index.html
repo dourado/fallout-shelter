@@ -59,7 +59,9 @@
 <h1>Vault Layout Optimized</h1>
 <p class="subtitle">Fallout Shelter &mdash; Endgame Optimization</p>
 
+<script src="/shared/rooms.js"></script>
 <div class="vault" id="layoutVault"></div>
+<script>DWELLERS=200;buildVault('layoutVault',null,null,{linkBase:'/rooms/'})</script>
 
 <!-- LEGEND -->
 <div class="legend">
@@ -147,7 +149,6 @@
 
 </main>
 
-<script src="/shared/rooms.js"></script>
 <script>
   function updateDwLabel() {
     var label = document.getElementById('dwLabel');
@@ -158,6 +159,7 @@
     else label.textContent = 'ENDGAME';
   }
   var input = document.getElementById('dwInput');
+  DWELLERS = parseInt(localStorage.getItem('dwellers')) || 0;
   input.value = DWELLERS;
   updateDwLabel();
   input.addEventListener('input', function() {
@@ -166,8 +168,6 @@
     localStorage.setItem('dwellers', DWELLERS);
     updateDwLabel();
   });
-  DWELLERS = 200;
-  buildVault('layoutVault', null, null, {linkBase: '/rooms/'});
 </script>
 </body>
 </html>
