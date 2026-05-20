@@ -35,7 +35,6 @@
 @media(max-width:960px){
   .dw-wrap{position:static;transform:none;width:100%;justify-content:center}
   .nav{flex-wrap:wrap;gap:10px}
-  .nav .back{position:static;transform:none}
   .detail-grid{gap:10px}
 }
 @media(max-width:700px){
