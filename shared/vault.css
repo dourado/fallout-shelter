@@ -3,7 +3,7 @@
 
 /* FLOOR */
 .floor{display:flex;align-items:stretch;gap:var(--g);position:relative;min-height:clamp(40px, 5vw + 8px, 62px)}
-.floor-label{font-family:'Share Tech Mono',monospace;font-size:clamp(8px, 0.6vw + 4px, 11px);color:#4b5563;min-width:clamp(12px, 1.5vw + 5px, 24px);text-align:right;flex-shrink:0;align-self:center}
+.floor-label{font-family:'Share Tech Mono',monospace;font-size:clamp(8px, 0.6vw + 4px, 11px);color:#9ca3af;min-width:clamp(12px, 1.5vw + 5px, 24px);text-align:right;flex-shrink:0;align-self:center}
 .surface-bg .floor-label{margin-right:auto}
 
 /* ROOM BASE */

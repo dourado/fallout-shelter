@@ -108,14 +108,14 @@
   <a href="/">Layout</a>
   <a href="/guia" class="active">Guia</a>
   <div class="dw-wrap">
-    <label>Dwellers:</label>
+    <label for="dwInput">Dwellers:</label>
     <input type="number" class="dw-input" id="dwInput" value="0" min="0" max="200" onchange="updateDwellers(+this.value)" oninput="updateDwellers(+this.value)">
     <span class="dw-label" id="dwLabel">NOVO VAULT</span>
   </div>
 </nav>
 
 <!-- ==================== MAIN PAGE ==================== -->
-<div class="page" id="mainPage">
+<main class="page" id="mainPage">
 
   <div class="golden">
     <h3>REGRAS DE OURO — seguir SEMPRE</h3>
@@ -387,7 +387,7 @@
 
   <div class="section-title">PROGRESSAO DE SALAS (ordem de desbloqueio)</div>
   <div class="room-list" id="roomList"></div>
-</div>
+</main>
 
 <script src="/shared/rooms.js"></script>
 <script>

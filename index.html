@@ -11,9 +11,10 @@
   body{display:flex;flex-direction:column;padding:0}
   .nav{width:100%}
   .layout-content{padding:clamp(12px, 2.5vw + 4px, 30px) clamp(6px, 0.8vw + 2px, 10px);display:flex;flex-direction:column;align-items:center;width:100%;align-self:center;text-align:center}
+  #layoutVault{min-height:calc(15 * clamp(40px, 5vw + 8px, 62px) + clamp(120px, 7vw + 60px, 200px))}
 
   h1{font-family:'Share Tech Mono',monospace;color:#4ade80;font-size:clamp(16px, 2vw + 6px, 28px);text-transform:uppercase;letter-spacing:clamp(1px, 0.3vw, 3px);margin-bottom:5px;text-shadow:0 0 20px rgba(74,222,128,.3)}
-  .subtitle{color:#6b7280;font-size:clamp(11px, 0.5vw + 8px, 14px);margin-bottom:clamp(16px, 2.5vw + 4px, 30px);letter-spacing:1px}
+  .subtitle{color:#9ca3af;font-size:clamp(11px, 0.5vw + 8px, 14px);margin-bottom:clamp(16px, 2.5vw + 4px, 30px);letter-spacing:1px}
 
   .legend{margin-top:clamp(20px, 2.5vw + 8px, 30px);display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(6px, 0.8vw + 4px, 12px);max-width:800px;width:100%}
   .legend-item{display:flex;align-items:flex-start;gap:clamp(8px, 0.6vw + 4px, 10px);background:#0f0f1a;padding:clamp(8px, 0.6vw + 4px, 10px) clamp(10px, 0.8vw + 4px, 14px);border-radius:8px;border:1px solid #2d2d44}
@@ -43,13 +44,13 @@
   <a href="/" class="active">Layout</a>
   <a href="/guia">Guia</a>
   <div class="dw-wrap">
-    <label>Dwellers:</label>
+    <label for="dwInput">Dwellers:</label>
     <input type="number" class="dw-input" id="dwInput" min="0" max="200">
     <span class="dw-label" id="dwLabel"></span>
   </div>
 </nav>
 
-<div class="layout-content">
+<main class="layout-content">
 
 <h1>Vault Layout Optimized</h1>
 <p class="subtitle">Fallout Shelter &mdash; Endgame Optimization</p>
@@ -140,7 +141,7 @@
   </ul>
 </div>
 
-</div>
+</main>
 
 <script src="/shared/rooms.js"></script>
 <script>

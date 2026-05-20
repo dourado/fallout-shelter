@@ -3,7 +3,7 @@ function renderRoom(roomId, containerId) {
   var wrap = document.createElement('div');
   wrap.className = 'dw-wrap';
   wrap.innerHTML =
-    '<label>Dwellers:</label>' +
+    '<label for="dwInput">Dwellers:</label>' +
     '<input type="number" class="dw-input" id="dwInput" value="0" min="0" max="200">' +
     '<span class="dw-label" id="dwLabel">NOVO VAULT</span>';
   nav.appendChild(wrap);
