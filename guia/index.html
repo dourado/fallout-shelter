@@ -440,6 +440,7 @@ function toggleMs(el) {
 
 function updateDwellers(n) {
   DWELLERS = Math.max(0, Math.min(200, parseInt(n) || 0));
+  localStorage.setItem('dwellers', DWELLERS);
   document.getElementById('dwInput').value = DWELLERS;
   var label = document.getElementById('dwLabel');
   if (DWELLERS === 0) label.textContent = 'NOVO VAULT';
@@ -476,9 +477,7 @@ function updateMilestones() {
   });
 }
 
-buildVault('mainVault', null, null, {linkBase: '/rooms/'});
-buildRoomList();
-updateMilestones();
+updateDwellers(DWELLERS);
 </script>
 
 </body>

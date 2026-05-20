@@ -1,4 +1,4 @@
-var DWELLERS = 0;
+var DWELLERS = parseInt(localStorage.getItem('dwellers')) || 0;
 
 var ROOMS = [
   {id:'vault_door',name:'Vault Door',unlock:0,size:'2',stat:null,floor:'01',css:'vault-door',

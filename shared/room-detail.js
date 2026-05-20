@@ -9,19 +9,27 @@ function renderRoom(roomId, containerId) {
   nav.appendChild(wrap);
 
   var input = document.getElementById('dwInput');
+  var label = document.getElementById('dwLabel');
+  input.value = DWELLERS;
+  updateDwLabel(label);
+
   input.addEventListener('input', function() {
     DWELLERS = Math.max(0, Math.min(200, parseInt(this.value) || 0));
     this.value = DWELLERS;
-    var label = document.getElementById('dwLabel');
-    if (DWELLERS === 0) label.textContent = 'NOVO VAULT';
-    else if (DWELLERS < 12) label.textContent = 'EARLY GAME';
-    else if (DWELLERS < 35) label.textContent = 'MID GAME';
-    else if (DWELLERS < 60) label.textContent = 'LATE GAME';
-    else label.textContent = 'ENDGAME';
+    localStorage.setItem('dwellers', DWELLERS);
+    updateDwLabel(label);
     renderRoomContent(roomId, containerId);
   });
 
   renderRoomContent(roomId, containerId);
+}
+
+function updateDwLabel(label) {
+  if (DWELLERS === 0) label.textContent = 'NOVO VAULT';
+  else if (DWELLERS < 12) label.textContent = 'EARLY GAME';
+  else if (DWELLERS < 35) label.textContent = 'MID GAME';
+  else if (DWELLERS < 60) label.textContent = 'LATE GAME';
+  else label.textContent = 'ENDGAME';
 }
 
 function renderRoomContent(roomId, containerId) {
