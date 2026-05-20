@@ -85,7 +85,10 @@ function renderRoomContent(roomId, containerId) {
     document.getElementById('detailInstructions').appendChild(li);
   });
 
+  var savedDw = DWELLERS;
+  DWELLERS = 200;
   buildVault('detailVault', roomId, function(id) {
     window.location.href = '/rooms/' + roomSlug(id);
   });
+  DWELLERS = savedDw;
 }
