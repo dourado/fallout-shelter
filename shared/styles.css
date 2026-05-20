@@ -3,11 +3,24 @@
 body{background:#1a1a2e;color:#e0e0e0;font-family:'Roboto Condensed',Arial,sans-serif;min-height:100vh}
 
 /* NAV */
-.nav{background:#0f0f1a;border-bottom:1px solid #2d2d44;padding:8px 20px;display:flex;align-items:center;justify-content:center;gap:20px;font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:1px}
+.nav{background:#0f0f1a;border-bottom:1px solid #2d2d44;padding:8px 20px;display:flex;align-items:center;justify-content:center;gap:20px;font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:1px;position:relative}
 .nav a{color:#6b7280;text-decoration:none;padding:4px 0;border-bottom:2px solid transparent;transition:all .15s}
 .nav a:hover{color:#4ade80}
 .nav a.active{color:#4ade80;border-bottom-color:#4ade80}
 
+/* DWELLERS WIDGET */
+.dw-wrap{position:absolute;right:20px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:8px}
+.dw-wrap label{font-size:12px;color:#9ca3af}
+.dw-input{width:56px;background:#1a1a2e;border:1px solid #4ade80;color:#4ade80;font-family:'Share Tech Mono',monospace;font-size:16px;text-align:center;padding:4px 2px;border-radius:4px;outline:none}
+.dw-input:focus{box-shadow:0 0 8px rgba(74,222,128,.3)}
+.dw-label{font-family:'Share Tech Mono',monospace;font-size:11px;color:#4ade80}
+
+@media(max-width:960px){
+  .dw-wrap{position:static;transform:none;width:100%;justify-content:center}
+  .nav{flex-wrap:wrap;gap:10px}
+}
 @media(max-width:480px){
+  .dw-input{width:48px;font-size:14px}
+  .dw-label{font-size:10px}
   .nav{padding:6px 10px;gap:12px;font-size:11px}
 }

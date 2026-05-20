@@ -8,13 +8,6 @@
 <link rel="stylesheet" href="/shared/styles.css">
 <link rel="stylesheet" href="/shared/vault.css">
 <style>
-  .nav{position:relative}
-  .dw-wrap{position:absolute;right:20px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:8px}
-  .dw-wrap label{font-size:12px;color:#9ca3af}
-  .dw-input{width:56px;background:#1a1a2e;border:1px solid #4ade80;color:#4ade80;font-family:'Share Tech Mono',monospace;font-size:16px;text-align:center;padding:4px 2px;border-radius:4px;outline:none}
-  .dw-input:focus{box-shadow:0 0 8px rgba(74,222,128,.3)}
-  .dw-label{font-family:'Share Tech Mono',monospace;font-size:11px;color:#4ade80}
-
   .page{padding:clamp(10px, 1.6vw + 4px, 20px);max-width:900px;margin:0 auto}
 
   .section-title{font-family:'Share Tech Mono',monospace;color:#4ade80;font-size:16px;letter-spacing:1px;margin:24px 0 12px;border-bottom:1px solid #2d2d44;padding-bottom:6px}
@@ -76,12 +69,9 @@
   .room-card .rc-arrow{color:#4b5563;font-size:16px}
 
   @media(max-width:960px){
-    .dw-wrap{position:static;transform:none;width:100%;justify-content:center}
-    .nav{flex-wrap:wrap;gap:10px}
     .milestone{margin-bottom:8px}
   }
   @media(max-width:700px){
-    .nav{flex-wrap:wrap;gap:8px}
     .ms-head h3{font-size:12px}
     .room-card{padding:8px 10px;gap:8px}
     .golden{padding:12px}
@@ -109,8 +99,6 @@
     .instruction-list li{font-size:12px;padding:6px 10px}
     .warn-banner{font-size:11px;padding:8px 10px}
     .vault-state{font-size:11px;padding:8px 10px}
-    .dw-input{width:48px;font-size:14px}
-    .dw-label{font-size:10px}
   }
 </style>
 </head>
