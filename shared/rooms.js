@@ -1,6 +1,10 @@
 var DWELLERS = 0;
 
 var ROOMS = [
+  {id:'vault_door',name:'Vault Door',unlock:0,size:'2',stat:null,floor:'01',css:'vault-door',
+   desc:'Entrada do vault. Posicao fixa, 6 squares. Nunca fazer upgrade!',
+   instructions:['Posicao fixa no andar 1 (superficie) — nao pode ser movida','Tamanho fixo: 2 blocos (6 squares)','<strong>NUNCA fazer upgrade</strong> — so aumenta duracao dos incidentes','Temas cosmeticos funcionam no Level 1','Raiders e Deathclaws entram por aqui — os 6 guardas da Sala de Guarda ao lado sao a primeira linha de defesa']},
+
   {id:'elevator',name:'Elevator',unlock:0,size:'1',stat:null,floor:null,css:'elevator',
    desc:'Conecta andares verticalmente.',
    instructions:['Colocar nas DUAS bordas (esquerda e direita) de TODOS os andares subterraneos','Isso bloqueia spawn de Molerats em todas as salas de producao','O andar 1 (superficie) so tem elevador na borda DIREITA']},
@@ -104,7 +108,7 @@ var ROOMS = [
 
 var VAULT_FLOORS = [
   {label:'01',surface:true,rooms:[
-    {id:'elevator',css:'vault-door',size:'size-2',name:'Vault Door',detail:'Posicao fixa (6 sq) • Nunca upgrade',badge:'LV 1',badgeCss:'background:#22c55e'},
+    {id:'vault_door',css:'vault-door',size:'size-2',name:'Vault Door',detail:'Posicao fixa (6 sq) • Nunca upgrade',badge:'LV 1',badgeCss:'background:#22c55e'},
     {id:'storage_room',css:'guard-room',size:'size-3',name:'Sala de Guarda',detail:'6 Dwellers • Armas S-Tier',badge:'LV 1',badgeCss:'background:#ef4444'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
