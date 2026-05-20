@@ -118,6 +118,86 @@
   </div>
 </nav>
 
+<script src="/shared/rooms.js"></script>
+<script>
+document.getElementById('dwInput').value = DWELLERS;
+(function(){var l=document.getElementById('dwLabel');l.textContent=DWELLERS===0?'NOVO VAULT':DWELLERS<12?'EARLY GAME':DWELLERS<35?'MID GAME':DWELLERS<60?'LATE GAME':'ENDGAME'})();
+
+function buildRoomList() {
+  var list = document.getElementById('roomList');
+  list.innerHTML = '';
+  var sorted = ROOMS.filter(function(r) { return r.id !== 'elevator'; });
+  sorted.sort(function(a,b) { return a.unlock - b.unlock; });
+
+  sorted.forEach(function(r) {
+    var status = getStatus(r);
+    var card = document.createElement('a');
+    card.className = 'room-card ' + (status === 'skip' ? 'locked' : status);
+    card.href = '/rooms/' + roomSlug(r.id);
+
+    var num = r.unlock === 0 ? '0' : r.unlock.toString();
+    var statusText = status === 'available' ? 'DESBLOQUEADO' :
+                     status === 'next' ? 'PROXIMO!' :
+                     status === 'skip' ? 'NAO CONSTRUIR' :
+                     r.unlock + ' dwellers';
+    var floorText = r.floor ? 'Andar ' + r.floor : (r.id === 'radio_studio' ? 'NAO CONSTRUIR' : 'Opcional');
+
+    card.innerHTML =
+      '<div class="rc-num">' + num + '</div>' +
+      '<div class="rc-info">' +
+        '<div class="rc-name">' + r.name + '</div>' +
+        '<div class="rc-sub">' + floorText + (r.size ? ' | ' + r.size + (r.size==='1'?' bloco':' blocos') : '') + (r.stat ? ' | ' + r.stat : '') + '</div>' +
+      '</div>' +
+      '<div class="rc-unlock">' + statusText + '</div>' +
+      '<div class="rc-arrow">&rarr;</div>';
+    list.appendChild(card);
+  });
+}
+
+function toggleMs(el) {
+  el.classList.toggle('expanded');
+}
+
+function updateDwellers(n) {
+  DWELLERS = Math.max(0, Math.min(200, parseInt(n) || 0));
+  localStorage.setItem('dwellers', DWELLERS);
+  document.getElementById('dwInput').value = DWELLERS;
+  var label = document.getElementById('dwLabel');
+  if (DWELLERS === 0) label.textContent = 'NOVO VAULT';
+  else if (DWELLERS < 12) label.textContent = 'EARLY GAME';
+  else if (DWELLERS < 35) label.textContent = 'MID GAME';
+  else if (DWELLERS < 60) label.textContent = 'LATE GAME';
+  else label.textContent = 'ENDGAME';
+  buildVault('mainVault', null, null, {linkBase: '/rooms/'});
+  buildRoomList();
+  updateMilestones();
+}
+
+function updateMilestones() {
+  var milestones = document.querySelectorAll('.milestone');
+  var thresholds = [];
+  milestones.forEach(function(m) { thresholds.push(parseInt(m.dataset.dw)); });
+
+  milestones.forEach(function(m, i) {
+    var myDw = thresholds[i];
+    var nextDw = thresholds[i + 1] !== undefined ? thresholds[i + 1] : Infinity;
+
+    m.classList.remove('done', 'current', 'locked', 'expanded');
+
+    if (DWELLERS >= nextDw) {
+      m.classList.add('done');
+      m.querySelector('.ms-badge').textContent = '✓ COMPLETO';
+    } else if (DWELLERS >= myDw) {
+      m.classList.add('current', 'expanded');
+      m.querySelector('.ms-badge').textContent = '→ AGORA';
+    } else {
+      m.classList.add('locked');
+      m.querySelector('.ms-badge').textContent = myDw + ' DW';
+    }
+  });
+}
+</script>
+
 <!-- ==================== MAIN PAGE ==================== -->
 <main class="page" id="mainPage">
 
@@ -141,7 +221,7 @@
   </div>
 
   <!-- MS 0-5 -->
-  <div class="milestone expanded" data-dw="0">
+  <div class="milestone" data-dw="0">
     <div class="ms-head" onclick="toggleMs(this.parentElement)">
       <span class="ms-badge">0-5 DW</span>
       <h3>TUTORIAL + SETUP INICIAL</h3>
@@ -368,6 +448,7 @@
       </ul>
     </div>
   </div>
+  <script>updateMilestones()</script>
 
   <div class="section-title">REFERENCIA: TAMANHO DAS SALAS</div>
   <div style="background:#0f0f1a;border-radius:8px;padding:14px 16px;margin-bottom:20px;border:1px solid #2d2d44">
@@ -388,89 +469,12 @@
 
   <div class="section-title">LAYOUT FINAL (clique em qualquer sala para ver detalhes)</div>
   <div class="vault" id="mainVault"></div>
+  <script>buildVault('mainVault', null, null, {linkBase: '/rooms/'})</script>
 
   <div class="section-title">PROGRESSAO DE SALAS (ordem de desbloqueio)</div>
   <div class="room-list" id="roomList"></div>
+  <script>buildRoomList()</script>
 </main>
-
-<script src="/shared/rooms.js"></script>
-<script>
-function buildRoomList() {
-  var list = document.getElementById('roomList');
-  list.innerHTML = '';
-  var sorted = ROOMS.filter(function(r) { return r.id !== 'elevator'; });
-  sorted.sort(function(a,b) { return a.unlock - b.unlock; });
-
-  sorted.forEach(function(r) {
-    var status = getStatus(r);
-    var card = document.createElement('a');
-    card.className = 'room-card ' + (status === 'skip' ? 'locked' : status);
-    card.href = '/rooms/' + roomSlug(r.id);
-
-    var num = r.unlock === 0 ? '0' : r.unlock.toString();
-    var statusText = status === 'available' ? 'DESBLOQUEADO' :
-                     status === 'next' ? 'PROXIMO!' :
-                     status === 'skip' ? 'NAO CONSTRUIR' :
-                     r.unlock + ' dwellers';
-    var floorText = r.floor ? 'Andar ' + r.floor : (r.id === 'radio_studio' ? 'NAO CONSTRUIR' : 'Opcional');
-
-    card.innerHTML =
-      '<div class="rc-num">' + num + '</div>' +
-      '<div class="rc-info">' +
-        '<div class="rc-name">' + r.name + '</div>' +
-        '<div class="rc-sub">' + floorText + (r.size ? ' | ' + r.size + (r.size==='1'?' bloco':' blocos') : '') + (r.stat ? ' | ' + r.stat : '') + '</div>' +
-      '</div>' +
-      '<div class="rc-unlock">' + statusText + '</div>' +
-      '<div class="rc-arrow">&rarr;</div>';
-    list.appendChild(card);
-  });
-}
-
-function toggleMs(el) {
-  el.classList.toggle('expanded');
-}
-
-function updateDwellers(n) {
-  DWELLERS = Math.max(0, Math.min(200, parseInt(n) || 0));
-  localStorage.setItem('dwellers', DWELLERS);
-  document.getElementById('dwInput').value = DWELLERS;
-  var label = document.getElementById('dwLabel');
-  if (DWELLERS === 0) label.textContent = 'NOVO VAULT';
-  else if (DWELLERS < 12) label.textContent = 'EARLY GAME';
-  else if (DWELLERS < 35) label.textContent = 'MID GAME';
-  else if (DWELLERS < 60) label.textContent = 'LATE GAME';
-  else label.textContent = 'ENDGAME';
-  buildVault('mainVault', null, null, {linkBase: '/rooms/'});
-  buildRoomList();
-  updateMilestones();
-}
-
-function updateMilestones() {
-  var milestones = document.querySelectorAll('.milestone');
-  var thresholds = [];
-  milestones.forEach(function(m) { thresholds.push(parseInt(m.dataset.dw)); });
-
-  milestones.forEach(function(m, i) {
-    var myDw = thresholds[i];
-    var nextDw = thresholds[i + 1] !== undefined ? thresholds[i + 1] : Infinity;
-
-    m.classList.remove('done', 'current', 'locked', 'expanded');
-
-    if (DWELLERS >= nextDw) {
-      m.classList.add('done');
-      m.querySelector('.ms-badge').textContent = '✓ COMPLETO';
-    } else if (DWELLERS >= myDw) {
-      m.classList.add('current', 'expanded');
-      m.querySelector('.ms-badge').textContent = '→ AGORA';
-    } else {
-      m.classList.add('locked');
-      m.querySelector('.ms-badge').textContent = myDw + ' DW';
-    }
-  });
-}
-
-updateDwellers(DWELLERS);
-</script>
 
 </body>
 </html>
