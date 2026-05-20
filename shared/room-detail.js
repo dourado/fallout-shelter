@@ -56,7 +56,7 @@ function renderRoomContent(roomId, containerId) {
 
   c.innerHTML =
     '<div class="room-detail">' +
-      '<div class="detail-header ' + r.css + (status === 'available' ? ' unlocked' : '') + '">' +
+      '<div class="detail-header ' + r.css + '">' +
         '<h2>' + r.name + '</h2>' +
         '<div style="font-size:13px;color:#9ca3af;margin-top:4px">' + r.desc + '</div>' +
         '<div class="unlock-badge ' + badgeClass + '">' + badgeText + '</div>' +

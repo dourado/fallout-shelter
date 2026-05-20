@@ -6,8 +6,7 @@
 .section-title{font-family:'Share Tech Mono',monospace;color:#4ade80;font-size:16px;letter-spacing:1px;margin:24px 0 12px;border-bottom:1px solid #2d2d44;padding-bottom:6px}
 .section-title:first-child{margin-top:0}
 
-.detail-header{text-align:center;padding:20px;margin-bottom:16px;border-radius:10px;transition:filter .3s}
-.detail-header.unlocked{filter:brightness(1.4)}
+.detail-header{text-align:center;padding:20px;margin-bottom:16px;border-radius:10px}
 .detail-header h2{font-family:'Share Tech Mono',monospace;font-size:clamp(18px, 1.2vw + 12px, 24px);margin-bottom:6px}
 .detail-header .unlock-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-family:'Share Tech Mono',monospace;font-size:14px;margin-top:8px}
 .detail-header .unlock-badge.available{background:#22c55e;color:#0f0f1a}
