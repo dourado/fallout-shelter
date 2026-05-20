@@ -21,7 +21,7 @@
 .size-2{width:calc(var(--u) * 2 + var(--g))}
 .size-3{width:calc(var(--u) * 3 + var(--g) * 2)}
 .elevator{width:clamp(15px, 3vw + 1px, 36px);min-height:clamp(40px, 5vw + 8px, 62px);background:linear-gradient(180deg,#374151,#1f2937);border-color:#4b5563;border-radius:4px;display:flex;align-items:center;justify-content:center}
-.elevator .room-name{font-size:clamp(5px, 0.4vw + 2px, 8px);color:#9ca3af;writing-mode:vertical-rl}
+.elevator .room-name{font-size:clamp(5px, 0.4vw + 2px, 8px);color:#d1d5db;writing-mode:vertical-rl}
 
 /* ROOM TYPES */
 .vault-door{background:linear-gradient(135deg,#7c3aed,#5b21b6);border-color:#8b5cf6;color:#f3e8ff}
@@ -37,7 +37,7 @@
 .living{background:linear-gradient(135deg,#be185d,#831843);border-color:#f472b6;color:#fce7f3}
 .medbay-prod{background:linear-gradient(135deg,#0e7490,#164e63);border-color:#06b6d4;color:#ecfeff}
 .gap{background:repeating-linear-gradient(45deg,#1a1a2e,#1a1a2e 4px,#22223a 4px,#22223a 8px);border:2px dashed #2d2d44;opacity:.5;cursor:default}
-.gap .room-name{font-size:clamp(7px, 0.5vw + 3px, 9px);color:#4b5563}
+.gap .room-name{font-size:clamp(7px, 0.5vw + 3px, 9px);color:#6b7280}
 .locked{opacity:.25;filter:grayscale(1)}
 
 /* SURFACE & DIVIDERS */

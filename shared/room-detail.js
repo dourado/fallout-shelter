@@ -58,7 +58,7 @@ function renderRoomContent(roomId, containerId) {
     '<div class="room-detail">' +
       '<div class="detail-header ' + r.css + '">' +
         '<h2>' + r.name + '</h2>' +
-        '<div style="font-size:13px;color:#9ca3af;margin-top:4px">' + r.desc + '</div>' +
+        '<div style="font-size:13px;color:rgba(255,255,255,0.85);margin-top:4px">' + r.desc + '</div>' +
         '<div class="unlock-badge ' + badgeClass + '">' + badgeText + '</div>' +
       '</div>' +
       '<div class="detail-grid">' +

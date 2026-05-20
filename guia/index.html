@@ -31,8 +31,8 @@
   .ms-head{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#0f0f1a;cursor:pointer;border-left:3px solid #4b5563;transition:all .2s}
   .ms-head:hover{background:#111827}
   .ms-head h3{font-family:'Share Tech Mono',monospace;font-size:13px;color:#e0e0e0;flex:1;margin:0}
-  .ms-badge{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#374151;color:#9ca3af}
-  .ms-arrow{color:#4b5563;font-size:11px;transition:transform .2s;user-select:none}
+  .ms-badge{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:#374151;color:#d1d5db}
+  .ms-arrow{color:#6b7280;font-size:11px;transition:transform .2s;user-select:none}
   .ms-body{display:none;padding:12px 16px 16px}
   .milestone.expanded .ms-body{display:block}
   .milestone.expanded .ms-arrow{transform:rotate(180deg)}
@@ -62,7 +62,7 @@
   .room-card.next{border-left:3px solid #eab308}
   .room-card.locked{border-left:3px solid #4b5563;opacity:.6}
   .room-card .rc-num{font-family:'Share Tech Mono',monospace;font-size:clamp(14px, 0.8vw + 8px, 20px);color:#4ade80;min-width:clamp(28px, 0.6vw + 22px, 32px);text-align:center}
-  .room-card.locked .rc-num{color:#4b5563}
+  .room-card.locked .rc-num{color:#6b7280}
   .room-card.next .rc-num{color:#eab308}
   .room-card .rc-info{flex:1}
   .room-card .rc-name{font-size:14px;font-weight:700}
@@ -70,7 +70,7 @@
   .room-card .rc-unlock{font-family:'Share Tech Mono',monospace;font-size:12px;color:#9ca3af;white-space:nowrap}
   .room-card.available .rc-unlock{color:#22c55e}
   .room-card.next .rc-unlock{color:#eab308}
-  .room-card .rc-arrow{color:#4b5563;font-size:16px}
+  .room-card .rc-arrow{color:#6b7280;font-size:16px}
 
   @media(max-width:960px){
     .milestone{margin-bottom:8px}
@@ -458,7 +458,7 @@ function updateMilestones() {
       <div><strong style="color:#e0e0e0">PG / Diner / Water / Storage / LQ / Training:</strong> 1 bloco cada — merge ate 3 blocos</div>
       <div><strong style="color:#e0e0e0">Overseer's Office / Barbershop:</strong> 2 blocos (fixo, nao expande)</div>
       <div><strong style="color:#e0e0e0">Weapon / Outfit / Theme Workshop:</strong> 3 blocos (fixo, nao reduz)</div>
-      <div style="margin-top:8px;font-size:11px;color:#6b7280">1 bloco = 3 squares &nbsp;|&nbsp; 2 blocos = 6 sq &nbsp;|&nbsp; 3 blocos = 9 sq</div>
+      <div style="margin-top:8px;font-size:11px;color:#9ca3af">1 bloco = 3 squares &nbsp;|&nbsp; 2 blocos = 6 sq &nbsp;|&nbsp; 3 blocos = 9 sq</div>
     </div>
     <div style="margin-top:10px;font-family:'Share Tech Mono',monospace;font-size:11px;color:#4ade80;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Capacidade por Andar</div>
     <div style="font-size:12px;color:#9ca3af;line-height:1.8">
