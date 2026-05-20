@@ -9,7 +9,12 @@
 <link rel="stylesheet" href="/shared/vault.css">
 <style>
   body{display:flex;flex-direction:column;padding:0}
-  .nav{width:100%}
+  .nav{width:100%;position:relative}
+  .dw-wrap{position:absolute;right:20px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:8px}
+  .dw-wrap label{font-size:12px;color:#9ca3af}
+  .dw-input{width:56px;background:#1a1a2e;border:1px solid #4ade80;color:#4ade80;font-family:'Share Tech Mono',monospace;font-size:16px;text-align:center;padding:4px 2px;border-radius:4px;outline:none}
+  .dw-input:focus{box-shadow:0 0 8px rgba(74,222,128,.3)}
+  .dw-label{font-family:'Share Tech Mono',monospace;font-size:11px;color:#4ade80}
   .layout-content{padding:clamp(12px, 2.5vw + 4px, 30px) clamp(6px, 0.8vw + 2px, 10px);display:flex;flex-direction:column;align-items:center;width:100%;align-self:center;text-align:center}
 
   h1{font-family:'Share Tech Mono',monospace;color:#4ade80;font-size:clamp(16px, 2vw + 6px, 28px);text-transform:uppercase;letter-spacing:clamp(1px, 0.3vw, 3px);margin-bottom:5px;text-shadow:0 0 20px rgba(74,222,128,.3)}
@@ -29,6 +34,8 @@
   .notes li strong{color:#e0e0e0}
 
   @media(max-width:960px){
+    .dw-wrap{position:static;transform:none;width:100%;justify-content:center}
+    .nav{flex-wrap:wrap;gap:10px}
     .legend{max-width:100%}
     .notes{max-width:100%}
   }
@@ -42,6 +49,11 @@
 <nav class="nav">
   <a href="/" class="active">Layout</a>
   <a href="/guia">Guia</a>
+  <div class="dw-wrap">
+    <label>Dwellers:</label>
+    <input type="number" class="dw-input" id="dwInput" min="0" max="200">
+    <span class="dw-label" id="dwLabel"></span>
+  </div>
 </nav>
 
 <div class="layout-content">
@@ -139,7 +151,23 @@
 
 <script src="/shared/rooms.js"></script>
 <script>
-  DWELLERS = 200;
+  function updateDwLabel() {
+    var label = document.getElementById('dwLabel');
+    if (DWELLERS === 0) label.textContent = 'NOVO VAULT';
+    else if (DWELLERS < 12) label.textContent = 'EARLY GAME';
+    else if (DWELLERS < 35) label.textContent = 'MID GAME';
+    else if (DWELLERS < 60) label.textContent = 'LATE GAME';
+    else label.textContent = 'ENDGAME';
+  }
+  var input = document.getElementById('dwInput');
+  input.value = DWELLERS;
+  updateDwLabel();
+  input.addEventListener('input', function() {
+    DWELLERS = Math.max(0, Math.min(200, parseInt(this.value) || 0));
+    this.value = DWELLERS;
+    localStorage.setItem('dwellers', DWELLERS);
+    updateDwLabel();
+  });
   buildVault('layoutVault', null, null, {linkBase: '/rooms/'});
 </script>
 </body>
