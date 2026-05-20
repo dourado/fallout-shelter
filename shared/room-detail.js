@@ -85,5 +85,7 @@ function renderRoomContent(roomId, containerId) {
     document.getElementById('detailInstructions').appendChild(li);
   });
 
-  buildVault('detailVault', roomId, null, {linkBase: '/rooms/'});
+  buildVault('detailVault', roomId, function(id) {
+    window.location.href = '/rooms/' + roomSlug(id);
+  });
 }
