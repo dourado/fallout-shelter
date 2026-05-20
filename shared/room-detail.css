@@ -1,4 +1,5 @@
-.nav .back{margin-right:auto;cursor:pointer;background:none;border:1px solid #4ade80;color:#4ade80;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:16px;text-decoration:none;line-height:1}
+.nav{position:relative}
+.nav .back{position:absolute;left:20px;top:50%;transform:translateY(-50%);cursor:pointer;background:none;border:1px solid #4ade80;color:#4ade80;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-size:16px;text-decoration:none;line-height:1}
 .nav .back:hover{background:#4ade80;color:#0f0f1a}
 
 .room-detail{padding:clamp(10px, 1.6vw + 4px, 20px);max-width:900px;margin:0 auto}
