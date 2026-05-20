@@ -108,31 +108,31 @@ var ROOMS = [
 
 var VAULT_FLOORS = [
   {label:'01',surface:true,rooms:[
-    {id:'vault_door',css:'vault-door',size:'size-2',name:'Vault Door',detail:'Posicao fixa (6 sq) • Nunca upgrade',badge:'LV 1',badgeCss:'background:#22c55e'},
-    {id:'storage_room',css:'guard-room',size:'size-3',name:'Sala de Guarda',detail:'6 Dwellers • Armas S-Tier',badge:'LV 1',badgeCss:'background:#ef4444'},
+    {id:'vault_door',css:'vault-door',size:'size-2',name:'Vault Door',detail:'Posicao fixa (6 sq) • Nunca upgrade',badge:'LV 1',badgeCss:'background:#22c55e;color:#052e16'},
+    {id:'storage_room',css:'guard-room',size:'size-3',name:'Sala de Guarda',detail:'6 Dwellers • Armas S-Tier',badge:'LV 1',badgeCss:'background:#dc2626'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'02',dividerBefore:'Kill Zone — Andares de Abate',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'nuclear_reactor',css:'power',size:'size-3',name:'Nuclear Reactor',detail:'6 Dwellers armados • S maxado',badge:'MAX',badgeCss:'background:#3b82f6'},
-    {id:'nuclear_reactor',css:'power',size:'size-3',name:'Nuclear Reactor',detail:'6 Dwellers armados • S maxado',badge:'MAX',badgeCss:'background:#3b82f6'},
+    {id:'nuclear_reactor',css:'power',size:'size-3',name:'Nuclear Reactor',detail:'6 Dwellers armados • S maxado',badge:'MAX',badgeCss:'background:#2563eb'},
+    {id:'nuclear_reactor',css:'power',size:'size-3',name:'Nuclear Reactor',detail:'6 Dwellers armados • S maxado',badge:'MAX',badgeCss:'background:#2563eb'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'03',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'nuka_cola_bottler',css:'food-water',size:'size-3',name:'Nuka-Cola Bottler',detail:'6 Dwellers armados • E+I max',badge:'MAX',badgeCss:'background:#3b82f6'},
-    {id:'nuka_cola_bottler',css:'food-water',size:'size-3',name:'Nuka-Cola Bottler',detail:'6 Dwellers armados • E+I max',badge:'MAX',badgeCss:'background:#3b82f6'},
+    {id:'nuka_cola_bottler',css:'food-water',size:'size-3',name:'Nuka-Cola Bottler',detail:'6 Dwellers armados • E+I max',badge:'MAX',badgeCss:'background:#2563eb'},
+    {id:'nuka_cola_bottler',css:'food-water',size:'size-3',name:'Nuka-Cola Bottler',detail:'6 Dwellers armados • E+I max',badge:'MAX',badgeCss:'background:#2563eb'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'04',dividerBefore:'Crafting',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'weapon_workshop',css:'craft',size:'size-3',name:'Weapon Workshop',detail:'6 Dwellers • Craft armas S-tier',badge:'MAX',badgeCss:'background:#3b82f6'},
-    {id:'outfit_workshop',css:'craft',size:'size-3',name:'Outfit Workshop',detail:'6 Dwellers • Craft roupas',badge:'MAX',badgeCss:'background:#3b82f6'},
+    {id:'weapon_workshop',css:'craft',size:'size-3',name:'Weapon Workshop',detail:'6 Dwellers • Craft armas S-tier',badge:'MAX',badgeCss:'background:#2563eb'},
+    {id:'outfit_workshop',css:'craft',size:'size-3',name:'Outfit Workshop',detail:'6 Dwellers • Craft roupas',badge:'MAX',badgeCss:'background:#2563eb'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'05',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'overseer_office',css:'overseer',size:'size-2',name:"Overseer's Office",detail:'Quests (6 sq fixo) • Sem staff',badge:'MAX',badgeCss:'background:#3b82f6'},
+    {id:'overseer_office',css:'overseer',size:'size-2',name:"Overseer's Office",detail:'Quests (6 sq fixo) • Sem staff',badge:'MAX',badgeCss:'background:#2563eb'},
     {id:'weight_room',css:'training',size:'size-3',name:'Weight Room',detail:'Treino Strength'},
     {id:null,css:'gap',size:'size-1',name:'vazio'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
@@ -159,7 +159,7 @@ var VAULT_FLOORS = [
   {label:'09',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
     {id:'game_room',css:'training',size:'size-3',name:'Game Room',detail:'Treino Luck'},
-    {id:'medbay',css:'medbay-prod',size:'size-3',name:'Medbay',detail:'Producao Stimpaks p/ Quests',badge:'MAX',badgeCss:'background:#3b82f6'},
+    {id:'medbay',css:'medbay-prod',size:'size-3',name:'Medbay',detail:'Producao Stimpaks p/ Quests',badge:'MAX',badgeCss:'background:#2563eb'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'10',capfarm:true,dividerBefore:'Cap Farming — Rush Spam',rooms:[
