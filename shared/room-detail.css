@@ -25,6 +25,10 @@
 .instruction-list li.warn{border-left-color:#ef4444}
 .instruction-list li.note{border-left-color:#eab308}
 
+.room-detail .vault{--u:clamp(32px, 5vw + 8px, 62px)}
+.room-detail .vault .floor{min-height:clamp(28px, 3.6vw + 6px, 44px)}
+.room-detail .vault .room{min-height:clamp(28px, 3.6vw + 6px, 44px)}
+
 @media(max-width:960px){
   .detail-grid{gap:10px}
 }
