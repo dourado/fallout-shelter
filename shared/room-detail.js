@@ -1,4 +1,30 @@
 function renderRoom(roomId, containerId) {
+  var nav = document.querySelector('.nav');
+  var wrap = document.createElement('div');
+  wrap.className = 'dw-wrap';
+  wrap.innerHTML =
+    '<label>Dwellers:</label>' +
+    '<input type="number" class="dw-input" id="dwInput" value="0" min="0" max="200">' +
+    '<span class="dw-label" id="dwLabel">NOVO VAULT</span>';
+  nav.appendChild(wrap);
+
+  var input = document.getElementById('dwInput');
+  input.addEventListener('input', function() {
+    DWELLERS = Math.max(0, Math.min(200, parseInt(this.value) || 0));
+    this.value = DWELLERS;
+    var label = document.getElementById('dwLabel');
+    if (DWELLERS === 0) label.textContent = 'NOVO VAULT';
+    else if (DWELLERS < 12) label.textContent = 'EARLY GAME';
+    else if (DWELLERS < 35) label.textContent = 'MID GAME';
+    else if (DWELLERS < 60) label.textContent = 'LATE GAME';
+    else label.textContent = 'ENDGAME';
+    renderRoomContent(roomId, containerId);
+  });
+
+  renderRoomContent(roomId, containerId);
+}
+
+function renderRoomContent(roomId, containerId) {
   var r = ROOMS.find(function(x) { return x.id === roomId; });
   if (!r) return;
 
