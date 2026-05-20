@@ -8,8 +8,6 @@
 <link rel="stylesheet" href="/shared/styles.css">
 <link rel="stylesheet" href="/shared/vault.css">
 <style>
-  .nav .back{display:none;cursor:pointer;background:none;border:1px solid #4ade80;color:#4ade80;padding:4px 12px;border-radius:4px;font-size:13px;font-family:'Roboto Condensed',sans-serif}
-  .nav .back:hover{background:#4ade80;color:#0f0f1a}
   .nav{position:relative}
   .dw-wrap{position:absolute;right:20px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:8px}
   .dw-wrap label{font-size:12px;color:#9ca3af}
@@ -17,8 +15,7 @@
   .dw-input:focus{box-shadow:0 0 8px rgba(74,222,128,.3)}
   .dw-label{font-family:'Share Tech Mono',monospace;font-size:11px;color:#4ade80}
 
-  .page{display:none;padding:clamp(10px, 1.6vw + 4px, 20px);max-width:900px;margin:0 auto}
-  .page.active{display:block}
+  .page{padding:clamp(10px, 1.6vw + 4px, 20px);max-width:900px;margin:0 auto}
 
   .section-title{font-family:'Share Tech Mono',monospace;color:#4ade80;font-size:16px;letter-spacing:1px;margin:24px 0 12px;border-bottom:1px solid #2d2d44;padding-bottom:6px}
   .section-title:first-child{margin-top:0}
@@ -78,33 +75,12 @@
   .room-card.next .rc-unlock{color:#eab308}
   .room-card .rc-arrow{color:#4b5563;font-size:16px}
 
-  .detail-header{text-align:center;padding:20px;margin-bottom:16px;border-radius:10px}
-  .detail-header h2{font-family:'Share Tech Mono',monospace;font-size:clamp(18px, 1.2vw + 12px, 24px);margin-bottom:6px}
-  .detail-header .unlock-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-family:'Share Tech Mono',monospace;font-size:14px;margin-top:8px}
-  .detail-header .unlock-badge.available{background:#22c55e;color:#0f0f1a}
-  .detail-header .unlock-badge.locked{background:#4b5563;color:#e0e0e0}
-
-  .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
-  .detail-card{background:#0f0f1a;border:1px solid #2d2d44;border-radius:8px;padding:14px}
-  .detail-card h3{font-family:'Share Tech Mono',monospace;color:#4ade80;font-size:12px;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
-  .detail-card p{font-size:13px;line-height:1.6;color:#9ca3af}
-  .detail-card p strong{color:#e0e0e0}
-  .detail-card.full{grid-column:1/-1}
-
-  .instruction-list{list-style:none;display:flex;flex-direction:column;gap:6px}
-  .instruction-list li{font-size:13px;padding:8px 12px;background:#111827;border-radius:4px;border-left:3px solid #4ade80;line-height:1.5;color:#9ca3af}
-  .instruction-list li strong{color:#e0e0e0}
-  .instruction-list li.warn{border-left-color:#ef4444}
-  .instruction-list li.note{border-left-color:#eab308}
-
   @media(max-width:960px){
     .dw-wrap{position:static;transform:none;width:100%;justify-content:center}
     .nav{flex-wrap:wrap;gap:10px}
-    .detail-grid{gap:10px}
     .milestone{margin-bottom:8px}
   }
   @media(max-width:700px){
-    .detail-grid{grid-template-columns:1fr}
     .nav{flex-wrap:wrap;gap:8px}
     .ms-head h3{font-size:12px}
     .room-card{padding:8px 10px;gap:8px}
@@ -143,7 +119,6 @@
 <nav class="nav">
   <a href="/">Layout</a>
   <a href="/guia" class="active">Guia</a>
-  <button class="back" id="backBtn" onclick="showMain()">Voltar</button>
   <div class="dw-wrap">
     <label>Dwellers:</label>
     <input type="number" class="dw-input" id="dwInput" value="0" min="0" max="200" onchange="updateDwellers(+this.value)" oninput="updateDwellers(+this.value)">
@@ -152,7 +127,7 @@
 </nav>
 
 <!-- ==================== MAIN PAGE ==================== -->
-<div class="page active" id="mainPage">
+<div class="page" id="mainPage">
 
   <div class="golden">
     <h3>REGRAS DE OURO — seguir SEMPRE</h3>
@@ -426,27 +401,8 @@
   <div class="room-list" id="roomList"></div>
 </div>
 
-<!-- ==================== DETAIL PAGE ==================== -->
-<div class="page" id="detailPage">
-  <div class="detail-header" id="detailHeader">
-    <h2 id="detailName"></h2>
-    <div id="detailSub" style="font-size:13px;color:#9ca3af;margin-top:4px"></div>
-    <div class="unlock-badge" id="detailBadge"></div>
-  </div>
-  <div class="detail-grid" id="detailGrid"></div>
-  <div class="section-title">POSICAO NO LAYOUT</div>
-  <div class="vault" id="detailVault" style="margin-bottom:20px"></div>
-  <div class="section-title">INSTRUCOES</div>
-  <ul class="instruction-list" id="detailInstructions"></ul>
-</div>
-
 <script src="/shared/rooms.js"></script>
 <script>
-function navigateToRoom(roomId) {
-  history.pushState({room: roomId}, '', '/rooms/' + roomSlug(roomId));
-  showDetail(roomId);
-}
-
 function buildRoomList() {
   var list = document.getElementById('roomList');
   list.innerHTML = '';
@@ -458,10 +414,6 @@ function buildRoomList() {
     var card = document.createElement('a');
     card.className = 'room-card ' + (status === 'skip' ? 'locked' : status);
     card.href = '/rooms/' + roomSlug(r.id);
-    card.onclick = function(e) {
-      e.preventDefault();
-      navigateToRoom(r.id);
-    };
 
     var num = r.unlock === 0 ? '0' : r.unlock.toString();
     var statusText = status === 'available' ? 'DESBLOQUEADO' :
@@ -482,68 +434,6 @@ function buildRoomList() {
   });
 }
 
-function showDetail(roomId) {
-  var r = ROOMS.find(function(x) { return x.id === roomId; });
-  if (!r) return;
-
-  document.getElementById('mainPage').classList.remove('active');
-  document.getElementById('detailPage').classList.add('active');
-  document.getElementById('backBtn').style.display = 'inline-block';
-  document.title = r.name + ' — Fallout Shelter Guide';
-
-  var status = getStatus(r);
-  var header = document.getElementById('detailHeader');
-  header.className = 'detail-header ' + r.css;
-  document.getElementById('detailName').textContent = r.name;
-  document.getElementById('detailSub').textContent = r.desc;
-
-  var badge = document.getElementById('detailBadge');
-  badge.className = 'unlock-badge ' + (status === 'available' ? 'available' : 'locked');
-  badge.textContent = r.unlock === 0 ? 'Disponivel desde o inicio' :
-                    status === 'available' ? 'DESBLOQUEADO (' + r.unlock + ' dwellers)' :
-                    'Desbloqueia com ' + r.unlock + ' dwellers';
-
-  var grid = document.getElementById('detailGrid');
-  grid.innerHTML =
-    '<div class="detail-card">' +
-      '<h3>Desbloqueio</h3>' +
-      '<p><strong>' + (r.unlock === 0 ? 'Inicio do jogo' : r.unlock + ' Dwellers') + '</strong><br>' +
-      (status === 'available' ? 'Voce ja tem acesso!' : 'Faltam ' + (r.unlock - DWELLERS) + ' dwellers') + '</p>' +
-    '</div>' +
-    '<div class="detail-card">' +
-      '<h3>Posicao no Layout</h3>' +
-      '<p><strong>' + (r.floor ? 'Andar ' + r.floor : (r.id === 'radio_studio' ? 'NAO CONSTRUIR' : 'Opcional / Andares de baixo')) + '</strong><br>' +
-      (r.stat ? 'SPECIAL: ' + r.stat : 'Sem stat associado') +
-      (r.size ? '<br>Tamanho: <strong>' + r.size + (r.size==='1'?' bloco':' blocos') + '</strong>' + (r.size === '3' ? ' (3-wide = 9 squares)' : r.size === '2' ? ' (2-wide = 6 squares)' : r.size === '1' ? ' (single = 3 squares)' : '') : '') + '</p>' +
-    '</div>';
-
-  var inst = document.getElementById('detailInstructions');
-  inst.innerHTML = '';
-  r.instructions.forEach(function(i) {
-    var li = document.createElement('li');
-    if (i.indexOf('NAO') !== -1 || i.indexOf('DESTRUIR') !== -1 || i.indexOf('NUNCA') !== -1 || i.indexOf('TEMPORARIO') !== -1) li.className = 'warn';
-    else if (i.indexOf('CRITICO') !== -1 || i.indexOf('ISOLADO') !== -1) li.className = 'note';
-    li.innerHTML = i;
-    inst.appendChild(li);
-  });
-
-  buildVault('detailVault', roomId, navigateToRoom);
-  window.scrollTo(0, 0);
-}
-
-function showMain() {
-  if (cameFromLayout) {
-    window.location.href = '/';
-    return;
-  }
-  document.getElementById('detailPage').classList.remove('active');
-  document.getElementById('mainPage').classList.add('active');
-  document.getElementById('backBtn').style.display = 'none';
-  document.title = 'Fallout Shelter - Guia do Zero';
-  history.pushState({}, '', '/guia');
-  window.scrollTo(0, 0);
-}
-
 function toggleMs(el) {
   el.classList.toggle('expanded');
 }
@@ -557,7 +447,7 @@ function updateDwellers(n) {
   else if (DWELLERS < 35) label.textContent = 'MID GAME';
   else if (DWELLERS < 60) label.textContent = 'LATE GAME';
   else label.textContent = 'ENDGAME';
-  buildVault('mainVault', null, navigateToRoom);
+  buildVault('mainVault', null, null, {linkBase: '/rooms/'});
   buildRoomList();
   updateMilestones();
 }
@@ -586,40 +476,9 @@ function updateMilestones() {
   });
 }
 
-window.onpopstate = function(e) {
-  if (e.state && e.state.room) {
-    showDetail(e.state.room);
-  } else if (cameFromLayout) {
-    window.location.href = '/';
-  } else {
-    document.getElementById('detailPage').classList.remove('active');
-    document.getElementById('mainPage').classList.add('active');
-    document.getElementById('backBtn').style.display = 'none';
-    document.title = 'Fallout Shelter - Guia do Zero';
-  }
-};
-
-var cameFromLayout = false;
-
-function initRouter() {
-  var path = window.location.pathname;
-  var match = path.match(/^\/rooms\/(.+)$/);
-  if (match) {
-    var id = roomIdFromSlug(match[1]);
-    var room = ROOMS.find(function(x) { return x.id === id; });
-    if (room) {
-      cameFromLayout = !document.referrer || new URL(document.referrer).pathname !== '/guia';
-      history.replaceState({room: id}, '', path);
-      showDetail(id);
-      return;
-    }
-  }
-  buildVault('mainVault', null, navigateToRoom);
-  buildRoomList();
-  updateMilestones();
-}
-
-initRouter();
+buildVault('mainVault', null, null, {linkBase: '/rooms/'});
+buildRoomList();
+updateMilestones();
 </script>
 
 </body>
