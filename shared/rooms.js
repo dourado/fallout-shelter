@@ -233,7 +233,7 @@ function buildVault(containerId, highlightId, onClick, options) {
       fl.appendChild(lbl);
       var ph = document.createElement('div');
       ph.className = 'gap';
-      ph.style.cssText = 'flex:1;display:flex;align-items:center;justify-content:flex-end;border:1px dashed #2d2d44;border-radius:4px;padding:4px 8px';
+      ph.style.cssText = 'flex:1;display:flex;align-items:center;justify-content:center;border:1px dashed #2d2d44;border-radius:4px;padding:4px 8px';
       ph.innerHTML = '<span class="room-name" style="color:#4b5563">Repetir padrao Storage + Gap + Living conforme necessario...</span>';
       fl.appendChild(ph);
       c.appendChild(fl);
