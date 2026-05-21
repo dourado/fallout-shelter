@@ -388,7 +388,6 @@ DWELLERS = parseInt(localStorage.getItem('dwellers')) || 0;
       </ul>
     </div>
   </div>
-  <script>initGuide()</script>
 
   <div class="section-title">REFERENCE: ROOM SIZES</div>
   <div style="background:#0f0f1a;border-radius:8px;padding:14px 16px;margin-bottom:20px;border:1px solid #2d2d44">
@@ -409,11 +408,10 @@ DWELLERS = parseInt(localStorage.getItem('dwellers')) || 0;
 
   <div class="section-title">FINAL LAYOUT (click any room for details)</div>
   <div class="vault" id="mainVault"></div>
-  <script>buildVault('mainVault', null, null, {linkBase: '/rooms/'})</script>
 
   <div class="section-title">ROOM PROGRESSION (unlock order)</div>
   <div class="room-list" id="roomList"></div>
-  <script>buildRoomList()</script>
+  <script>initGuide()</script>
 </main>
 
 <footer class="footer">
