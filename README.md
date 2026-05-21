@@ -68,7 +68,7 @@ Tested across all 54 pages (May 2026):
 | Accessibility | 100 | 100 |
 | SEO | 100 | 100 |
 | Best Practices | 100 | 96 |
-| Performance | 97-100 | 89-100 |
+| Performance | 97-100 | 83-100 |
 
 ## Development
 
