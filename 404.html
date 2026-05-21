@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Fallout Shelter Guide</title>
+<meta name="description" content="Page not found.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Roboto+Condensed:wght@400;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Roboto+Condensed:wght@400;700&display=swap"></noscript>
+<link rel="stylesheet" href="/shared/styles.css">
+<style>
+  body{display:flex;flex-direction:column;min-height:100vh}
+  .content{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+  .card{background:#0f0f1a;border:1px solid #2d2d44;border-radius:12px;padding:clamp(30px,4vw,50px) clamp(24px,4vw,48px);text-align:center;max-width:480px;width:100%}
+  .code{font-family:'Share Tech Mono',monospace;font-size:clamp(48px,8vw,72px);color:#4ade80;letter-spacing:4px;text-shadow:0 0 30px rgba(74,222,128,.3);margin-bottom:8px}
+  .title{font-family:'Share Tech Mono',monospace;font-size:clamp(14px,2vw,18px);color:#4ade80;text-transform:uppercase;letter-spacing:2px;margin-bottom:20px}
+  .message{color:#9ca3af;font-size:clamp(13px,1.2vw,15px);line-height:1.6;margin-bottom:28px}
+  .back{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:13px;color:#4ade80;border:1px solid #4ade80;padding:10px 24px;border-radius:6px;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .15s}
+  .back:hover{background:#4ade80;color:#0f0f1a}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="/" id="navLayout">Layout</a>
+  <a href="/guide" id="navGuide">Guide</a>
+</nav>
+<div class="content">
+  <div class="card">
+    <div class="code">404</div>
+    <div class="title" id="title">VAULT NOT FOUND</div>
+    <p class="message" id="message">This section of the vault hasn't been built yet. The Overseer suggests heading back to a known location.</p>
+    <a href="/" class="back" id="backBtn">&gt; Back to Vault</a>
+  </div>
+</div>
+<footer class="footer">
+  <span>Fallout Shelter Guide</span>
+  <a href="https://github.com/dourado/fallout-shelter" target="_blank" rel="noopener">GitHub</a>
+  <a href="/" class="lang-toggle" id="langToggle">PT</a>
+</footer>
+<script>
+(function() {
+  var pt = localStorage.getItem('lang_pref') === 'pt';
+  if (pt) {
+    document.documentElement.lang = 'pt-BR';
+    document.getElementById('navLayout').href = '/pt-br/';
+    document.getElementById('navGuide').href = '/pt-br/guide';
+    document.getElementById('title').textContent = 'VAULT NÃO ENCONTRADO';
+    document.getElementById('message').textContent = 'Esta seção do vault ainda não foi construída. O Overseer sugere voltar para um local conhecido.';
+    document.getElementById('backBtn').textContent = '> Voltar ao Vault';
+    document.getElementById('backBtn').href = '/pt-br/';
+    document.getElementById('langToggle').textContent = 'EN';
+    document.getElementById('langToggle').href = '/';
+  }
+})();
+</script>
+</body>
+</html>
