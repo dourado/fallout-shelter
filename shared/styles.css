@@ -13,6 +13,12 @@ body{background:#1a1a2e;color:#e0e0e0;font-family:'Roboto Condensed',Arial,sans-
 .dw-input{width:56px;background:#1a1a2e;border:1px solid #4ade80;color:#4ade80;font-family:'Share Tech Mono',monospace;font-size:16px;text-align:center;padding:4px 2px;border-radius:4px;outline:none}
 .dw-input:focus{box-shadow:0 0 8px rgba(74,222,128,.3)}
 .dw-label{font-family:'Share Tech Mono',monospace;font-size:11px;color:#4ade80}
+/* FOOTER */
+.footer{background:#0f0f1a;border-top:1px solid #2d2d44;padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:16px;font-family:'Share Tech Mono',monospace;font-size:11px;color:#4b5563;letter-spacing:0.5px}
+.footer a{color:#9ca3af;text-decoration:none;transition:color .15s}
+.footer a:hover{color:#4ade80}
+.lang-toggle{border:1px solid #4ade80;padding:2px 8px;border-radius:3px;font-size:11px;letter-spacing:1px;color:#4ade80}
+.lang-toggle:hover{background:#4ade80;color:#0f0f1a}
 
 @media(max-width:960px){
   .dw-wrap{position:static;transform:none;width:100%;justify-content:center}

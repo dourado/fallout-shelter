@@ -6,6 +6,9 @@
 <title>Fallout Shelter - Guia do Zero</title>
 <meta name="description" content="Guia otimizado para começar um vault do zero em Fallout Shelter. Build order, layout e estratégias.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="https://fallout-shelter.vercel.app/guide">
+<link rel="alternate" hreflang="pt-BR" href="https://fallout-shelter.vercel.app/pt-br/guide">
+<link rel="alternate" hreflang="x-default" href="https://fallout-shelter.vercel.app/guide">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Roboto+Condensed:wght@400;700&display=swap" media="print" onload="this.media='all'">
@@ -118,93 +121,20 @@
 <body>
 
 <nav class="nav">
-  <a href="/">Layout</a>
-  <a href="/guia" class="active">Guia</a>
+  <a href="/pt-br">Layout</a>
+  <a href="/pt-br/guide" class="active">Guia</a>
   <div class="dw-wrap">
     <label for="dwInput">Dwellers:</label>
     <input type="number" class="dw-input" id="dwInput" value="0" min="0" max="200" onchange="updateDwellers(+this.value)" oninput="updateDwellers(+this.value)">
-    <span class="dw-label" id="dwLabel">NOVO VAULT</span>
+    <span class="dw-label" id="dwLabel"></span>
   </div>
 </nav>
 
+<script src="/shared/i18n.js"></script>
 <script src="/shared/rooms.js"></script>
+<script src="/shared/guide.js"></script>
 <script>
-document.getElementById('dwInput').value = DWELLERS;
-(function(){var l=document.getElementById('dwLabel');l.textContent=DWELLERS===0?'NOVO VAULT':DWELLERS<12?'EARLY GAME':DWELLERS<35?'MID GAME':DWELLERS<60?'LATE GAME':'ENDGAME'})();
-
-function buildRoomList() {
-  var list = document.getElementById('roomList');
-  list.innerHTML = '';
-  var sorted = ROOMS.filter(function(r) { return r.id !== 'elevator'; });
-  sorted.sort(function(a,b) { return a.unlock - b.unlock; });
-
-  sorted.forEach(function(r) {
-    var status = getStatus(r);
-    var card = document.createElement('a');
-    card.className = 'room-card ' + (status === 'skip' ? 'locked' : status);
-    card.href = '/rooms/' + roomSlug(r.id);
-
-    var num = r.unlock === 0 ? '0' : r.unlock.toString();
-    var statusText = status === 'available' ? 'DESBLOQUEADO' :
-                     status === 'next' ? 'PROXIMO!' :
-                     status === 'skip' ? 'NAO CONSTRUIR' :
-                     r.unlock + ' dwellers';
-    var floorText = r.floor ? 'Andar ' + r.floor : (r.id === 'radio_studio' ? 'NAO CONSTRUIR' : 'Opcional');
-
-    card.innerHTML =
-      '<div class="rc-num">' + num + '</div>' +
-      '<div class="rc-info">' +
-        '<div class="rc-name">' + r.name + '</div>' +
-        '<div class="rc-sub">' + floorText + (r.size ? ' | ' + r.size + (r.size==='1'?' bloco':' blocos') : '') + (r.stat ? ' | ' + r.stat : '') + '</div>' +
-      '</div>' +
-      '<div class="rc-unlock">' + statusText + '</div>' +
-      '<div class="rc-arrow">&rarr;</div>';
-    list.appendChild(card);
-  });
-}
-
-function toggleMs(el) {
-  el.classList.toggle('expanded');
-}
-
-function updateDwellers(n) {
-  DWELLERS = Math.max(0, Math.min(200, parseInt(n) || 0));
-  localStorage.setItem('dwellers', DWELLERS);
-  document.getElementById('dwInput').value = DWELLERS;
-  var label = document.getElementById('dwLabel');
-  if (DWELLERS === 0) label.textContent = 'NOVO VAULT';
-  else if (DWELLERS < 12) label.textContent = 'EARLY GAME';
-  else if (DWELLERS < 35) label.textContent = 'MID GAME';
-  else if (DWELLERS < 60) label.textContent = 'LATE GAME';
-  else label.textContent = 'ENDGAME';
-  buildVault('mainVault', null, null, {linkBase: '/rooms/'});
-  buildRoomList();
-  updateMilestones();
-}
-
-function updateMilestones() {
-  var milestones = document.querySelectorAll('.milestone');
-  var thresholds = [];
-  milestones.forEach(function(m) { thresholds.push(parseInt(m.dataset.dw)); });
-
-  milestones.forEach(function(m, i) {
-    var myDw = thresholds[i];
-    var nextDw = thresholds[i + 1] !== undefined ? thresholds[i + 1] : Infinity;
-
-    m.classList.remove('done', 'current', 'locked', 'expanded');
-
-    if (DWELLERS >= nextDw) {
-      m.classList.add('done');
-      m.querySelector('.ms-badge').textContent = '✓ COMPLETO';
-    } else if (DWELLERS >= myDw) {
-      m.classList.add('current', 'expanded');
-      m.querySelector('.ms-badge').textContent = '→ AGORA';
-    } else {
-      m.classList.add('locked');
-      m.querySelector('.ms-badge').textContent = myDw + ' DW';
-    }
-  });
-}
+DWELLERS = parseInt(localStorage.getItem('dwellers')) || 0;
 </script>
 
 <!-- ==================== MAIN PAGE ==================== -->
@@ -457,7 +387,7 @@ function updateMilestones() {
       </ul>
     </div>
   </div>
-  <script>updateMilestones()</script>
+  <script>initGuide()</script>
 
   <div class="section-title">REFERENCIA: TAMANHO DAS SALAS</div>
   <div style="background:#0f0f1a;border-radius:8px;padding:14px 16px;margin-bottom:20px;border:1px solid #2d2d44">
@@ -485,5 +415,9 @@ function updateMilestones() {
   <script>buildRoomList()</script>
 </main>
 
+<footer class="footer">
+  <span>Fallout Shelter Guide</span>
+  <a href="/guide" class="lang-toggle">EN</a>
+</footer>
 </body>
 </html>

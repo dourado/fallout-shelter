@@ -1,165 +1,234 @@
 var DWELLERS = parseInt(localStorage.getItem('dwellers')) || 0;
 
+function getRoomStrings(r) {
+  var lang = getLang();
+  if (lang === 'en' && r.en) return {desc:r.en.desc, instructions:r.en.instructions};
+  return {desc:r.desc, instructions:r.instructions};
+}
+
 var ROOMS = [
   {id:'vault_door',name:'Vault Door',unlock:0,size:'2',stat:null,floor:'01',css:'vault-door',
    desc:'Entrada do vault. Posicao fixa, 6 squares. Nunca fazer upgrade!',
-   instructions:['Posicao fixa no andar 1 (superficie) — nao pode ser movida','Tamanho fixo: 2 blocos (6 squares)','<strong>NUNCA fazer upgrade</strong> — so aumenta duracao dos incidentes','Temas cosmeticos funcionam no Level 1','Raiders e Deathclaws entram por aqui — os 6 guardas da Sala de Guarda ao lado sao a primeira linha de defesa']},
+   instructions:['Posicao fixa no andar 1 (superficie) — nao pode ser movida','Tamanho fixo: 2 blocos (6 squares)','<strong>NUNCA fazer upgrade</strong> — so aumenta duracao dos incidentes','Temas cosmeticos funcionam no Level 1','Raiders e Deathclaws entram por aqui — os 6 guardas da Sala de Guarda ao lado sao a primeira linha de defesa'],
+   en:{desc:'Vault door. Fixed position, 6 squares. Never upgrade!',
+   instructions:['Fixed position on floor 1 (surface) — cannot be moved','Fixed size: 2 blocks (6 squares)','<strong>NEVER upgrade</strong> — only increases incident duration','Cosmetic themes work at Level 1','Raiders and Deathclaws enter here — the 6 guards in the Guard Room next door are the first line of defense']}},
 
   {id:'elevator',name:'Elevator',unlock:0,size:'1',stat:null,floor:null,css:'elevator',
    desc:'Conecta andares verticalmente.',
-   instructions:['Colocar nas DUAS bordas (esquerda e direita) de TODOS os andares subterraneos','Isso bloqueia spawn de Molerats em todas as salas de producao','O andar 1 (superficie) so tem elevador na borda DIREITA']},
+   instructions:['Colocar nas DUAS bordas (esquerda e direita) de TODOS os andares subterraneos','Isso bloqueia spawn de Molerats em todas as salas de producao','O andar 1 (superficie) so tem elevador na borda DIREITA'],
+   en:{desc:'Connects floors vertically.',
+   instructions:['Place on BOTH edges (left and right) of ALL underground floors','This blocks Molerat spawns in all production rooms','Floor 1 (surface) only has an elevator on the RIGHT edge']}},
 
   {id:'living_quarters',name:'Living Quarters',unlock:0,size:'2',stat:'C',floor:'12+',css:'living',
    desc:'Aumenta capacidade de Dwellers e permite breeding.',
-   instructions:['No endgame, ficam nos andares de baixo (12+) com gaps entre elas','Sem staff necessario — incidentes morrem sozinhos nos gaps','Usar para breeding: pet de gemeos ANTES da gravidez, trocar para Child-SPECIAL antes do nascimento','SPECIAL combinado dos pais 134+ = bebe Legendary']},
+   instructions:['No endgame, ficam nos andares de baixo (12+) com gaps entre elas','Sem staff necessario — incidentes morrem sozinhos nos gaps','Usar para breeding: pet de gemeos ANTES da gravidez, trocar para Child-SPECIAL antes do nascimento','SPECIAL combinado dos pais 134+ = bebe Legendary'],
+   en:{desc:'Increases Dweller capacity and enables breeding.',
+   instructions:['In endgame, placed on lower floors (12+) with gaps between them','No staff needed — incidents die on their own in gaps','For breeding: equip twins pet BEFORE pregnancy, switch to Child-SPECIAL pet before birth','Combined parent SPECIAL 134+ = Legendary baby']}},
 
   {id:'power_generator',name:'Power Generator',unlock:0,size:'3',stat:'S',floor:'02',css:'power',
    desc:'Produz energia. TEMPORARIO — sera substituido por Nuclear Reactor aos 60 dwellers.',
-   instructions:['Colocar no andar 2 (posicao final dos Nuclear Reactors)','Merge em 3 blocos para maxima eficiencia','Staffar com Dwellers de alto Strength','<strong>TEMPORARIO</strong>: destruir e substituir por Nuclear Reactor quando desbloquear (60 dwellers)','Dwellers deste andar tambem servem como kill zone — arma-los bem']},
+   instructions:['Colocar no andar 2 (posicao final dos Nuclear Reactors)','Merge em 3 blocos para maxima eficiencia','Staffar com Dwellers de alto Strength','<strong>TEMPORARIO</strong>: destruir e substituir por Nuclear Reactor quando desbloquear (60 dwellers)','Dwellers deste andar tambem servem como kill zone — arma-los bem'],
+   en:{desc:'Produces power. TEMPORARY — will be replaced by Nuclear Reactor at 60 dwellers.',
+   instructions:['Place on floor 2 (final position for Nuclear Reactors)','Merge to 3 blocks for maximum efficiency','Staff with high-Strength Dwellers','<strong>TEMPORARY</strong>: destroy and replace with Nuclear Reactor when unlocked (60 dwellers)','Dwellers on this floor also serve as kill zone — equip them well']}},
 
   {id:'diner',name:'Diner',unlock:0,size:'3',stat:'A',floor:'03',css:'food-water',
    desc:'Produz comida. TEMPORARIO — sera substituido por Nuka-Cola Bottler aos 100 dwellers.',
-   instructions:['Colocar no andar 3 (posicao final dos Nuka-Cola Bottlers)','Merge em 3 blocos','Staffar com Dwellers de alto Agility','<strong>TEMPORARIO</strong>: sera substituido por Garden (70), depois Nuka-Cola Bottler (100)']},
+   instructions:['Colocar no andar 3 (posicao final dos Nuka-Cola Bottlers)','Merge em 3 blocos','Staffar com Dwellers de alto Agility','<strong>TEMPORARIO</strong>: sera substituido por Garden (70), depois Nuka-Cola Bottler (100)'],
+   en:{desc:'Produces food. TEMPORARY — will be replaced by Nuka-Cola Bottler at 100 dwellers.',
+   instructions:['Place on floor 3 (final position for Nuka-Cola Bottlers)','Merge to 3 blocks','Staff with high-Agility Dwellers','<strong>TEMPORARY</strong>: will be replaced by Garden (70), then Nuka-Cola Bottler (100)']}},
 
   {id:'water_treatment',name:'Water Treatment',unlock:0,size:'3',stat:'P',floor:'03',css:'food-water',
    desc:'Produz agua. TEMPORARIO — sera substituido por Nuka-Cola Bottler aos 100 dwellers.',
-   instructions:['Colocar no andar 3 ao lado do Diner','Merge em 3 blocos','Staffar com Dwellers de alto Perception','<strong>TEMPORARIO</strong>: sera substituido por Water Purification (80), depois Nuka-Cola Bottler (100)']},
+   instructions:['Colocar no andar 3 ao lado do Diner','Merge em 3 blocos','Staffar com Dwellers de alto Perception','<strong>TEMPORARIO</strong>: sera substituido por Water Purification (80), depois Nuka-Cola Bottler (100)'],
+   en:{desc:'Produces water. TEMPORARY — will be replaced by Nuka-Cola Bottler at 100 dwellers.',
+   instructions:['Place on floor 3 next to the Diner','Merge to 3 blocks','Staff with high-Perception Dwellers','<strong>TEMPORARY</strong>: will be replaced by Water Purification (80), then Nuka-Cola Bottler (100)']}},
 
   {id:'storage_room',name:'Storage Room',unlock:12,size:'3',stat:null,floor:'01',css:'guard-room',
    desc:'A sala mais importante da defesa! Fica logo apos a Vault Door como "Sala de Guarda".',
-   instructions:['Construir 3 blocos <strong>imediatamente apos a Vault Door</strong> no andar 1','<strong>MANTER NO LEVEL 1</strong> — sala rasa = Dwellers entram em posicao de combate mais rapido','Colocar 6 Dwellers com as MELHORES armas do vault','Dwellers devem ter HP maximo (levelados Lv1→50 com E10 + outfit E7)','SPECIAL nao afeta combate no vault — so dano da arma e HP importam','Storages extras ficam nos andares 12+ (fundo) sem staff, com gaps entre elas']},
+   instructions:['Construir 3 blocos <strong>imediatamente apos a Vault Door</strong> no andar 1','<strong>MANTER NO LEVEL 1</strong> — sala rasa = Dwellers entram em posicao de combate mais rapido','Colocar 6 Dwellers com as MELHORES armas do vault','Dwellers devem ter HP maximo (levelados Lv1→50 com E10 + outfit E7)','SPECIAL nao afeta combate no vault — so dano da arma e HP importam','Storages extras ficam nos andares 12+ (fundo) sem staff, com gaps entre elas'],
+   en:{desc:'The most important defense room! Placed right after the Vault Door as the "Guard Room".',
+   instructions:['Build 3 blocks <strong>immediately after the Vault Door</strong> on floor 1','<strong>KEEP AT LEVEL 1</strong> — shallow room = Dwellers enter combat position faster','Place 6 Dwellers with the BEST weapons in the vault','Dwellers must have max HP (leveled Lv1→50 with E10 + E7 outfit)','SPECIAL does not affect vault combat — only weapon damage and HP matter','Extra Storages go on lower floors (12+) with no staff, gaps between them']}},
 
   {id:'medbay',name:'Medbay',unlock:14,size:'1-3',stat:'I',floor:'09+10-11',css:'medbay-prod',
    desc:'Produz Stimpaks. Duas funcoes: producao (3 blocos no andar 9) e cap farming (1 bloco nos andares 10-11).',
-   instructions:['<strong>Producao</strong>: 1x Medbay 3 blocos maxed no andar 9 — produz Stimpaks para Quests','<strong>Cap farming</strong>: Medbays 1 bloco Level 1 alternadas com Science Labs nos andares 10-11','Cap farm: 2 Dwellers high-Luck por sala, rush infinito para caps','<strong>NAO merge</strong> as Medbays de cap farm — devem ser singles (1 bloco cada)','Alternancia Med-Sci-Med-Sci previne auto-merge de salas adjacentes do mesmo tipo']},
+   instructions:['<strong>Producao</strong>: 1x Medbay 3 blocos maxed no andar 9 — produz Stimpaks para Quests','<strong>Cap farming</strong>: Medbays 1 bloco Level 1 alternadas com Science Labs nos andares 10-11','Cap farm: 2 Dwellers high-Luck por sala, rush infinito para caps','<strong>NAO merge</strong> as Medbays de cap farm — devem ser singles (1 bloco cada)','Alternancia Med-Sci-Med-Sci previne auto-merge de salas adjacentes do mesmo tipo'],
+   en:{desc:'Produces Stimpaks. Two roles: production (3 blocks on floor 9) and cap farming (1 block on floors 10-11).',
+   instructions:['<strong>Production</strong>: 1x Medbay 3 blocks maxed on floor 9 — produces Stimpaks for Quests','<strong>Cap farming</strong>: 1-block Level 1 Medbays alternating with Science Labs on floors 10-11','Cap farm: 2 high-Luck Dwellers per room, infinite rush for caps','<strong>DO NOT merge</strong> cap farm Medbays — must be singles (1 block each)','Med-Sci-Med-Sci alternation prevents auto-merge of adjacent same-type rooms']}},
 
   {id:'science_lab',name:'Science Lab',unlock:16,size:'1',stat:'I',floor:'10-11',css:'cap-farm',
    desc:'Produz RadAway. Principal uso no endgame: cap farming com rush spam.',
-   instructions:['Colocar 1 bloco Level 1 alternadas com Medbays nos andares 10-11','2 Dwellers high-Luck + high-Level por sala','Rush infinito — taxa de sucesso alta com Luck alto','<strong>NAO fazer upgrade</strong> — Level 1 para ciclo rapido de rush','<strong>NAO merge</strong> — manter como salas individuais (1 bloco)','Padrao por andar: Med-Sci-Med-Sci-Med-Sci (6 salas, 6 slots)']},
+   instructions:['Colocar 1 bloco Level 1 alternadas com Medbays nos andares 10-11','2 Dwellers high-Luck + high-Level por sala','Rush infinito — taxa de sucesso alta com Luck alto','<strong>NAO fazer upgrade</strong> — Level 1 para ciclo rapido de rush','<strong>NAO merge</strong> — manter como salas individuais (1 bloco)','Padrao por andar: Med-Sci-Med-Sci-Med-Sci (6 salas, 6 slots)'],
+   en:{desc:'Produces RadAway. Main endgame use: cap farming with rush spam.',
+   instructions:['Place 1-block Level 1 alternating with Medbays on floors 10-11','2 high-Luck + high-Level Dwellers per room','Infinite rush — high success rate with high Luck','<strong>DO NOT upgrade</strong> — Level 1 for fast rush cycles','<strong>DO NOT merge</strong> — keep as individual rooms (1 block)','Pattern per floor: Med-Sci-Med-Sci-Med-Sci (6 rooms, 6 slots)']}},
 
   {id:'overseer_office',name:"Overseer's Office",unlock:18,size:'2',stat:null,floor:'05',css:'overseer',
    desc:'Desbloqueia Quests — principal fonte de armas e roupas Legendary no endgame.',
-   instructions:['Colocar no andar 5 ao lado do Weight Room','Tamanho fixo: 2 blocos (6 squares) — nao pode ser expandido','Unico por vault — so pode ter UM','Fazer upgrade ate Lv3 para enviar 3 quests simultaneas','Nao precisa de staff para funcionar']},
+   instructions:['Colocar no andar 5 ao lado do Weight Room','Tamanho fixo: 2 blocos (6 squares) — nao pode ser expandido','Unico por vault — so pode ter UM','Fazer upgrade ate Lv3 para enviar 3 quests simultaneas','Nao precisa de staff para funcionar'],
+   en:{desc:'Unlocks Quests — main source of Legendary weapons and outfits in endgame.',
+   instructions:['Place on floor 5 next to the Weight Room','Fixed size: 2 blocks (6 squares) — cannot be expanded','One per vault — you can only have ONE','Upgrade to Lv3 for 3 simultaneous quests','No staff needed to function']}},
 
   {id:'radio_studio',name:'Radio Studio',unlock:20,size:null,stat:'C',floor:null,css:'locked',
    desc:'NAO CONSTRUIR! Atrai Raiders e Deathclaws desnecessariamente.',
-   instructions:['<strong class="warn">NAO CONSTRUIR</strong> — atrai ataques de Raiders e Deathclaws','Bebes gerados por breeding sao melhores que recrutas do wasteland','A unica vantagem (happiness boost) nao vale o risco','Se ja construiu, destrua imediatamente']},
+   instructions:['<strong class="warn">NAO CONSTRUIR</strong> — atrai ataques de Raiders e Deathclaws','Bebes gerados por breeding sao melhores que recrutas do wasteland','A unica vantagem (happiness boost) nao vale o risco','Se ja construiu, destrua imediatamente'],
+   en:{desc:'DO NOT BUILD! Attracts Raiders and Deathclaws unnecessarily.',
+   instructions:['<strong class="warn">DO NOT BUILD</strong> — attracts Raider and Deathclaw attacks','Babies from breeding are better than wasteland recruits','The only advantage (happiness boost) is not worth the risk','If already built, destroy it immediately']}},
 
   {id:'weapon_workshop',name:'Weapon Workshop',unlock:22,size:'3',stat:null,floor:'04',css:'craft',
    desc:'Craft de armas. Tamanho fixo 3 blocos (9 squares). Essencial para armas Legendary.',
-   instructions:['Colocar no andar 4 (lado esquerdo)','Tamanho fixo: 3 blocos — nao pode ser menor','Staffar com 6 Dwellers para crafting mais rapido','Priorizar craft de armas S-tier: Dragon\'s Maw, MIRV, Vengeance','Armas craftadas aqui vao para os 6 guardas do andar 1']},
+   instructions:['Colocar no andar 4 (lado esquerdo)','Tamanho fixo: 3 blocos — nao pode ser menor','Staffar com 6 Dwellers para crafting mais rapido','Priorizar craft de armas S-tier: Dragon\'s Maw, MIRV, Vengeance','Armas craftadas aqui vao para os 6 guardas do andar 1'],
+   en:{desc:'Weapon crafting. Fixed size 3 blocks (9 squares). Essential for Legendary weapons.',
+   instructions:['Place on floor 4 (left side)','Fixed size: 3 blocks — cannot be smaller','Staff with 6 Dwellers for faster crafting','Prioritize S-tier weapons: Dragon\'s Maw, MIRV, Vengeance','Crafted weapons go to the 6 guards on floor 1']}},
 
   {id:'weight_room',name:'Weight Room',unlock:24,size:'3',stat:'S',floor:'05',css:'training',
    desc:'Treina Strength. Fica no andar 5 ao lado do Overseer\'s Office.',
-   instructions:['Colocar no andar 5 (ao lado do Overseer\'s Office)','Merge em 3 blocos para 6 trainees simultaneos','Strength e essencial para producao de energia (Power Generator / Nuclear Reactor)','Treinar S e prioridade para workers de energia']},
+   instructions:['Colocar no andar 5 (ao lado do Overseer\'s Office)','Merge em 3 blocos para 6 trainees simultaneos','Strength e essencial para producao de energia (Power Generator / Nuclear Reactor)','Treinar S e prioridade para workers de energia'],
+   en:{desc:'Trains Strength. Located on floor 5 next to the Overseer\'s Office.',
+   instructions:['Place on floor 5 (next to Overseer\'s Office)','Merge to 3 blocks for 6 simultaneous trainees','Strength is essential for power production (Power Generator / Nuclear Reactor)','S training is priority for power workers']}},
 
   {id:'athletics_room',name:'Athletics Room',unlock:26,size:'3',stat:'A',floor:'08',css:'training',
    desc:'Treina Agility. Fica no andar 8.',
-   instructions:['Colocar no andar 8 (ao lado do Classroom)','Merge em 3 blocos','Agility afeta producao de comida (Diner/Garden)','Menos prioritario que Endurance e Strength no inicio']},
+   instructions:['Colocar no andar 8 (ao lado do Classroom)','Merge em 3 blocos','Agility afeta producao de comida (Diner/Garden)','Menos prioritario que Endurance e Strength no inicio'],
+   en:{desc:'Trains Agility. Located on floor 8.',
+   instructions:['Place on floor 8 (next to Classroom)','Merge to 3 blocks','Agility affects food production (Diner/Garden)','Lower priority than Endurance and Strength early on']}},
 
   {id:'armory',name:'Armory',unlock:28,size:'3',stat:'P',floor:'06',css:'training',
    desc:'Treina Perception. Fica no andar 6.',
-   instructions:['Colocar no andar 6 (ao lado do Lounge que desbloqueia aos 40)','Merge em 3 blocos','Perception afeta producao de agua (Water Treatment/Purification)','Ate o Lounge desbloquear (40), o outro lado do andar 6 fica vazio']},
+   instructions:['Colocar no andar 6 (ao lado do Lounge que desbloqueia aos 40)','Merge em 3 blocos','Perception afeta producao de agua (Water Treatment/Purification)','Ate o Lounge desbloquear (40), o outro lado do andar 6 fica vazio'],
+   en:{desc:'Trains Perception. Located on floor 6.',
+   instructions:['Place on floor 6 (next to Lounge which unlocks at 40)','Merge to 3 blocks','Perception affects water production (Water Treatment/Purification)','Until Lounge unlocks (40), the other side of floor 6 stays empty']}},
 
   {id:'classroom',name:'Classroom',unlock:30,size:'3',stat:'I',floor:'08',css:'training',
    desc:'Treina Intelligence. Fica no andar 8.',
-   instructions:['Colocar no andar 8 (ao lado do Athletics Room)','Merge em 3 blocos','Intelligence e ESSENCIAL: afeta producao de Stimpaks, RadAway e Nuka-Cola Bottler','Prioridade alta de treino para workers de Medbay, Science Lab e Bottler']},
+   instructions:['Colocar no andar 8 (ao lado do Athletics Room)','Merge em 3 blocos','Intelligence e ESSENCIAL: afeta producao de Stimpaks, RadAway e Nuka-Cola Bottler','Prioridade alta de treino para workers de Medbay, Science Lab e Bottler'],
+   en:{desc:'Trains Intelligence. Located on floor 8.',
+   instructions:['Place on floor 8 (next to Athletics Room)','Merge to 3 blocks','Intelligence is ESSENTIAL: affects Stimpak, RadAway and Nuka-Cola Bottler production','High training priority for Medbay, Science Lab and Bottler workers']}},
 
   {id:'outfit_workshop',name:'Outfit Workshop',unlock:32,size:'3',stat:null,floor:'04',css:'craft',
    desc:'Craft de roupas. Tamanho fixo 3 blocos (9 squares).',
-   instructions:['Colocar no andar 4 (lado direito, ao lado do Weapon Workshop)','Tamanho fixo: 3 blocos — nao pode ser menor','Staffar com 6 Dwellers','Priorizar craft de roupas com +7 Endurance (essenciais para HP max durante leveling)','Craft Sturdy Wasteland Gear (+5E) ou Expert Lab Coat (+7I) conforme necessidade']},
+   instructions:['Colocar no andar 4 (lado direito, ao lado do Weapon Workshop)','Tamanho fixo: 3 blocos — nao pode ser menor','Staffar com 6 Dwellers','Priorizar craft de roupas com +7 Endurance (essenciais para HP max durante leveling)','Craft Sturdy Wasteland Gear (+5E) ou Expert Lab Coat (+7I) conforme necessidade'],
+   en:{desc:'Outfit crafting. Fixed size 3 blocks (9 squares).',
+   instructions:['Place on floor 4 (right side, next to Weapon Workshop)','Fixed size: 3 blocks — cannot be smaller','Staff with 6 Dwellers','Prioritize +7 Endurance outfits (essential for max HP during leveling)','Craft Sturdy Wasteland Gear (+5E) or Expert Lab Coat (+7I) as needed']}},
 
   {id:'fitness_room',name:'Fitness Room',unlock:35,size:'3',stat:'E',floor:'07',css:'training-e',
    desc:'Treina Endurance. DEVE SER ISOLADO — gaps nos dois lados. Dwellers Lv1 sao frageis!',
-   instructions:['Colocar no andar 7 com <strong>gaps nos dois lados</strong> (ISOLADO)','Layout do andar: Elev | gap | Fitness Room 3 blocos | gap | Elev','<strong>CRITICO</strong>: Dwellers treinando Endurance sao Level 1 (frageis!)','Isolamento impede propagacao de incidentes para eles','Endurance e o stat MAIS IMPORTANTE do jogo','Todo Dweller deve ter E10 + outfit E7 ANTES de ganhar qualquer XP','HP e calculado no level-up: E17 (10 base + 7 outfit) de Lv1→50 = 595 HP (maximo)']},
+   instructions:['Colocar no andar 7 com <strong>gaps nos dois lados</strong> (ISOLADO)','Layout do andar: Elev | gap | Fitness Room 3 blocos | gap | Elev','<strong>CRITICO</strong>: Dwellers treinando Endurance sao Level 1 (frageis!)','Isolamento impede propagacao de incidentes para eles','Endurance e o stat MAIS IMPORTANTE do jogo','Todo Dweller deve ter E10 + outfit E7 ANTES de ganhar qualquer XP','HP e calculado no level-up: E17 (10 base + 7 outfit) de Lv1→50 = 595 HP (maximo)'],
+   en:{desc:'Trains Endurance. MUST BE ISOLATED — gaps on both sides. Lv1 Dwellers are fragile!',
+   instructions:['Place on floor 7 with <strong>gaps on both sides</strong> (ISOLATED)','Floor layout: Elev | gap | Fitness Room 3 blocks | gap | Elev','<strong>CRITICAL</strong>: Dwellers training Endurance are Level 1 (fragile!)','Isolation prevents incident spread to them','Endurance is the MOST IMPORTANT stat in the game','Every Dweller must have E10 + E7 outfit BEFORE gaining any XP','HP is calculated on level-up: E17 (10 base + 7 outfit) from Lv1→50 = 595 HP (maximum)']}},
 
   {id:'lounge',name:'Lounge',unlock:40,size:'3',stat:'C',floor:'06',css:'training',
    desc:'Treina Charisma. Fica no andar 6 ao lado do Armory.',
-   instructions:['Colocar no andar 6 (ao lado do Armory)','Merge em 3 blocos','Charisma afeta velocidade de breeding e producao do Radio Studio','Menor prioridade de treino — foque em E, S, I primeiro']},
+   instructions:['Colocar no andar 6 (ao lado do Armory)','Merge em 3 blocos','Charisma afeta velocidade de breeding e producao do Radio Studio','Menor prioridade de treino — foque em E, S, I primeiro'],
+   en:{desc:'Trains Charisma. Located on floor 6 next to the Armory.',
+   instructions:['Place on floor 6 (next to Armory)','Merge to 3 blocks','Charisma affects breeding speed and Radio Studio production','Lowest training priority — focus on E, S, I first']}},
 
   {id:'theme_workshop',name:'Theme Workshop',unlock:42,size:'3',stat:null,floor:null,css:'craft',
    desc:'Craft de temas cosmeticos. Opcional — nao essencial para otimizacao.',
-   instructions:['<strong>Opcional</strong> — so se quiser personalizar a aparencia do vault','Tamanho fixo: 3 blocos','Se construir, colocar nos andares de baixo (nao desperdicar espaco dos andares superiores)','Temas funcionam em salas Level 1 (incluindo Vault Door)']},
+   instructions:['<strong>Opcional</strong> — so se quiser personalizar a aparencia do vault','Tamanho fixo: 3 blocos','Se construir, colocar nos andares de baixo (nao desperdicar espaco dos andares superiores)','Temas funcionam em salas Level 1 (incluindo Vault Door)'],
+   en:{desc:'Cosmetic theme crafting. Optional — not essential for optimization.',
+   instructions:['<strong>Optional</strong> — only if you want to customize vault appearance','Fixed size: 3 blocks','If built, place on lower floors (don\'t waste upper floor space)','Themes work on Level 1 rooms (including Vault Door)']}},
 
   {id:'game_room',name:'Game Room',unlock:45,size:'3',stat:'L',floor:'09',css:'training',
    desc:'Treina Luck. Fica no andar 9 ao lado da Medbay de producao.',
-   instructions:['Colocar no andar 9 (ao lado da Medbay 3 blocos de producao)','Merge em 3 blocos','Luck afeta chance de rush bem-sucedido e caps encontrados','<strong>Prioridade alta</strong>: Luck alto e essencial para cap farming eficiente','Treinar Luck nos Dwellers que vao fazer rush spam nos andares 10-11']},
+   instructions:['Colocar no andar 9 (ao lado da Medbay 3 blocos de producao)','Merge em 3 blocos','Luck afeta chance de rush bem-sucedido e caps encontrados','<strong>Prioridade alta</strong>: Luck alto e essencial para cap farming eficiente','Treinar Luck nos Dwellers que vao fazer rush spam nos andares 10-11'],
+   en:{desc:'Trains Luck. Located on floor 9 next to the production Medbay.',
+   instructions:['Place on floor 9 (next to the 3-block production Medbay)','Merge to 3 blocks','Luck affects successful rush chance and caps found','<strong>High priority</strong>: high Luck is essential for efficient cap farming','Train Luck on Dwellers who will rush spam on floors 10-11']}},
 
   {id:'barbershop',name:'Barbershop',unlock:50,size:'2',stat:null,floor:null,css:'craft',
    desc:'Muda aparencia dos Dwellers. Puramente cosmetico.',
-   instructions:['<strong>Opcional</strong> — puramente cosmetico','Tamanho fixo: 2 blocos','Se construir, colocar nos andares de baixo','Nao afeta gameplay']},
+   instructions:['<strong>Opcional</strong> — puramente cosmetico','Tamanho fixo: 2 blocos','Se construir, colocar nos andares de baixo','Nao afeta gameplay'],
+   en:{desc:'Changes Dweller appearance. Purely cosmetic.',
+   instructions:['<strong>Optional</strong> — purely cosmetic','Fixed size: 2 blocks','If built, place on lower floors','Does not affect gameplay']}},
 
   {id:'nuclear_reactor',name:'Nuclear Reactor',unlock:60,size:'3',stat:'S',floor:'02',css:'power',
    desc:'Substitui Power Generator. 2 salas 3 blocos maxed = energia para o vault inteiro.',
-   instructions:['<strong>SUBSTITUIR</strong> os Power Generators do andar 2','Destruir Power Generators e construir 2x Nuclear Reactor 3 blocos','Staffar com Dwellers de Strength maxado (10)','2 salas maxed com workers S10 = energia para 200 Dwellers','Dwellers deste andar tambem sao kill zone — arma-los com armas top','Este andar e o 2o ponto de combate apos o andar 1']},
+   instructions:['<strong>SUBSTITUIR</strong> os Power Generators do andar 2','Destruir Power Generators e construir 2x Nuclear Reactor 3 blocos','Staffar com Dwellers de Strength maxado (10)','2 salas maxed com workers S10 = energia para 200 Dwellers','Dwellers deste andar tambem sao kill zone — arma-los com armas top','Este andar e o 2o ponto de combate apos o andar 1'],
+   en:{desc:'Replaces Power Generator. 2 maxed 3-block rooms = power for the entire vault.',
+   instructions:['<strong>REPLACE</strong> the Power Generators on floor 2','Destroy Power Generators and build 2x Nuclear Reactor 3 blocks','Staff with maxed Strength (10) Dwellers','2 maxed rooms with S10 workers = power for 200 Dwellers','Dwellers on this floor are also kill zone — equip them with top weapons','This floor is the 2nd combat point after floor 1']}},
 
   {id:'garden',name:'Garden',unlock:70,size:'3',stat:'A',floor:'03',css:'food-water',
    desc:'Substitui Diner. TEMPORARIO — sera substituido por Nuka-Cola Bottler aos 100.',
-   instructions:['<strong>SUBSTITUIR</strong> o Diner no andar 3','Produz mais comida que o Diner','Staffar com Dwellers de Agility maxado','<strong>TEMPORARIO</strong>: sera substituido por Nuka-Cola Bottler aos 100 dwellers']},
+   instructions:['<strong>SUBSTITUIR</strong> o Diner no andar 3','Produz mais comida que o Diner','Staffar com Dwellers de Agility maxado','<strong>TEMPORARIO</strong>: sera substituido por Nuka-Cola Bottler aos 100 dwellers'],
+   en:{desc:'Replaces Diner. TEMPORARY — will be replaced by Nuka-Cola Bottler at 100.',
+   instructions:['<strong>REPLACE</strong> the Diner on floor 3','Produces more food than the Diner','Staff with maxed Agility Dwellers','<strong>TEMPORARY</strong>: will be replaced by Nuka-Cola Bottler at 100 dwellers']}},
 
   {id:'water_purification',name:'Water Purification',unlock:80,size:'3',stat:'P',floor:'03',css:'food-water',
    desc:'Substitui Water Treatment. TEMPORARIO — sera substituido por Nuka-Cola Bottler aos 100.',
-   instructions:['<strong>SUBSTITUIR</strong> o Water Treatment no andar 3','Produz mais agua que o Water Treatment','Staffar com Dwellers de Perception maxado','<strong>TEMPORARIO</strong>: sera substituido por Nuka-Cola Bottler aos 100 dwellers']},
+   instructions:['<strong>SUBSTITUIR</strong> o Water Treatment no andar 3','Produz mais agua que o Water Treatment','Staffar com Dwellers de Perception maxado','<strong>TEMPORARIO</strong>: sera substituido por Nuka-Cola Bottler aos 100 dwellers'],
+   en:{desc:'Replaces Water Treatment. TEMPORARY — will be replaced by Nuka-Cola Bottler at 100.',
+   instructions:['<strong>REPLACE</strong> the Water Treatment on floor 3','Produces more water than Water Treatment','Staff with maxed Perception Dwellers','<strong>TEMPORARY</strong>: will be replaced by Nuka-Cola Bottler at 100 dwellers']}},
 
   {id:'nuka_cola_bottler',name:'Nuka-Cola Bottler',unlock:100,size:'3',stat:'E',floor:'03',css:'food-water',
    desc:'Produz comida E agua simultaneamente. 2 salas 3 blocos = sustenta 200 Dwellers.',
-   instructions:['<strong>SUBSTITUIR TUDO</strong> no andar 3 (Garden + Water Purification)','Construir 2x Nuka-Cola Bottler 3 blocos no andar 3','Staffar com Dwellers de Endurance + Intelligence maxados','2 salas maxed = comida E agua para 200 Dwellers','Este e o upgrade FINAL de producao de comida/agua','Dwellers deste andar tambem sao kill zone — arma-los bem']}
+   instructions:['<strong>SUBSTITUIR TUDO</strong> no andar 3 (Garden + Water Purification)','Construir 2x Nuka-Cola Bottler 3 blocos no andar 3','Staffar com Dwellers de Endurance + Intelligence maxados','2 salas maxed = comida E agua para 200 Dwellers','Este e o upgrade FINAL de producao de comida/agua','Dwellers deste andar tambem sao kill zone — arma-los bem'],
+   en:{desc:'Produces food AND water simultaneously. 2 maxed 3-block rooms = sustains 200 Dwellers.',
+   instructions:['<strong>REPLACE EVERYTHING</strong> on floor 3 (Garden + Water Purification)','Build 2x Nuka-Cola Bottler 3 blocks on floor 3','Staff with maxed Endurance + Intelligence Dwellers','2 maxed rooms = food AND water for 200 Dwellers','This is the FINAL food/water production upgrade','Dwellers on this floor are also kill zone — equip them well']}}
 ];
 
 var VAULT_FLOORS = [
   {label:'01',surface:true,rooms:[
-    {id:'vault_door',css:'vault-door',size:'size-2',name:'Vault Door',detail:'Posicao fixa (6 sq) • Nunca upgrade',badge:'LV 1',badgeCss:'background:#22c55e;color:#052e16'},
-    {id:'storage_room',css:'guard-room',size:'size-3',name:'Sala de Guarda',detail:'6 Dwellers • Armas S-Tier',badge:'LV 1',badgeCss:'background:#dc2626'},
+    {id:'vault_door',css:'vault-door',size:'size-2',name:'Vault Door',detail:'Posicao fixa (6 sq) • Nunca upgrade',badge:'LV 1',badgeCss:'background:#22c55e;color:#052e16',
+     en:{detail:'Fixed position (6 sq) • Never upgrade'}},
+    {id:'storage_room',css:'guard-room',size:'size-3',name:'Sala de Guarda',detail:'6 Dwellers • Armas S-Tier',badge:'LV 1',badgeCss:'background:#dc2626',
+     en:{name:'Guard Room',detail:'6 Dwellers • S-Tier Weapons'}},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
-  {label:'02',dividerBefore:'Kill Zone — Andares de Abate',rooms:[
+  {label:'02',dividerBefore:'Kill Zone — Andares de Abate',en:{dividerBefore:'Kill Zone — Slaughter Floors'},rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'nuclear_reactor',css:'power',size:'size-3',name:'Nuclear Reactor',detail:'6 Dwellers armados • S maxado',badge:'MAX',badgeCss:'background:#2563eb'},
-    {id:'nuclear_reactor',css:'power',size:'size-3',name:'Nuclear Reactor',detail:'6 Dwellers armados • S maxado',badge:'MAX',badgeCss:'background:#2563eb'},
+    {id:'nuclear_reactor',css:'power',size:'size-3',name:'Nuclear Reactor',detail:'6 Dwellers armados • S maxado',badge:'MAX',badgeCss:'background:#2563eb',
+     en:{detail:'6 Armed Dwellers • Maxed S'}},
+    {id:'nuclear_reactor',css:'power',size:'size-3',name:'Nuclear Reactor',detail:'6 Dwellers armados • S maxado',badge:'MAX',badgeCss:'background:#2563eb',
+     en:{detail:'6 Armed Dwellers • Maxed S'}},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'03',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'nuka_cola_bottler',css:'food-water',size:'size-3',name:'Nuka-Cola Bottler',detail:'6 Dwellers armados • E+I max',badge:'MAX',badgeCss:'background:#2563eb'},
-    {id:'nuka_cola_bottler',css:'food-water',size:'size-3',name:'Nuka-Cola Bottler',detail:'6 Dwellers armados • E+I max',badge:'MAX',badgeCss:'background:#2563eb'},
+    {id:'nuka_cola_bottler',css:'food-water',size:'size-3',name:'Nuka-Cola Bottler',detail:'6 Dwellers armados • E+I max',badge:'MAX',badgeCss:'background:#2563eb',
+     en:{detail:'6 Armed Dwellers • E+I max'}},
+    {id:'nuka_cola_bottler',css:'food-water',size:'size-3',name:'Nuka-Cola Bottler',detail:'6 Dwellers armados • E+I max',badge:'MAX',badgeCss:'background:#2563eb',
+     en:{detail:'6 Armed Dwellers • E+I max'}},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'04',dividerBefore:'Crafting',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'weapon_workshop',css:'craft',size:'size-3',name:'Weapon Workshop',detail:'6 Dwellers • Craft armas S-tier',badge:'MAX',badgeCss:'background:#2563eb'},
-    {id:'outfit_workshop',css:'craft',size:'size-3',name:'Outfit Workshop',detail:'6 Dwellers • Craft roupas',badge:'MAX',badgeCss:'background:#2563eb'},
+    {id:'weapon_workshop',css:'craft',size:'size-3',name:'Weapon Workshop',detail:'6 Dwellers • Craft armas S-tier',badge:'MAX',badgeCss:'background:#2563eb',
+     en:{detail:'6 Dwellers • Craft S-tier weapons'}},
+    {id:'outfit_workshop',css:'craft',size:'size-3',name:'Outfit Workshop',detail:'6 Dwellers • Craft roupas',badge:'MAX',badgeCss:'background:#2563eb',
+     en:{detail:'6 Dwellers • Craft outfits'}},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'05',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'overseer_office',css:'overseer',size:'size-2',name:"Overseer's Office",detail:'Quests (6 sq fixo) • Sem staff',badge:'MAX',badgeCss:'background:#2563eb'},
-    {id:'weight_room',css:'training',size:'size-3',name:'Weight Room',detail:'Treino Strength'},
-    {id:null,css:'gap',size:'size-1',name:'vazio'},
+    {id:'overseer_office',css:'overseer',size:'size-2',name:"Overseer's Office",detail:'Quests (6 sq fixo) • Sem staff',badge:'MAX',badgeCss:'background:#2563eb',
+     en:{detail:'Quests (fixed 6 sq) • No staff'}},
+    {id:'weight_room',css:'training',size:'size-3',name:'Weight Room',detail:'Treino Strength',en:{detail:'Strength Training'}},
+    {id:null,css:'gap',size:'size-1',name:'vazio',en:{name:'empty'}},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
-  {label:'06',dividerBefore:'Treinamento SPECIAL',rooms:[
+  {label:'06',dividerBefore:'Treinamento SPECIAL',en:{dividerBefore:'SPECIAL Training'},rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'armory',css:'training',size:'size-3',name:'Armory',detail:'Treino Perception'},
-    {id:'lounge',css:'training',size:'size-3',name:'Lounge',detail:'Treino Charisma'},
+    {id:'armory',css:'training',size:'size-3',name:'Armory',detail:'Treino Perception',en:{detail:'Perception Training'}},
+    {id:'lounge',css:'training',size:'size-3',name:'Lounge',detail:'Treino Charisma',en:{detail:'Charisma Training'}},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'07',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:null,css:'gap',size:'size-1',name:'vazio'},
-    {id:'fitness_room',css:'training-e',size:'size-3',name:'Fitness Room',detail:'Treino Endurance',badge:'ISOLADO',badgeCss:'background:#eab308;color:#1a1a2e'},
-    {id:null,css:'gap',size:'size-2',name:'vazio'},
+    {id:null,css:'gap',size:'size-1',name:'vazio',en:{name:'empty'}},
+    {id:'fitness_room',css:'training-e',size:'size-3',name:'Fitness Room',detail:'Treino Endurance',badge:'ISOLADO',badgeCss:'background:#eab308;color:#1a1a2e',
+     en:{detail:'Endurance Training',badge:'ISOLATED'}},
+    {id:null,css:'gap',size:'size-2',name:'vazio',en:{name:'empty'}},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'08',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'classroom',css:'training',size:'size-3',name:'Classroom',detail:'Treino Intelligence'},
-    {id:'athletics_room',css:'training',size:'size-3',name:'Athletics Room',detail:'Treino Agility'},
+    {id:'classroom',css:'training',size:'size-3',name:'Classroom',detail:'Treino Intelligence',en:{detail:'Intelligence Training'}},
+    {id:'athletics_room',css:'training',size:'size-3',name:'Athletics Room',detail:'Treino Agility',en:{detail:'Agility Training'}},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'09',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'game_room',css:'training',size:'size-3',name:'Game Room',detail:'Treino Luck'},
-    {id:'medbay',css:'medbay-prod',size:'size-3',name:'Medbay',detail:'Producao Stimpaks p/ Quests',badge:'MAX',badgeCss:'background:#2563eb'},
+    {id:'game_room',css:'training',size:'size-3',name:'Game Room',detail:'Treino Luck',en:{detail:'Luck Training'}},
+    {id:'medbay',css:'medbay-prod',size:'size-3',name:'Medbay',detail:'Producao Stimpaks p/ Quests',badge:'MAX',badgeCss:'background:#2563eb',
+     en:{detail:'Stimpak Production for Quests'}},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'10',capfarm:true,dividerBefore:'Cap Farming — Rush Spam',rooms:[
@@ -182,25 +251,25 @@ var VAULT_FLOORS = [
     {id:'science_lab',css:'cap-farm',size:'size-1',name:'Sci',badge:'LV 1'},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
-  {label:'12',dividerBefore:'Storage — Auto-Extincao de Incidentes',rooms:[
+  {label:'12',dividerBefore:'Storage — Auto-Extincao de Incidentes',en:{dividerBefore:'Storage — Incident Self-Extinction'},rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'storage_room',css:'storage',size:'size-3',name:'Storage',detail:'Sem staff'},
+    {id:'storage_room',css:'storage',size:'size-3',name:'Storage',detail:'Sem staff',en:{detail:'No staff'}},
     {id:null,css:'gap',size:'size-1',name:'gap'},
-    {id:'living_quarters',css:'living',size:'size-2',name:'Living Quarters',detail:'Sem staff'},
+    {id:'living_quarters',css:'living',size:'size-2',name:'Living Quarters',detail:'Sem staff',en:{detail:'No staff'}},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'13',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'living_quarters',css:'living',size:'size-2',name:'Living Quarters',detail:'Sem staff'},
+    {id:'living_quarters',css:'living',size:'size-2',name:'Living Quarters',detail:'Sem staff',en:{detail:'No staff'}},
     {id:null,css:'gap',size:'size-1',name:'gap'},
-    {id:'storage_room',css:'storage',size:'size-3',name:'Storage',detail:'Sem staff'},
+    {id:'storage_room',css:'storage',size:'size-3',name:'Storage',detail:'Sem staff',en:{detail:'No staff'}},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'14',rooms:[
     {id:null,css:'elevator',size:'elevator',name:'ELEV'},
-    {id:'storage_room',css:'storage',size:'size-3',name:'Storage',detail:'Sem staff'},
+    {id:'storage_room',css:'storage',size:'size-3',name:'Storage',detail:'Sem staff',en:{detail:'No staff'}},
     {id:null,css:'gap',size:'size-1',name:'gap'},
-    {id:'living_quarters',css:'living',size:'size-2',name:'Living Quarters',detail:'Sem staff'},
+    {id:'living_quarters',css:'living',size:'size-2',name:'Living Quarters',detail:'Sem staff',en:{detail:'No staff'}},
     {id:null,css:'elevator',size:'elevator',name:'ELEV'}
   ]},
   {label:'15+',placeholder:true}
@@ -219,11 +288,13 @@ function buildVault(containerId, highlightId, onClick, options) {
   var c = document.getElementById(containerId);
   c.innerHTML = '';
 
+  var T = I18N[getLang()];
   VAULT_FLOORS.forEach(function(f) {
-    if (f.dividerBefore) {
+    var fDivider = (getLang() === 'en' && f.en && f.en.dividerBefore) ? f.en.dividerBefore : f.dividerBefore;
+    if (fDivider) {
       var div = document.createElement('div');
       div.className = 'divider';
-      div.innerHTML = '<span>' + f.dividerBefore + '</span>';
+      div.innerHTML = '<span>' + fDivider + '</span>';
       c.appendChild(div);
     }
 
@@ -238,7 +309,7 @@ function buildVault(containerId, highlightId, onClick, options) {
       var ph = document.createElement('div');
       ph.className = 'gap';
       ph.style.cssText = 'flex:1;display:flex;align-items:center;justify-content:center;border:1px dashed #2d2d44;border-radius:4px;padding:4px 8px';
-      ph.innerHTML = '<span class="room-name" style="color:#9ca3af">Repetir padrao Storage + Gap + Living conforme necessario...</span>';
+      ph.innerHTML = '<span class="room-name" style="color:#9ca3af">' + T.placeholder_repeat + '</span>';
       fl.appendChild(ph);
       c.appendChild(fl);
       return;
@@ -274,7 +345,8 @@ function buildFloor(f, highlightId, onClick, options) {
     var el;
     if (roomData && !isElev && !isGap && options.linkBase) {
       el = document.createElement('a');
-      el.href = options.linkBase + roomSlug(roomData.id);
+      var prefix = getLang() === 'pt' ? '/pt-br' : '';
+      el.href = prefix + options.linkBase + roomSlug(roomData.id);
     } else {
       el = document.createElement('div');
       if (roomData && !isElev && !isGap && onClick) {
@@ -287,11 +359,14 @@ function buildFloor(f, highlightId, onClick, options) {
     if (isLocked && !isElev && !isGap) el.classList.add('locked');
     if (isHighlighted) el.classList.add('highlighted');
 
-    var html = '<span class="room-name">' + r.name + '</span>';
-    if (r.detail) html += '<span class="room-detail">' + r.detail + '</span>';
-    if (r.badge) {
+    var rName = (getLang() === 'en' && r.en && r.en.name) ? r.en.name : r.name;
+    var rDetail = (getLang() === 'en' && r.en && r.en.detail) ? r.en.detail : r.detail;
+    var rBadge = (getLang() === 'en' && r.en && r.en.badge) ? r.en.badge : r.badge;
+    var html = '<span class="room-name">' + rName + '</span>';
+    if (rDetail) html += '<span class="room-detail">' + rDetail + '</span>';
+    if (rBadge) {
       var bCss = r.badgeCss || 'background:#374151';
-      html = '<span class="room-badge" style="' + bCss + '">' + r.badge + '</span>' + html;
+      html = '<span class="room-badge" style="' + bCss + '">' + rBadge + '</span>' + html;
     }
     el.innerHTML = html;
 

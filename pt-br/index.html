@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vault Layout — Fallout Shelter Guide</title>
-<meta name="description" content="Optimized visual vault layout for Fallout Shelter. Room placement for endgame.">
+<title>Layout do Vault — Fallout Shelter Guide</title>
+<meta name="description" content="Layout visual otimizado do vault em Fallout Shelter. Posicao de cada sala para endgame.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate" hreflang="en" href="https://fallout-shelter.vercel.app/">
 <link rel="alternate" hreflang="pt-BR" href="https://fallout-shelter.vercel.app/pt-br/">
@@ -15,7 +15,6 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Roboto+Condensed:wght@400;700&display=swap"></noscript>
 <link rel="stylesheet" href="/shared/styles.css">
 <link rel="stylesheet" href="/shared/vault.css">
-<script src="/shared/lang-detect.js"></script>
 <style>
   body{display:flex;flex-direction:column;padding:0}
   .nav{width:100%}
@@ -50,8 +49,8 @@
 <body>
 
 <nav class="nav">
-  <a href="/" class="active">Layout</a>
-  <a href="/guide">Guide</a>
+  <a href="/pt-br" class="active">Layout</a>
+  <a href="/pt-br/guide">Guia</a>
   <div class="dw-wrap">
     <label for="dwInput">Dwellers:</label>
     <input type="number" class="dw-input" id="dwInput" min="0" max="200">
@@ -74,82 +73,82 @@
   <div class="legend-item">
     <div class="legend-icon" style="background:#dc2626;"></div>
     <div class="legend-text">
-      <strong>Guard Room (Lv1)</strong><br>
-      1st room after Vault Door. Shallow room (Lv1) = instant positioning. 6 Dwellers with Dragon's Maw / MIRV / Vengeance.
+      <strong>Sala de Guarda (Lv1)</strong><br>
+      1a sala apos Vault Door. Sala rasa (Lv1) = posicionamento instantaneo. 6 Dwellers com Dragon's Maw / MIRV / Vengeance.
     </div>
   </div>
   <div class="legend-item">
     <div class="legend-icon" style="background:#d97706;"></div>
     <div class="legend-text">
       <strong>Nuclear Reactor (Max)</strong><br>
-      2 rooms = power for the entire vault. Workers with S10. Also serve as kill zone.
+      2 salas = energia pra vault inteiro. Workers com S10. Tambem servem de kill zone.
     </div>
   </div>
   <div class="legend-item">
     <div class="legend-icon" style="background:#0891b2;"></div>
     <div class="legend-text">
       <strong>Nuka-Cola Bottler (Max)</strong><br>
-      2 rooms = food + water for 200 Dwellers. Workers with E+I max.
+      2 salas = comida + agua pra 200 Dwellers. Workers com E+I max.
     </div>
   </div>
   <div class="legend-item">
     <div class="legend-icon" style="background:#7c3aed;"></div>
     <div class="legend-text">
       <strong>Workshops (Max)</strong><br>
-      Weapon + Outfit. Craft Legendary weapons and outfits.
+      Weapon + Outfit. Craft armas e roupas Legendary.
     </div>
   </div>
   <div class="legend-item">
     <div class="legend-icon" style="background:#1d4ed8;"></div>
     <div class="legend-text">
-      <strong>Overseer's Office (fixed 6 sq)</strong><br>
-      Required for Quests. Lv3 = 3 simultaneous quests. One per vault. No staff.
+      <strong>Overseer's Office (6 sq fixo)</strong><br>
+      Obrigatorio para Quests. Lv3 = 3 quests simultaneas. Unico por vault. Sem staff.
     </div>
   </div>
   <div class="legend-item">
     <div class="legend-icon" style="background:#059669;"></div>
     <div class="legend-text">
       <strong>Training Rooms</strong><br>
-      One per SPECIAL stat. E-training ISOLATED (gaps on both sides).
+      Um de cada stat SPECIAL. E-training ISOLADO (gaps nos dois lados).
     </div>
   </div>
   <div class="legend-item">
     <div class="legend-icon" style="background:#ca8a04;"></div>
     <div class="legend-text">
       <strong>Cap Farm (Lv1)</strong><br>
-      Medbay/SciLab 1x alternating. 2 high-Luck Dwellers per room. Infinite rush.
+      Medbay/SciLab 1x alternados. 2 Dwellers high-Luck por sala. Rush infinito.
     </div>
   </div>
   <div class="legend-item">
     <div class="legend-icon" style="background:#475569;"></div>
     <div class="legend-text">
-      <strong>Storage + Living (bottom)</strong><br>
-      No staff. Gaps between rooms = incidents die on their own.
+      <strong>Storage + Living (fundo)</strong><br>
+      Sem staff. Gaps entre salas = incidentes morrem sozinhos.
     </div>
   </div>
   <div class="legend-item">
     <div class="legend-icon" style="background:#e11d48;"></div>
     <div class="legend-text">
-      <strong>E-Training (Isolated!)</strong><br>
-      Lv1 Dwellers are fragile. No adjacent rooms = zero incident spread.
+      <strong>E-Training (Isolado!)</strong><br>
+      Dwellers Lv1 frageis. Sem salas adjacentes = zero propagacao de incidentes.
     </div>
   </div>
 </div>
 
 <!-- NOTES -->
 <div class="notes">
-  <h2>Critical Rules</h2>
+  <h2>Regras Criticas</h2>
   <ul>
-    <li><strong>Never upgrade Vault Door</strong> &mdash; only increases incident duration. Cosmetic themes work at Lv1.</li>
-    <li><strong>SPECIAL does not affect vault combat</strong> &mdash; only Weapon Damage and max HP matter. Outfits are irrelevant for defense.</li>
-    <li><strong>Max HP</strong> &mdash; every Dweller must be leveled Lv1&rarr;50 with Endurance 10 + E7 outfit equipped. This yields 595 HP (maximum possible).</li>
-    <li><strong>Elevators on both edges</strong> &mdash; blocks Molerat spawns in all production rooms.</li>
-    <li><strong>Deathclaws die on floors 2-3</strong> &mdash; 18 armed Dwellers on kill floors eliminate any invader before floor 4.</li>
-    <li><strong>Radio Room off</strong> &mdash; attracts Raiders/Deathclaws unnecessarily. Babies > wasteland recruits.</li>
-    <li><strong>Mr. Handy</strong> &mdash; one per production floor (2-3). DO NOT place on floor 1 to prevent him from greeting invaders.</li>
-    <li><strong>Breeding</strong> &mdash; equip twins pet BEFORE pregnancy, switch to Child-SPECIAL pet before birth. Combined parent SPECIAL 134+ = Legendary baby.</li>
-    <li><strong>Overseer's Office</strong> &mdash; required for Quests (main source of Legendary loot). Upgrade to Lv3 = 3 simultaneous quests. One per vault.</li>
-    <li><strong>Narrower surface</strong> &mdash; the top row has only 17 squares (vs 20+ underground). Vault Door (6 sq) + Guard Room 3-wide (9 sq) + Elevator fills the entire width.</li>
+    <li><strong>Vault Door nunca upgrade</strong> &mdash; so aumenta duracao dos incidentes. Temas cosmeticos funcionam no Lv1.</li>
+    <li><strong>SPECIAL nao afeta combate no vault</strong> &mdash; so Dano da Arma e HP maximo importam. Outfits sao irrelevantes na defesa.</li>
+    <li><strong>HP maximo</strong> &mdash; todo Dweller deve ser levelado Lv1&rarr;50 com Endurance 10 + outfit E7 equipado. Isso gera 595 HP (maximo possivel).</li>
+    <li><strong>Elevadores nas duas bordas</strong> &mdash; bloqueia spawn de Molerats em todas as salas de producao.</li>
+    <li><strong>Deathclaws morrem no andar 2-3</strong> &mdash; 18 Dwellers armados nos kill floors eliminam qualquer invasor antes do andar 4.</li>
+    <li><strong>Radio Room desligada</strong> &mdash; atrai Raiders/Deathclaws desnecessariamente. Bebes > recrutas do wasteland.</li>
+    <li><strong>Mr. Handy</strong> &mdash; um por andar de producao (2-3). NAO colocar no andar 1 pra evitar que ele va cumprimentar invasores.</li>
+    <li><strong>Breeding</strong> &mdash; pet de gemeos ANTES da gravidez, trocar pra pet Child-SPECIAL antes do nascimento. SPECIAL combinado dos pais 134+ = bebe Legendary.</li>
+    <li><strong>Overseer's Office</strong> &mdash; obrigatorio para Quests (principal fonte de loot Legendary). Upgrade pra Lv3 = 3 quests simultaneas. Unico por vault.</li>
+    <li><strong>Superficie mais estreita</strong> &mdash; o top row tem apenas 17 squares (vs 20+ subterraneos). Vault Door (6 sq) + Sala de Guarda 3-wide (9 sq) + Elevador preenche toda a largura.</li>
   </ul>
 </div>
 
@@ -178,7 +177,7 @@
 </script>
 <footer class="footer">
   <span>Fallout Shelter Guide</span>
-  <a href="/pt-br/" class="lang-toggle">PT</a>
+  <a href="/" class="lang-toggle">EN</a>
 </footer>
 </body>
 </html>
