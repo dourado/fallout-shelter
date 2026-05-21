@@ -38,11 +38,11 @@
 <footer class="footer">
   <span>Fallout Shelter Guide</span>
   <a href="https://github.com/dourado/fallout-shelter" target="_blank" rel="noopener">GitHub</a>
-  <a href="/" class="lang-toggle" id="langToggle">PT</a>
+  <a href="/pt-br/" class="lang-toggle" id="langToggle">PT</a>
 </footer>
 <script>
 (function() {
-  var pt = localStorage.getItem('lang_pref') === 'pt';
+  var pt = window.location.pathname.indexOf('/pt-br') === 0 || localStorage.getItem('lang_pref') === 'pt';
   if (pt) {
     document.documentElement.lang = 'pt-BR';
     document.getElementById('navLayout').href = '/pt-br/';
