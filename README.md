@@ -1,6 +1,8 @@
 # Fallout Shelter — Vault Layout Guide
 
-Guia visual otimizado para construir o vault perfeito em Fallout Shelter. Layout de endgame, posicionamento de cada sala, build order do zero ao endgame.
+Optimized visual guide for building the perfect vault in Fallout Shelter. Endgame layout, room placement, and build order from scratch to endgame.
+
+Available in **English** and **Portuguese (BR)**.
 
 **Live:** [fallout-shelter.vercel.app](https://fallout-shelter.vercel.app)
 
@@ -8,39 +10,58 @@ Guia visual otimizado para construir o vault perfeito em Fallout Shelter. Layout
 
 | Route | Description |
 |-------|-------------|
-| `/` | Layout completo do vault comWaiting for Perf2 to be ready so we can complete the deployment. todas as salas posicionadas |
-| `/guia` | Guia passo a passo do zero ao endgame (milestones + room list) |
-| `/rooms/:slug` | Pagina individual de cada sala (25 salas) com instrucoes e vault miniatura |
+| `/` | Full vault layout with all rooms positioned |
+| `/guide` | Step-by-step guide from scratch to endgame (milestones + room list) |
+| `/rooms/:slug` | Individual room page (25 rooms) with instructions and vault miniature |
+| `/pt-br/...` | Portuguese (BR) version of all pages above |
 
 ## Stack
 
 Zero dependencies. HTML + CSS + vanilla JS. Deployed on Vercel.
 
-- **~34 KiB** de codigo total (shared/)
-- **69 KiB** page weight (com fonts)
-- **7-10 requests** por pagina
+- **~40 KiB** total code (shared/)
+- **69 KiB** page weight (with fonts)
+- **7-10 requests** per page
 
 ## Project Structure
 
 ```
-├── index.html                  # Layout page (vault diagram)
-├── favicon.svg                 # Vault Boy silhouette favicon
+├── index.html                  # EN layout page (vault diagram)
+├── favicon.svg                 # Vault Boy favicon
 ├── vercel.json                 # cleanUrls: true
-├── guia/
-│   └── index.html              # Guide page (milestones + room list)
+├── guide/
+│   └── index.html              # EN guide page (milestones + room list)
 ├── rooms/
-│   └── *.html                  # 25 individual room detail pages
+│   └── *.html                  # 25 EN room detail pages
+├── pt-br/
+│   ├── index.html              # PT layout page
+│   ├── guide/
+│   │   └── index.html          # PT guide page
+│   └── rooms/
+│       └── *.html              # 25 PT room detail pages
 └── shared/
-    ├── rooms.js                # Room data + buildVault() renderer
+    ├── i18n.js                 # getLang() + UI string dictionary (EN/PT)
+    ├── lang-detect.js          # Auto-redirect pt-BR browsers to /pt-br/
+    ├── rooms.js                # Room data (EN/PT) + buildVault() renderer
     ├── room-detail.js          # Room detail page renderer
+    ├── guide.js                # Guide page logic (milestones, room list)
     ├── vault.css               # Vault diagram styles
     ├── room-detail.css         # Room detail styles
-    └── styles.css              # Global styles (nav, body, fonts)
+    └── styles.css              # Global styles (nav, footer, fonts)
 ```
+
+## i18n
+
+- English is the default language at `/`
+- Portuguese (BR) lives under `/pt-br/`
+- `getLang()` picks language from URL path (`/pt-br` prefix → PT, otherwise EN)
+- Room data and UI strings are shared via `rooms.js` and `i18n.js`
+- First-time visitors with `pt-BR` browser language are auto-redirected
+- Language toggle in page footer
 
 ## Lighthouse Scores
 
-Tested across all 27 pages (May 2026):
+Tested across all 54 pages (May 2026):
 
 | Category | Desktop | Mobile |
 |----------|---------|--------|
@@ -51,7 +72,7 @@ Tested across all 27 pages (May 2026):
 
 ## Development
 
-No build step. Open `index.html` in a browser or serve locally:
+No build step. Serve locally:
 
 ```bash
 npx serve .

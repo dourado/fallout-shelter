@@ -13,7 +13,7 @@ function renderRoom(roomId, containerId) {
   var toggleHref = getLang() === 'en' ? '/pt-br/rooms/' + slug : '/rooms/' + slug;
   var footer = document.createElement('footer');
   footer.className = 'footer';
-  footer.innerHTML = '<span>Fallout Shelter Guide</span><a href="' + toggleHref + '" class="lang-toggle">' + T.lang_switch_label + '</a>';
+  footer.innerHTML = '<span>Fallout Shelter Guide</span><a href="https://github.com/dourado/fallout-shelter" target="_blank" rel="noopener">GitHub</a><a href="' + toggleHref + '" class="lang-toggle">' + T.lang_switch_label + '</a>';
   document.body.appendChild(footer);
 
   var input = document.getElementById('dwInput');
